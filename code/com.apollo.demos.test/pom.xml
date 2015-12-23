@@ -5,12 +5,12 @@
 
   <parent>
     <groupId>com.apollo.base.pom</groupId>
-    <artifactId>com.apollo.base.pom.core</artifactId>
+    <artifactId>core</artifactId>
     <version>1.0.0</version>
   </parent>
 
   <groupId>com.apollo.demos</groupId>
-  <artifactId>com.apollo.demos.test</artifactId>
+  <artifactId>test</artifactId>
   <version>${version}</version>
 
   <name>com.apollo.demos.test</name>
