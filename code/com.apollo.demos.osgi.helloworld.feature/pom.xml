@@ -9,24 +9,24 @@
     <version>1.0.0</version>
   </parent>
 
-  <groupId>com.apollo.demos.osgi</groupId>
-  <artifactId>apollo-demos</artifactId>
+  <groupId>com.apollo.demos.osgi.helloworld</groupId>
+  <artifactId>apollo-demos-helloworld</artifactId>
   <version>${version}</version>
   <packaging>feature</packaging>
 
-  <name>com.apollo.demos.osgi.feature</name>
-  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/com.apollo.demos.osgi.feature</url>
+  <name>com.apollo.demos.osgi.helloworld.feature</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/com.apollo.demos.osgi.helloworld.feature</url>
 
   <properties>
     <deploy.output>../build/output</deploy.output>
-    <deploy.home>com/apollo/demos/osgi</deploy.home>
+    <deploy.home>com/apollo/demos/osgi/helloworld</deploy.home>
   </properties>
 
   <dependencies>
-    <!--dependency>
+    <dependency>
       <groupId>com.apollo.demos.osgi</groupId>
       <artifactId>helloworld</artifactId>
       <version>${version}</version>
-    </dependency-->
+    </dependency>
   </dependencies>
 </project>
