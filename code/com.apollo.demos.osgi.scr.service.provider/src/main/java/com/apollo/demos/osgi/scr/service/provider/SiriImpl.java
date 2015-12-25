@@ -20,6 +20,10 @@ public class SiriImpl implements ISiri {
 
     private static final Logger s_logger = LoggerFactory.getLogger(SiriImpl.class);
 
+    public SiriImpl() {
+        s_logger.info("New.");
+    }
+
     @Override
     public String sayHello() {
         return "Hello, Service Component Runtime (SCR).";
