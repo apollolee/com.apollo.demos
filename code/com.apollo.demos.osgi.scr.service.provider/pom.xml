@@ -20,6 +20,7 @@
   <properties>
     <bundle.activator></bundle.activator>
     <bundle.export.package>
+      com.apollo.demos.osgi.scr.service.api.bad
     </bundle.export.package>
     <bundle.import.package>
       *

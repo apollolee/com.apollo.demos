@@ -34,5 +34,11 @@
       <artifactId>api</artifactId>
       <version>${version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.apollo.demos.osgi.service</groupId>
+      <artifactId>provider</artifactId>
+      <version>${version}</version>
+    </dependency>
   </dependencies>
 </project>

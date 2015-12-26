@@ -20,6 +20,8 @@ public class Activator implements BundleActivator {
 
     private AppleWatch m_appleWatch;
 
+    private BadAppleWatch m_badAppleWatch;
+
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
@@ -30,6 +32,9 @@ public class Activator implements BundleActivator {
 
         m_appleWatch = new AppleWatch(context);
         m_appleWatch.open();
+
+        m_badAppleWatch = new BadAppleWatch(context);
+        m_badAppleWatch.open();
     }
 
     /**
@@ -37,6 +42,9 @@ public class Activator implements BundleActivator {
      */
     public void stop(BundleContext bundleContext) throws Exception {
         s_logger.info("Stop com.apollo.demos.osgi.service.invoker.");
+
+        m_badAppleWatch.close();
+        m_badAppleWatch = null;
 
         m_appleWatch.close();
         m_appleWatch = null;

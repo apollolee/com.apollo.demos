@@ -20,6 +20,7 @@
   <properties>
     <bundle.activator>com.apollo.demos.osgi.service.provider.Activator</bundle.activator>
     <bundle.export.package>
+      com.apollo.demos.osgi.service.api.bad
     </bundle.export.package>
     <bundle.import.package>
       *

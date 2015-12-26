@@ -1,7 +1,7 @@
 /*
  * 此代码创建于 2015年12月24日 上午10:20:12。
  */
-package com.apollo.demos.osgi.service.provider;
+package com.apollo.demos.osgi.service.provider.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

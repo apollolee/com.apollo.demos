@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.apollo.demos.osgi.service.api.ISiri;
+import com.apollo.demos.osgi.service.api.bad.IBadSiri;
+import com.apollo.demos.osgi.service.provider.impl.BadSiriImpl;
+import com.apollo.demos.osgi.service.provider.impl.SiriImpl;
 
 /*
  * Service的提供者，启动Bundle时注册。
@@ -23,6 +26,8 @@ public class Activator implements BundleActivator {
 
     private ServiceRegistration m_siriSr;
 
+    private ServiceRegistration m_badSiriSr;
+
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
@@ -32,6 +37,7 @@ public class Activator implements BundleActivator {
         Activator.context = bundleContext;
 
         m_siriSr = context.registerService(ISiri.class.getName(), new SiriImpl(), null);
+        m_badSiriSr = context.registerService(IBadSiri.class.getName(), new BadSiriImpl(), null);
     }
 
     /**
@@ -40,6 +46,7 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext bundleContext) throws Exception {
         s_logger.info("Stop com.apollo.demos.osgi.service.provider.");
 
+        m_badSiriSr.unregister();
         m_siriSr.unregister();
 
         Activator.context = null;
