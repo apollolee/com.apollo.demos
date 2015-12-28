@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.apollo.demos.osgi.service.api.bad.IBadSiri;
+import com.apollo.demos.osgi.service.api.bad.IPhone;
 
 public class BadAppleWatch extends ServiceTracker {
 
@@ -25,7 +26,10 @@ public class BadAppleWatch extends ServiceTracker {
         s_logger.info("Adding service.");
 
         IBadSiri badSiri = (IBadSiri) super.addingService(reference);
-        s_logger.info("[ID = {}] Say: {} [IPhone = {}]", IBadSiri.ID, badSiri.sayHello(), badSiri.giveMeAnIPhone().getDescription());
+        IPhone ip = badSiri.giveMeAnIPhone();
+
+        s_logger.info("IBadSiri: [ID = {}] Say: {}", IBadSiri.ID, badSiri.sayHello());
+        s_logger.info("IPhone: [ID = {}] Say: {}", IPhone.ID, ip.sayHello());
 
         return badSiri;
     }

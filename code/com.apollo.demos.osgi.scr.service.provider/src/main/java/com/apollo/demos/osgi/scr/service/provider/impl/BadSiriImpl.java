@@ -27,7 +27,7 @@ public class BadSiriImpl implements IBadSiri {
 
     @Override
     public String sayHello() {
-        return "Hello, I am a bad Siri. [ID = " + ID + "]";
+        return "Hello, I am a bad Siri. [ID = " + ID + "]"; //这里的ID始终都是最新的，其实是编译优化引起的，并不是OSGi中存在2个IBadSiri。
     }
 
     @Override

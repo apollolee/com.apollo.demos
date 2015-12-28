@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.apollo.demos.osgi.scr.service.api.ISiri;
 import com.apollo.demos.osgi.scr.service.api.bad.IBadSiri;
+import com.apollo.demos.osgi.scr.service.api.bad.IPhone;
 
 @Component
 public class AppleWatch {
@@ -58,8 +59,12 @@ public class AppleWatch {
 
     protected void bindBadSiri(IBadSiri badSiri) {
         s_logger.info("Bind BadSiri.");
+
         m_badSiri = badSiri;
-        s_logger.info("[ID = {}] Say: {} [IPhone = {}]", IBadSiri.ID, badSiri.sayHello(), badSiri.giveMeAnIPhone().getDescription());
+        IPhone ip = badSiri.giveMeAnIPhone();
+
+        s_logger.info("IBadSiri: [ID = {}] Say: {}", IBadSiri.ID, badSiri.sayHello());
+        s_logger.info("IPhone: [ID = {}] Say: {}", IPhone.ID, ip.sayHello());
     }
 
     protected void unbindBadSiri(IBadSiri badSiri) {
