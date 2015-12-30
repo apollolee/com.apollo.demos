@@ -40,5 +40,11 @@
       <artifactId>org.apache.felix.scr</artifactId>
       <version>1.8.2</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.eventadmin</artifactId>
+      <version>1.4.2</version>
+    </dependency>
   </dependencies>
 </project>
