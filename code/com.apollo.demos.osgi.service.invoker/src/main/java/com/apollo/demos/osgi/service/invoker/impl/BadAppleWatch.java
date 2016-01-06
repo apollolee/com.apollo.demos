@@ -1,7 +1,7 @@
 /*
  * 此代码创建于 2015年12月26日 上午10:17:04。
  */
-package com.apollo.demos.osgi.service.invoker;
+package com.apollo.demos.osgi.service.invoker.impl;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;

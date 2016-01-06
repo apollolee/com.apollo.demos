@@ -5,6 +5,9 @@ import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.apollo.demos.osgi.service.invoker.impl.AppleWatch;
+import com.apollo.demos.osgi.service.invoker.impl.BadAppleWatch;
+
 /*
  * Service的调用者，为了不依赖启动顺序，使用了ServiceTracker进行处理。
  */
