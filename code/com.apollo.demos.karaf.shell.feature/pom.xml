@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom.karaf</groupId>
+    <artifactId>feature</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.karaf.shell</groupId>
+  <artifactId>apollo-demos-karaf-shell</artifactId>
+  <version>${version}</version>
+  <packaging>feature</packaging>
+
+  <name>com.apollo.demos.karaf.shell.feature</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/com.apollo.demos.karaf.shell.feature</url>
+
+  <properties>
+    <deploy.output>../build/output</deploy.output>
+    <deploy.home>com/apollo/demos/karaf/shell</deploy.home>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.apollo.demos.karaf</groupId>
+      <artifactId>shell</artifactId>
+      <version>${version}</version>
+    </dependency>
+  </dependencies>
+</project>
