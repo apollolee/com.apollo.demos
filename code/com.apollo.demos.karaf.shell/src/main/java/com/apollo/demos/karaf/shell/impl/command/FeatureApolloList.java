@@ -6,12 +6,11 @@ package com.apollo.demos.karaf.shell.impl.command;
 import org.apache.karaf.shell.commands.Command;
 import org.apache.karaf.shell.commands.Option;
 import org.apache.karaf.shell.console.CommandSessionHolder;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Command(scope = "feature", name = "apollo-list", description = "List apollo features.")
-public class FeatureApolloList extends OsgiCommandSupport {
+public class FeatureApolloList extends ApolloBase {
 
     private static final Logger s_logger = LoggerFactory.getLogger(FeatureApolloList.class);
 

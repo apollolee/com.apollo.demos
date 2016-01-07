@@ -14,7 +14,9 @@
       <action class="com.apollo.demos.karaf.shell.impl.command.ApolloBundleDetails" />
 
       <completers>
-        <ref component-id="apolloBundleNameCompleter" />
+        <ref component-id="apolloGroupCompleter" />
+        <ref component-id="apolloNameCompleter" />
+        <null />
       </completers>
 
       <optional-completers>
@@ -23,6 +25,7 @@
     </command>
   </command-bundle>
 
-  <bean id="apolloBundleNameCompleter" class="com.apollo.demos.karaf.shell.impl.completer.ApolloBundleName" />
+  <bean id="apolloGroupCompleter" class="com.apollo.demos.karaf.shell.impl.completer.ApolloGroup" />
+  <bean id="apolloNameCompleter" class="com.apollo.demos.karaf.shell.impl.completer.ApolloName" />
   <bean id="apolloOptionCompleter" class="com.apollo.demos.karaf.shell.impl.completer.ApolloOption" />
 </blueprint>

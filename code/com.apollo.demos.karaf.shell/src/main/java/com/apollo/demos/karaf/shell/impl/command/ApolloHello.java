@@ -4,12 +4,11 @@
 package com.apollo.demos.karaf.shell.impl.command;
 
 import org.apache.karaf.shell.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Command(scope = "apollo", name = "hello", description = "Apollo say hello.")
-public class ApolloHello extends OsgiCommandSupport {
+public class ApolloHello extends ApolloBase {
 
     private static final Logger s_logger = LoggerFactory.getLogger(ApolloHello.class);
 
