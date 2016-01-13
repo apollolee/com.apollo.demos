@@ -7,21 +7,20 @@ import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Modified;
-import org.apache.felix.scr.annotations.Properties;
-import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.apollo.demos.osgi.scr.message.api.EScope;
+import com.apollo.demos.osgi.scr.message.api.EType;
 import com.apollo.demos.osgi.scr.message.api.IComputeParticle;
 import com.apollo.demos.osgi.scr.message.api.IComputeParticleCreator;
+import com.apollo.demos.osgi.scr.message.api.annotation.ComputeParticleCreator;
 
 @Component
 @Service
-@Properties({ @Property(name = "type", value = "NE"),
-             @Property(name = "function", value = "CreatePw"),
-             @Property(name = "scope", value = "CNode") })
+@ComputeParticleCreator(type = EType.NE, function = "CreatePw", scope = EScope.CNode)
 public class ComputeParticleCreatorImpl implements IComputeParticleCreator {
 
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleCreatorImpl.class);

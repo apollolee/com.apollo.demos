@@ -27,6 +27,7 @@ import com.apollo.demos.osgi.scr.message.api.IMessageContext;
 import com.apollo.demos.osgi.scr.message.api.IMessageManager;
 import com.apollo.demos.osgi.scr.message.api.ParticleMessage;
 import com.apollo.demos.osgi.scr.message.api.RegisterInfo;
+import com.apollo.demos.osgi.scr.message.api.annotation.ComputeParticleCreator;
 
 @Component
 @Service
@@ -72,16 +73,8 @@ public class MessageManager implements IMessageManager {
     }
 
     protected void registerComputeParticleCreator(IComputeParticleCreator creator, Map<String, Object> properties) {
-        String type = (String) properties.get("type");
-        String function = (String) properties.get("function");
-        String scope = (String) properties.get("scope");
-        s_logger.info("Register compute particle creator. [Compute Particle Creator = {}] , [Type = {}] , [Function = {}] , [Scope = {}]",
-                      creator.getClass().getName(),
-                      type,
-                      function,
-                      scope);
-
-        RegisterInfo ri = new RegisterInfo(EType.valueOf(type), function, EScope.valueOf(scope));
+        RegisterInfo ri = getRegisterInfo(creator, properties);
+        s_logger.info("Register compute particle creator. [Creator = {}] , [RegisterInfo = {}]", creator.getClass().getName(), ri);
 
         CopyOnWriteArrayList<IComputeParticleCreator> creators = new CopyOnWriteArrayList<IComputeParticleCreator>();
         CopyOnWriteArrayList<IComputeParticleCreator> oldCreators = m_creatorMap.putIfAbsent(ri, creators);
@@ -90,25 +83,32 @@ public class MessageManager implements IMessageManager {
     }
 
     protected void unregisterComputeParticleCreator(IComputeParticleCreator creator, Map<String, Object> properties) {
-        String type = (String) properties.get("type");
-        String function = (String) properties.get("function");
-        String scope = (String) properties.get("scope");
-        s_logger.info("Unregister compute particle creator. [Compute Particle Creator = {}] , [Type = {}] , [Function = {}] , [Scope = {}]",
-                      creator.getClass().getName(),
-                      type,
-                      function,
-                      scope);
-
-        RegisterInfo ri = new RegisterInfo(EType.valueOf(type), function, EScope.valueOf(scope));
+        RegisterInfo ri = getRegisterInfo(creator, properties);
+        s_logger.info("Unregister compute particle creator. [Creator = {}] , [RegisterInfo = {}]", creator.getClass().getName(), ri);
 
         CopyOnWriteArrayList<IComputeParticleCreator> creators = m_creatorMap.get(ri);
         if (creators == null || !creators.remove(creator)) {
-            s_logger.error("Compute particle creator is not exist. [Compute Particle Creator = {}] , [Type = {}] , [Function = {}] , [Scope = {}]",
-                           creator.getClass().getName(),
-                           type,
-                           function,
-                           scope);
+            s_logger.error("Compute particle creator is not exist. [Creator = {}] , [RegisterInfo = {}]", creator.getClass().getName(), ri);
         }
+    }
+
+    protected RegisterInfo getRegisterInfo(IComputeParticleCreator creator, Map<String, Object> properties) {
+        EType type = null;
+        String function = null;
+        EScope scope = null;
+
+        if (creator.getClass().isAnnotationPresent(ComputeParticleCreator.class)) {
+            ComputeParticleCreator cpc = creator.getClass().getAnnotation(ComputeParticleCreator.class);
+            type = cpc.type();
+            function = cpc.function();
+            scope = cpc.scope();
+        }
+
+        type = type == null ? EType.valueOf((String) properties.get("type")) : type;
+        function = function == null ? (String) properties.get("function") : function;
+        scope = scope == null ? EScope.valueOf((String) properties.get("scope")) : scope;
+
+        return new RegisterInfo(type, function, scope);
     }
 
 }

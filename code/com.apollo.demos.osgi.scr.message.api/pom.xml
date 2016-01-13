@@ -20,7 +20,7 @@
   <properties>
     <bundle.activator></bundle.activator>
     <bundle.export.package>
-      com.apollo.demos.osgi.scr.message.api
+      com.apollo.demos.osgi.scr.message.api.*
     </bundle.export.package>
     <bundle.import.package>
       *
