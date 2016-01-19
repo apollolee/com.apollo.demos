@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom.osgi</groupId>
+    <artifactId>bundle</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi.fragment</groupId>
+  <artifactId>host</artifactId>
+  <version>${version}</version>
+  <packaging>bundle</packaging>
+
+  <name>com.apollo.demos.osgi.fragment.host</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/fragment/com.apollo.demos.osgi.fragment.host</url>
+  <description>%HostBundleDescription</description><!-- 这个地方Felix无法从fragment中读取国际化信息，但在其Activator中可以读到，估计是初始化顺序问题，在Equinox中无此问题。 -->
+
+  <properties>
+    <bundle.activator>com.apollo.demos.osgi.fragment.host.Activator</bundle.activator>
+    <bundle.export.package>
+    </bundle.export.package>
+    <bundle.import.package>
+      *
+    </bundle.import.package>
+    <deploy.output>../../../build/output</deploy.output>
+    <deploy.home>com/apollo/demos/osgi/fragment</deploy.home>
+  </properties>
+</project>

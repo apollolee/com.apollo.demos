@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom.osgi</groupId>
+    <artifactId>bundle</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi</groupId>
+  <artifactId>helloworld</artifactId>
+  <version>${version}</version>
+  <packaging>bundle</packaging>
+
+  <name>com.apollo.demos.osgi.helloworld</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/helloworld/com.apollo.demos.osgi.helloworld</url>
+
+  <properties>
+    <bundle.activator>com.apollo.demos.osgi.helloworld.Activator</bundle.activator>
+    <bundle.export.package>
+    </bundle.export.package>
+    <bundle.import.package>
+      *
+    </bundle.import.package>
+    <deploy.output>../../../build/output</deploy.output>
+    <deploy.home>com/apollo/demos/osgi</deploy.home>
+  </properties>
+</project>
