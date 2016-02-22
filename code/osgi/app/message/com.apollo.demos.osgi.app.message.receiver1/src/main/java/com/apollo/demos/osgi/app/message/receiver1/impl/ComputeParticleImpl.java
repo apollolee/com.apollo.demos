@@ -19,7 +19,7 @@ import com.apollo.demos.osgi.app.message.api.IComputeParticle;
 import com.apollo.demos.osgi.app.message.api.IMessageContext;
 import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 
-@Component(factory = "ComputeParticle", configurationFactory = true)
+@Component(factory = "ComputeParticle")
 @Service
 @ComputeParticle(type = EType.NE, function = "CreateLsp", scope = EScope.CNode)
 public class ComputeParticleImpl implements IComputeParticle {
