@@ -27,27 +27,30 @@ public class ComputeParticleImpl implements IComputeParticle {
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleImpl.class);
 
     public ComputeParticleImpl() {
-        s_logger.info("New.");
+        s_logger.info("New. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
     }
 
     @Override
     public void processMessage(IMessageContext context, ParticleMessage message) {
-        s_logger.info("Process message. [Message Context = {}] , [Particle Message ={}]", context, message);
+        s_logger.info("Process message. [ID = 0x{}] , [Message Context = {}] , [Particle Message ={}]",
+                      Integer.toHexString(System.identityHashCode(this)),
+                      context,
+                      message);
     }
 
     @Activate
     protected void activate(ComponentContext context) {
-        s_logger.info("Activate.");
+        s_logger.info("Activate. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
     }
 
     @Deactivate
     protected void deactivate(ComponentContext context) {
-        s_logger.info("Deactivate.");
+        s_logger.info("Deactivate. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
     }
 
     @Modified
     protected void modified(ComponentContext context) {
-        s_logger.info("Modified.");
+        s_logger.info("Modified. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
     }
 
 }
