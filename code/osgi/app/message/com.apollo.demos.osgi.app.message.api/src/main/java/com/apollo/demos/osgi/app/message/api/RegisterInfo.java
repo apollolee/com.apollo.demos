@@ -10,30 +10,30 @@ public class RegisterInfo {
 
     private static final Logger s_logger = LoggerFactory.getLogger(RegisterInfo.class);
 
-    public EType m_type;
+    public String m_type;
+
+    public String m_scope;
 
     public String m_function;
 
-    public EScope m_scope;
-
-    public RegisterInfo(EType type, String function, EScope scope) {
-        s_logger.info("New. [Type = {}] , [Function = {}] , [Scope = {}]", type, function, scope);
+    public RegisterInfo(String type, String scope, String function) {
+        s_logger.info("New. [Type = {}] , [Scope = {}] , [Function = {}]", type, scope, function);
 
         m_type = type;
-        m_function = function;
         m_scope = scope;
+        m_function = function;
     }
 
-    public EType getType() {
+    public String getType() {
         return m_type;
+    }
+
+    public String getScope() {
+        return m_scope;
     }
 
     public String getFunction() {
         return m_function;
-    }
-
-    public EScope getScope() {
-        return m_scope;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class RegisterInfo {
         int hashCode = 17;
 
         hashCode = hashCode * 37 + m_type.hashCode();
-        hashCode = hashCode * 37 + m_function.hashCode();
         hashCode = hashCode * 37 + m_scope.hashCode();
+        hashCode = hashCode * 37 + m_function.hashCode();
 
         return hashCode;
     }
@@ -51,7 +51,7 @@ public class RegisterInfo {
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof RegisterInfo) {
             RegisterInfo o = (RegisterInfo) obj;
-            return m_type == o.m_type && m_function.equals(o.m_function) && m_scope == o.m_scope;
+            return m_type.endsWith(o.m_type) && m_scope.endsWith(o.m_scope) && m_function.equals(o.m_function);
 
         } else {
             return false;
@@ -60,7 +60,7 @@ public class RegisterInfo {
 
     @Override
     public String toString() {
-        return "[Type = " + m_type + "] , [Function = " + m_function + "] , [Scope = " + m_scope + "]";
+        return "[Type = " + m_type + "] , [Scope = " + m_scope + "] , [Function = " + m_function + "]";
     }
 
 }

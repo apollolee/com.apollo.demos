@@ -3,6 +3,13 @@
  */
 package com.apollo.demos.osgi.app.message.receiver2.impl;
 
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.FactoryPrefix;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Function;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Scope;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Type;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Scope.CNode;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Type.NE;
+
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
@@ -12,16 +19,12 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apollo.demos.osgi.app.message.api.ComputeParticle;
-import com.apollo.demos.osgi.app.message.api.EScope;
-import com.apollo.demos.osgi.app.message.api.EType;
 import com.apollo.demos.osgi.app.message.api.IComputeParticle;
 import com.apollo.demos.osgi.app.message.api.IMessageContext;
 import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 
-@Component(factory = "ComputeParticle")
+@Component(factory = FactoryPrefix + ":" + Type + "=" + NE + ";" + Scope + "=" + CNode + ";" + Function + "=CreatePw")
 @Service
-@ComputeParticle(type = EType.NE, function = "CreatePw", scope = EScope.CNode)
 public class ComputeParticleImpl implements IComputeParticle {
 
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleImpl.class);

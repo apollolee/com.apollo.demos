@@ -16,8 +16,8 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apollo.demos.osgi.app.message.api.EScope;
-import com.apollo.demos.osgi.app.message.api.EType;
+import com.apollo.demos.osgi.app.message.api.IMessageConstants.Scope;
+import com.apollo.demos.osgi.app.message.api.IMessageConstants.Type;
 import com.apollo.demos.osgi.app.message.api.IMessageManager;
 import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 import com.apollo.demos.osgi.app.message.api.RegisterInfo;
@@ -59,8 +59,10 @@ public class SenderImpl {
             @Override
             public void run() {
                 while (true) {
-                    RegisterInfo ri = new RegisterInfo(EType.NE, "CreateLsp", EScope.CNode);
-                    ParticleMessage message = new ParticleMessage(ri, "1", "Please create a LSP.");
+                    RegisterInfo ri = new RegisterInfo(Type.NE, Scope.CNode, "CreateLsp");
+                    ParticleMessage message = new ParticleMessage(ri,
+                                                                  String.valueOf((int) (Math.random() * 100) % 2),
+                                                                  "Please create a LSP.");
                     s_logger.info("Post message. [Message = {}]", message);
                     m_messageManager.postMessage(message);
 

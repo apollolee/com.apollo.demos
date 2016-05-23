@@ -3,6 +3,15 @@
  */
 package com.apollo.demos.osgi.app.message.core.impl;
 
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.FactoryPrefix;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Function;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Scope;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Type;
+import static org.apache.felix.scr.annotations.ReferenceCardinality.MANDATORY_MULTIPLE;
+import static org.apache.felix.scr.annotations.ReferencePolicy.DYNAMIC;
+import static org.osgi.service.component.ComponentConstants.COMPONENT_FACTORY;
+import static org.osgi.service.component.ComponentConstants.COMPONENT_NAME;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -13,8 +22,6 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Modified;
 import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.ReferenceCardinality;
-import org.apache.felix.scr.annotations.ReferencePolicy;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.ComponentFactory;
@@ -22,9 +29,6 @@ import org.osgi.service.component.ComponentInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apollo.demos.osgi.app.message.api.ComputeParticle;
-import com.apollo.demos.osgi.app.message.api.EScope;
-import com.apollo.demos.osgi.app.message.api.EType;
 import com.apollo.demos.osgi.app.message.api.IComputeParticle;
 import com.apollo.demos.osgi.app.message.api.IMessageContext;
 import com.apollo.demos.osgi.app.message.api.IMessageManager;
@@ -33,14 +37,26 @@ import com.apollo.demos.osgi.app.message.api.RegisterInfo;
 
 @Component
 @Service
-@Reference(referenceInterface = ComponentFactory.class, target = "(component.factory=ComputeParticle)", cardinality = ReferenceCardinality.MANDATORY_MULTIPLE, policy = ReferencePolicy.DYNAMIC, bind = "register", unbind = "unregister")
+@Reference(referenceInterface = ComponentFactory.class, target = "(component.factory=" + FactoryPrefix + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
 public class MessageManager implements IMessageManager {
+
+    static class Pair {
+
+        ComponentFactory m_cf;
+
+        ConcurrentMap<String, ComponentInstance> m_cis = new ConcurrentHashMap<String, ComponentInstance>();
+
+        Pair(ComponentFactory cf) {
+            m_cf = cf;
+        }
+
+    }
 
     private static final Logger s_logger = LoggerFactory.getLogger(MessageManager.class);
 
     private IMessageContext m_context = new MessageContextImpl();
 
-    private ConcurrentMap<RegisterInfo, CopyOnWriteArrayList<ComponentFactory>> m_computeParticleFactoryMap = new ConcurrentHashMap<RegisterInfo, CopyOnWriteArrayList<ComponentFactory>>();
+    private ConcurrentMap<RegisterInfo, CopyOnWriteArrayList<Pair>> m_cpMap = new ConcurrentHashMap<RegisterInfo, CopyOnWriteArrayList<Pair>>();
 
     public MessageManager() {
         s_logger.info("New.");
@@ -51,13 +67,23 @@ public class MessageManager implements IMessageManager {
         s_logger.info("Post message. [Message = {}]", message);
 
         RegisterInfo ri = message.getRegisterInfo();
-        CopyOnWriteArrayList<ComponentFactory> cpfs = m_computeParticleFactoryMap.get(ri);
-        if (cpfs != null) {
-            for (ComponentFactory cpf : cpfs) {
-                ComponentInstance ci = cpf.newInstance(null);
+        CopyOnWriteArrayList<Pair> cpfs = m_cpMap.get(ri);
+        if (cpfs == null || cpfs.isEmpty()) {
+            s_logger.warn("Compute particle factory list is not found. [Message = {}]", message);
+
+        } else {
+            String value = message.getValue();
+            for (Pair cpf : cpfs) {
+                ComponentInstance ci = cpf.m_cis.get(value);
+                if (ci == null) {
+                    ci = cpf.m_cf.newInstance(null);
+                    ComponentInstance oldCi = cpf.m_cis.putIfAbsent(value, ci);
+                    if (oldCi != null && oldCi != ci) {
+                        ci = oldCi;
+                    }
+                }
                 IComputeParticle cp = (IComputeParticle) ci.getInstance();
                 cp.processMessage(m_context, message);
-                ci.dispose();
             }
         }
     }
@@ -78,46 +104,59 @@ public class MessageManager implements IMessageManager {
     }
 
     protected void register(ComponentFactory cpf, Map<String, Object> properties) {
-        String cp = (String) properties.get("component.name");
+        String cp = (String) properties.get(COMPONENT_NAME);
         RegisterInfo ri = getRegisterInfo(cpf, properties);
         s_logger.info("Register compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
 
-        CopyOnWriteArrayList<ComponentFactory> cpfs = new CopyOnWriteArrayList<ComponentFactory>();
-        CopyOnWriteArrayList<ComponentFactory> oldCpfs = m_computeParticleFactoryMap.putIfAbsent(ri, cpfs);
+        CopyOnWriteArrayList<Pair> cpfs = new CopyOnWriteArrayList<Pair>();
+        CopyOnWriteArrayList<Pair> oldCpfs = m_cpMap.putIfAbsent(ri, cpfs);
         cpfs = oldCpfs == null ? cpfs : oldCpfs;
-        cpfs.add(cpf);
+        cpfs.add(new Pair(cpf));
     }
 
     protected void unregister(ComponentFactory cpf, Map<String, Object> properties) {
-        String cp = (String) properties.get("component.name");
+        String cp = (String) properties.get(COMPONENT_NAME);
         RegisterInfo ri = getRegisterInfo(cpf, properties);
         s_logger.info("Unregister compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
 
-        CopyOnWriteArrayList<ComponentFactory> cpfs = m_computeParticleFactoryMap.get(ri);
-        if (cpfs == null || !cpfs.remove(cpf)) {
-            s_logger.error("Compute particle factory is not exist. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+        CopyOnWriteArrayList<Pair> cpfs = m_cpMap.get(ri);
+        if (cpfs == null) {
+            s_logger.error("Compute particle factory list is not found. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+
+        } else {
+            for (Pair p : cpfs) {
+                if (p.m_cf == cpf) {
+                    s_logger.info("Remove compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+
+                    for (ComponentInstance ci : p.m_cis.values()) {
+                        ci.dispose();
+                    }
+                    cpfs.remove(p);
+
+                    return;
+                }
+            }
+
+            s_logger.error("Compute particle factory is not found. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
         }
     }
 
     protected RegisterInfo getRegisterInfo(ComponentFactory cpf, Map<String, Object> properties) {
-        EType type = null;
-        String function = null;
-        EScope scope = null;
+        String factory = (String) properties.get(COMPONENT_FACTORY);
 
-        Class<?> cpc = cpf.newInstance(null).getInstance().getClass();
+        String type = getProperty(factory, Type);
+        String scope = getProperty(factory, Scope);
+        String function = getProperty(factory, Function);
 
-        if (cpc.isAnnotationPresent(ComputeParticle.class)) {
-            ComputeParticle cp = cpc.getAnnotation(ComputeParticle.class);
-            type = cp.type();
-            function = cp.function();
-            scope = cp.scope();
-        }
+        return new RegisterInfo(type, scope, function);
+    }
 
-        type = type == null ? EType.valueOf((String) properties.get("type")) : type;
-        function = function == null ? (String) properties.get("function") : function;
-        scope = scope == null ? EScope.valueOf((String) properties.get("scope")) : scope;
-
-        return new RegisterInfo(type, function, scope);
+    protected String getProperty(String factory, String property) {
+        int beginIndex = factory.indexOf(property);
+        beginIndex = factory.indexOf('=', beginIndex) + 1;
+        int endIndex = factory.indexOf(';', beginIndex);
+        endIndex = endIndex == -1 ? factory.length() : endIndex;
+        return factory.substring(beginIndex, endIndex);
     }
 
 }
