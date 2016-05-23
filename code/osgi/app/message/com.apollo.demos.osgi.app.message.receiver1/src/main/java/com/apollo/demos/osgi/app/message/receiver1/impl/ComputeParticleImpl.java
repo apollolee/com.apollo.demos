@@ -3,10 +3,10 @@
  */
 package com.apollo.demos.osgi.app.message.receiver1.impl;
 
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.FactoryPrefix;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Function;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Scope;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Type;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Factory.ComputeParticle;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Function;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Scope;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Type;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Scope.CNode;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Type.NE;
 
@@ -23,7 +23,7 @@ import com.apollo.demos.osgi.app.message.api.IComputeParticle;
 import com.apollo.demos.osgi.app.message.api.IMessageContext;
 import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 
-@Component(factory = FactoryPrefix + ":" + Type + "=" + NE + ";" + Scope + "=" + CNode + ";" + Function + "=CreateLsp")
+@Component(factory = ComputeParticle + ":" + Type + "=" + NE + ";" + Scope + "=" + CNode + ";" + Function + "=CreateLsp")
 @Service
 public class ComputeParticleImpl implements IComputeParticle {
 

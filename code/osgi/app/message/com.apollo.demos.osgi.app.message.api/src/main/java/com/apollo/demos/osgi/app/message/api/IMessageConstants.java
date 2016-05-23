@@ -5,17 +5,19 @@ package com.apollo.demos.osgi.app.message.api;
 
 public interface IMessageConstants {
 
+    public static interface Factory {
+
+        public static final String ComputeParticle = "message.computeParticle";
+
+    }
+
     public static interface Property {
 
-        public static interface Message {
+        public static final String Type = "message.type";
 
-            public static final String Type = "message.type";
+        public static final String Scope = "message.scope";
 
-            public static final String Scope = "message.scope";
-
-            public static final String Function = "message.function";
-
-        }
+        public static final String Function = "message.function";
 
     }
 
@@ -36,7 +38,5 @@ public interface IMessageConstants {
         public static final String CNode = "CNode";
 
     }
-
-    public static final String FactoryPrefix = "ComputeParticle";
 
 }

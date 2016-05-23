@@ -3,10 +3,10 @@
  */
 package com.apollo.demos.osgi.app.message.core.impl;
 
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.FactoryPrefix;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Function;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Scope;
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Message.Type;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Factory.ComputeParticle;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Function;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Scope;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Type;
 import static org.apache.felix.scr.annotations.ReferenceCardinality.MANDATORY_MULTIPLE;
 import static org.apache.felix.scr.annotations.ReferencePolicy.DYNAMIC;
 import static org.osgi.service.component.ComponentConstants.COMPONENT_FACTORY;
@@ -37,7 +37,7 @@ import com.apollo.demos.osgi.app.message.api.RegisterInfo;
 
 @Component
 @Service
-@Reference(referenceInterface = ComponentFactory.class, target = "(component.factory=" + FactoryPrefix + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
+@Reference(referenceInterface = ComponentFactory.class, target = "(component.factory=" + ComputeParticle + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
 public class MessageManager implements IMessageManager {
 
     static class Pair {
