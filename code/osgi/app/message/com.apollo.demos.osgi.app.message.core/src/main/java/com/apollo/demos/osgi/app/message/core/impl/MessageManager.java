@@ -37,7 +37,7 @@ import com.apollo.demos.osgi.app.message.api.RegisterInfo;
 
 @Component
 @Service
-@Reference(referenceInterface = ComponentFactory.class, target = "(component.factory=" + ComputeParticle + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
+@Reference(referenceInterface = ComponentFactory.class, target = "(" + COMPONENT_FACTORY + "=" + ComputeParticle + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
 public class MessageManager implements IMessageManager {
 
     static class Pair {
