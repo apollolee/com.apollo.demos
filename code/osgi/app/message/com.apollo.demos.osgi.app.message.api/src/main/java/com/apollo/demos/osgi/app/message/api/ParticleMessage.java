@@ -3,10 +3,12 @@
  */
 package com.apollo.demos.osgi.app.message.api;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ParticleMessage {
+public class ParticleMessage<M extends Serializable> {
 
     private static final Logger s_logger = LoggerFactory.getLogger(ParticleMessage.class);
 
@@ -14,9 +16,9 @@ public class ParticleMessage {
 
     public String m_value;
 
-    public Object m_message;
+    public M m_message;
 
-    public ParticleMessage(RegisterInfo registerInfo, String value, Object message) {
+    public ParticleMessage(RegisterInfo registerInfo, String value, M message) {
         s_logger.info("New. [Register Info = {}] , [Value = {}] , [Message = {}]", registerInfo, value, message);
 
         m_registerInfo = registerInfo;
@@ -32,7 +34,7 @@ public class ParticleMessage {
         return m_value;
     }
 
-    public Object getMessage() {
+    public M getMessage() {
         return m_message;
     }
 

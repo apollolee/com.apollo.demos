@@ -63,6 +63,7 @@ public class MessageManager implements IMessageManager {
     }
 
     @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void postMessage(ParticleMessage message) {
         s_logger.info("Post message. [Message = {}]", message);
 

@@ -3,8 +3,10 @@
  */
 package com.apollo.demos.osgi.app.message.api;
 
-public interface IComputeParticle {
+import java.io.Serializable;
 
-    public abstract void processMessage(IMessageContext context, ParticleMessage message);
+public interface IComputeParticle<M extends Serializable> {
+
+    public abstract void processMessage(IMessageContext context, ParticleMessage<M> message);
 
 }

@@ -25,7 +25,7 @@ import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 
 @Component(factory = ComputeParticle + ":" + Type + "=" + NE + ";" + Scope + "=" + CNode + ";" + Function + "=CreateLsp")
 @Service
-public class ComputeParticleImpl implements IComputeParticle {
+public class ComputeParticleImpl implements IComputeParticle<String> {
 
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleImpl.class);
 
@@ -34,7 +34,7 @@ public class ComputeParticleImpl implements IComputeParticle {
     }
 
     @Override
-    public void processMessage(IMessageContext context, ParticleMessage message) {
+    public void processMessage(IMessageContext context, ParticleMessage<String> message) {
         s_logger.info("Process message. [ID = 0x{}] , [Message Context = {}] , [Particle Message ={}]",
                       Integer.toHexString(System.identityHashCode(this)),
                       context,

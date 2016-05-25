@@ -60,9 +60,9 @@ public class SenderImpl {
             public void run() {
                 while (true) {
                     RegisterInfo ri = new RegisterInfo(Type.NE, Scope.CNode, "CreateLsp");
-                    ParticleMessage message = new ParticleMessage(ri,
-                                                                  String.valueOf((int) (Math.random() * 100) % 2),
-                                                                  "Please create a LSP.");
+                    ParticleMessage<String> message = new ParticleMessage<String>(ri,
+                                                                                  String.valueOf((int) (Math.random() * 100) % 2),
+                                                                                  "Please create a LSP.");
                     s_logger.info("Post message. [Message = {}]", message);
                     m_messageManager.postMessage(message);
 
