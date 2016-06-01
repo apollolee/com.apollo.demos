@@ -24,7 +24,7 @@ public class FeatureApolloList extends ApolloBase {
     @Override
     protected Object doExecute() throws Exception {
         String installed = m_isInstalled ? "-i" : "";
-        return CommandSessionHolder.getSession().execute("feature:list " + installed + " | grep apollo-demo");
+        return CommandSessionHolder.getSession().execute("feature:list " + installed + " | grep apollo-demos");
     }
 
 }
