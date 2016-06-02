@@ -63,7 +63,7 @@ public class SenderImpl {
                     ParticleMessage<String> message = new ParticleMessage<String>(ri,
                                                                                   String.valueOf((int) (Math.random() * 100) % 2),
                                                                                   "Please create a PW.");
-                    s_logger.info("Post message. [Message={}]", message);
+                    s_logger.info("Post message. [{}]", message);
                     m_messageManager.postMessage(message);
 
                     Thread.yield();

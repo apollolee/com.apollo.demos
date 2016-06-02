@@ -65,12 +65,12 @@ public class MessageManager implements IMessageManager {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void postMessage(ParticleMessage message) {
-        s_logger.debug("Post message. [Message={}]", message);
+        s_logger.debug("Post message. [{}]", message);
 
         RegisterInfo ri = message.getRegisterInfo();
         CopyOnWriteArrayList<Pair> cpfs = m_cpMap.get(ri);
         if (cpfs == null || cpfs.isEmpty()) {
-            s_logger.warn("Compute particle factory list is not found. [Message={}]", message);
+            s_logger.warn("Compute particle factory list is not found. [{}]", message);
 
         } else {
             String value = message.getValue();

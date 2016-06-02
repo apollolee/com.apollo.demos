@@ -31,27 +31,27 @@ public class ComputeParticleImpl implements IComputeParticle<String> {
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleImpl.class);
 
     public ComputeParticleImpl() {
-        s_logger.trace("New. [ID={}]", showId(this));
+        s_logger.trace("New. [{}]", showId(this));
     }
 
     @Override
     public void processMessage(IMessageContext context, ParticleMessage<String> message) {
-        s_logger.info("Process message. [ID={}],[MessageContext={}],[ParticleMessage={}]", showId(this), context, message);
+        s_logger.info("Process message. [{}#{}#{}]", showId(this), context, message);
     }
 
     @Activate
     protected void activate(ComponentContext context) {
-        s_logger.trace("Activate. [ID={}]", showId(this));
+        s_logger.trace("Activate. [{}]", showId(this));
     }
 
     @Deactivate
     protected void deactivate(ComponentContext context) {
-        s_logger.trace("Deactivate. [ID={}]", showId(this));
+        s_logger.trace("Deactivate. [{}]", showId(this));
     }
 
     @Modified
     protected void modified(ComponentContext context) {
-        s_logger.trace("Modified. [ID={}]", showId(this));
+        s_logger.trace("Modified. [{}]", showId(this));
     }
 
 }
