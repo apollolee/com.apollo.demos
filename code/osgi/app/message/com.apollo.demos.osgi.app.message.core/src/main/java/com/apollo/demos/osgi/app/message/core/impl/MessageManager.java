@@ -3,11 +3,11 @@
  */
 package com.apollo.demos.osgi.app.message.core.impl;
 
-import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Factory.ComputeParticle;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Function;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Scope;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Type;
-import static org.apache.felix.scr.annotations.ReferenceCardinality.MANDATORY_MULTIPLE;
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Target.AllComputeParticle;
+import static org.apache.felix.scr.annotations.ReferenceCardinality.OPTIONAL_MULTIPLE;
 import static org.apache.felix.scr.annotations.ReferencePolicy.DYNAMIC;
 import static org.osgi.service.component.ComponentConstants.COMPONENT_FACTORY;
 import static org.osgi.service.component.ComponentConstants.COMPONENT_NAME;
@@ -35,9 +35,9 @@ import com.apollo.demos.osgi.app.message.api.IMessageManager;
 import com.apollo.demos.osgi.app.message.api.ParticleMessage;
 import com.apollo.demos.osgi.app.message.api.RegisterInfo;
 
-@Component
+@Component(immediate = true)
 @Service
-@Reference(referenceInterface = ComponentFactory.class, target = "(" + COMPONENT_FACTORY + "=" + ComputeParticle + "*)", cardinality = MANDATORY_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
+@Reference(referenceInterface = ComponentFactory.class, target = AllComputeParticle, cardinality = OPTIONAL_MULTIPLE, policy = DYNAMIC, bind = "register", unbind = "unregister")
 public class MessageManager implements IMessageManager {
 
     static class Pair {
@@ -59,18 +59,18 @@ public class MessageManager implements IMessageManager {
     private ConcurrentMap<RegisterInfo, CopyOnWriteArrayList<Pair>> m_cpMap = new ConcurrentHashMap<RegisterInfo, CopyOnWriteArrayList<Pair>>();
 
     public MessageManager() {
-        s_logger.info("New.");
+        s_logger.trace("New.");
     }
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void postMessage(ParticleMessage message) {
-        s_logger.info("Post message. [Message = {}]", message);
+        s_logger.debug("Post message. [Message={}]", message);
 
         RegisterInfo ri = message.getRegisterInfo();
         CopyOnWriteArrayList<Pair> cpfs = m_cpMap.get(ri);
         if (cpfs == null || cpfs.isEmpty()) {
-            s_logger.warn("Compute particle factory list is not found. [Message = {}]", message);
+            s_logger.warn("Compute particle factory list is not found. [Message={}]", message);
 
         } else {
             String value = message.getValue();
@@ -91,23 +91,23 @@ public class MessageManager implements IMessageManager {
 
     @Activate
     protected void activate(ComponentContext context) {
-        s_logger.info("Activate.");
+        s_logger.trace("Activate.");
     }
 
     @Deactivate
     protected void deactivate(ComponentContext context) {
-        s_logger.info("Deactivate.");
+        s_logger.trace("Deactivate.");
     }
 
     @Modified
     protected void modified(ComponentContext context) {
-        s_logger.info("Modified.");
+        s_logger.trace("Modified.");
     }
 
     protected void register(ComponentFactory cpf, Map<String, Object> properties) {
         String cp = (String) properties.get(COMPONENT_NAME);
         RegisterInfo ri = getRegisterInfo(cpf, properties);
-        s_logger.info("Register compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+        s_logger.debug("Register compute particle factory. [{}#{}]", cp, ri);
 
         CopyOnWriteArrayList<Pair> cpfs = new CopyOnWriteArrayList<Pair>();
         CopyOnWriteArrayList<Pair> oldCpfs = m_cpMap.putIfAbsent(ri, cpfs);
@@ -118,16 +118,16 @@ public class MessageManager implements IMessageManager {
     protected void unregister(ComponentFactory cpf, Map<String, Object> properties) {
         String cp = (String) properties.get(COMPONENT_NAME);
         RegisterInfo ri = getRegisterInfo(cpf, properties);
-        s_logger.info("Unregister compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+        s_logger.debug("Unregister compute particle factory. [{}#{}]", cp, ri);
 
         CopyOnWriteArrayList<Pair> cpfs = m_cpMap.get(ri);
         if (cpfs == null) {
-            s_logger.error("Compute particle factory list is not found. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+            s_logger.error("Compute particle factory list is not found. [{}#{}]", cp, ri);
 
         } else {
             for (Pair p : cpfs) {
                 if (p.m_cf == cpf) {
-                    s_logger.info("Remove compute particle factory. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+                    s_logger.trace("Remove compute particle factory. [{}#{}]", cp, ri);
 
                     for (ComponentInstance ci : p.m_cis.values()) {
                         ci.dispose();
@@ -138,7 +138,7 @@ public class MessageManager implements IMessageManager {
                 }
             }
 
-            s_logger.error("Compute particle factory is not found. [ComputeParticle = {}] , [RegisterInfo = {}]", cp, ri);
+            s_logger.error("Compute particle factory is not found. [{}#{}]", cp, ri);
         }
     }
 

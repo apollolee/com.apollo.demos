@@ -9,6 +9,7 @@ import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.S
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Property.Type;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Scope.CNode;
 import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Type.NE;
+import static com.apollo.demos.osgi.app.message.api.MessageUtilities.showId;
 
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
@@ -30,30 +31,27 @@ public class ComputeParticleImpl implements IComputeParticle<String> {
     private static final Logger s_logger = LoggerFactory.getLogger(ComputeParticleImpl.class);
 
     public ComputeParticleImpl() {
-        s_logger.info("New. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
+        s_logger.trace("New. [ID={}]", showId(this));
     }
 
     @Override
     public void processMessage(IMessageContext context, ParticleMessage<String> message) {
-        s_logger.info("Process message. [ID = 0x{}] , [Message Context = {}] , [Particle Message ={}]",
-                      Integer.toHexString(System.identityHashCode(this)),
-                      context,
-                      message);
+        s_logger.info("Process message. [ID={}],[MessageContext={}],[ParticleMessage={}]", showId(this), context, message);
     }
 
     @Activate
     protected void activate(ComponentContext context) {
-        s_logger.info("Activate. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
+        s_logger.trace("Activate. [ID={}]", showId(this));
     }
 
     @Deactivate
     protected void deactivate(ComponentContext context) {
-        s_logger.info("Deactivate. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
+        s_logger.trace("Deactivate. [ID={}]", showId(this));
     }
 
     @Modified
     protected void modified(ComponentContext context) {
-        s_logger.info("Modified. [ID = 0x{}]", Integer.toHexString(System.identityHashCode(this)));
+        s_logger.trace("Modified. [ID={}]", showId(this));
     }
 
 }

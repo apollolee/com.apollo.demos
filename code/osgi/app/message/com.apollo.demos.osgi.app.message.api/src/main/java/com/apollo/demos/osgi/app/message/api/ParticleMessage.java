@@ -3,6 +3,8 @@
  */
 package com.apollo.demos.osgi.app.message.api;
 
+import static com.apollo.demos.osgi.app.message.api.MessageUtilities.showClass;
+
 import java.io.Serializable;
 
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ public class ParticleMessage<M extends Serializable> {
     public M m_message;
 
     public ParticleMessage(RegisterInfo registerInfo, String value, M message) {
-        s_logger.info("New. [Register Info = {}] , [Value = {}] , [Message = {}]", registerInfo, value, message);
+        s_logger.trace("New. [{}#{}#{}]", registerInfo, value, showClass(message));
 
         m_registerInfo = registerInfo;
         m_value = value;
@@ -40,7 +42,7 @@ public class ParticleMessage<M extends Serializable> {
 
     @Override
     public String toString() {
-        return "[Register Info = " + m_registerInfo + "] , [Value = " + m_value + "] , [Message = " + m_message + "]";
+        return m_registerInfo + "#" + m_value + "#" + showClass(m_message);
     }
 
 }

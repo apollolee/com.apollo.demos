@@ -3,11 +3,20 @@
  */
 package com.apollo.demos.osgi.app.message.api;
 
+import static com.apollo.demos.osgi.app.message.api.IMessageConstants.Factory.ComputeParticle;
+import static org.osgi.service.component.ComponentConstants.COMPONENT_FACTORY;
+
 public interface IMessageConstants {
 
     public static interface Factory {
 
         public static final String ComputeParticle = "message.computeParticle";
+
+    }
+
+    public static interface Target {
+
+        public static final String AllComputeParticle = "(" + COMPONENT_FACTORY + "=" + ComputeParticle + "*)";
 
     }
 

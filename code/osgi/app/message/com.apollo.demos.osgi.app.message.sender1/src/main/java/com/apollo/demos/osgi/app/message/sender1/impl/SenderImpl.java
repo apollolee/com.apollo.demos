@@ -33,26 +33,26 @@ public class SenderImpl {
     private ExecutorService m_es = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
 
     public SenderImpl() {
-        s_logger.info("New.");
+        s_logger.trace("New.");
     }
 
     @Activate
     protected void activate(ComponentContext context) {
-        s_logger.info("Activate.");
+        s_logger.trace("Activate.");
     }
 
     @Deactivate
     protected void deactivate(ComponentContext context) {
-        s_logger.info("Deactivate.");
+        s_logger.trace("Deactivate.");
     }
 
     @Modified
     protected void modified(ComponentContext context) {
-        s_logger.info("Modified.");
+        s_logger.trace("Modified.");
     }
 
     protected void bindMessageManager(IMessageManager messageManager) {
-        s_logger.info("Bind MessageManager.");
+        s_logger.trace("Bind MessageManager.");
         m_messageManager = messageManager;
         m_es.execute(new Runnable() {
 
@@ -63,7 +63,7 @@ public class SenderImpl {
                     ParticleMessage<String> message = new ParticleMessage<String>(ri,
                                                                                   String.valueOf((int) (Math.random() * 100) % 2),
                                                                                   "Please create a LSP.");
-                    s_logger.info("Post message. [Message = {}]", message);
+                    s_logger.info("Post message. [Message={}]", message);
                     m_messageManager.postMessage(message);
 
                     Thread.yield();
@@ -72,7 +72,7 @@ public class SenderImpl {
                         Thread.sleep(5000);
 
                     } catch (InterruptedException ex) {
-                        s_logger.info("Post message is interrupted.");
+                        s_logger.debug("Post message is interrupted.");
                         break;
                     }
                 }
@@ -82,7 +82,7 @@ public class SenderImpl {
     }
 
     protected void unbindMessageManager(IMessageManager messageManager) {
-        s_logger.info("Unbind MessageManager.");
+        s_logger.trace("Unbind MessageManager.");
 
         m_es.shutdownNow();
 

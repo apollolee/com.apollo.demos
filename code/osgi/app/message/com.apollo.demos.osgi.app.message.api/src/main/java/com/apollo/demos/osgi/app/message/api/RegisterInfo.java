@@ -17,7 +17,7 @@ public class RegisterInfo {
     public String m_function;
 
     public RegisterInfo(String type, String scope, String function) {
-        s_logger.info("New. [Type = {}] , [Scope = {}] , [Function = {}]", type, scope, function);
+        s_logger.trace("New. [{}#{}#{}]", type, scope, function);
 
         m_type = type;
         m_scope = scope;
@@ -60,7 +60,7 @@ public class RegisterInfo {
 
     @Override
     public String toString() {
-        return "[Type = " + m_type + "] , [Scope = " + m_scope + "] , [Function = " + m_function + "]";
+        return m_type + "#" + m_scope + "#" + m_function;
     }
 
 }

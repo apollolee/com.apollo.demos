@@ -13,7 +13,7 @@ public class MessageContextImpl implements IMessageContext {
     private static final Logger s_logger = LoggerFactory.getLogger(MessageContextImpl.class);
 
     public MessageContextImpl() {
-        s_logger.info("New.");
+        s_logger.trace("New.");
     }
 
     @Override
