@@ -10,7 +10,7 @@ public final class MessageUtilities implements IMessageConstants {
     }
 
     public static final String showId(Object object) {
-        return "0x" + Integer.toHexString(System.identityHashCode(object));
+        return object == null ? "null" : ("0x" + Integer.toHexString(System.identityHashCode(object)));
     }
 
     /**
