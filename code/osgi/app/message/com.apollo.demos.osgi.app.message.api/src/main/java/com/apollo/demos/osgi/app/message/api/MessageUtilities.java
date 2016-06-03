@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2016Äê6ÔÂ2ÈÕ ÉÏÎç10:12:38¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2016å¹´6æœˆ2æ—¥ ä¸Šåˆ10:12:38ã€‚
  */
 package com.apollo.demos.osgi.app.message.api;
 
@@ -14,10 +14,10 @@ public final class MessageUtilities implements IMessageConstants {
     }
 
     /**
-     * ¹¹Ôì·½·¨¡£
+     * æ„é€ æ–¹æ³•ã€‚
      */
     private MessageUtilities() {
-        /* ½ûÖ¹´ÓÍâ²¿ÊµÀı»¯´ËÀà */
+        /* ç¦æ­¢ä»å¤–éƒ¨å®ä¾‹åŒ–æ­¤ç±» */
     }
 
 }

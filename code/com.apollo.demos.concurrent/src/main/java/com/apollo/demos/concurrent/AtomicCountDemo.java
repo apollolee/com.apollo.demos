@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-2-17 ÏÂÎç03:56:08¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-2-17 ä¸‹åˆ03:56:08ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -9,14 +9,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AtomicCountDemo {
 
     public static void main(String[] args) throws InterruptedException {
-        //Count.count(); //ÆÕÍ¨ÀàËÆi++µÄ¼ÆÊı
-        AtomicCount.count(); //Ô­×Ó²Ù×÷µÄ¼ÆÊı
+        //Count.count(); //æ™®é€šç±»ä¼¼i++çš„è®¡æ•°
+        AtomicCount.count(); //åŸå­æ“ä½œçš„è®¡æ•°
     }
 
 }
 
 /**
- * ÆÕÍ¨¼ÆÊıÀà¡£
+ * æ™®é€šè®¡æ•°ç±»ã€‚
  */
 class Count {
 
@@ -27,28 +27,28 @@ class Count {
     }
 
     /**
-     * ¶àÏß³Ì¼ÆÊı¡£
+     * å¤šçº¿ç¨‹è®¡æ•°ã€‚
      */
     static void count() {
-        for (int i = 0; i < 10; i++) { //ÖØ¸´10´Î
-            final CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
-            final CountDownLatch endGate = new CountDownLatch(100); //ÖÕÖ¹±ÕËø
+        for (int i = 0; i < 10; i++) { //é‡å¤10æ¬¡
+            final CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
+            final CountDownLatch endGate = new CountDownLatch(100); //ç»ˆæ­¢é—­é”
 
-            final Count count = new Count(); //ÆÕÍ¨¼ÆÊı
-            for (int j = 0; j < 100; j++) { //´´½¨100¸ö¼ÆÊıÏß³Ì
+            final Count count = new Count(); //æ™®é€šè®¡æ•°
+            for (int j = 0; j < 100; j++) { //åˆ›å»º100ä¸ªè®¡æ•°çº¿ç¨‹
                 new Thread(new Runnable() {
 
                     public void run() {
                         try {
-                            startGate.await(); //ÆğÊ¼±ÕËø×èÈû
+                            startGate.await(); //èµ·å§‹é—­é”é˜»å¡
 
                             try {
-                                for (int i = 0; i < 100; i++) { //¼ÆÊı100´Î×ÔÔö
+                                for (int i = 0; i < 100; i++) { //è®¡æ•°100æ¬¡è‡ªå¢
                                     count.increment();
                                 }
 
                             } finally {
-                                endGate.countDown(); //ÖÕÖ¹±ÕËø¼ÆÊı
+                                endGate.countDown(); //ç»ˆæ­¢é—­é”è®¡æ•°
                             }
 
                         } catch (InterruptedException ex) {
@@ -59,11 +59,11 @@ class Count {
                 }).start();
             }
 
-            startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+            startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
             try {
-                endGate.await(); //¼ÆÊıÏß³ÌÈ«²¿¼ÆÊıÍê±Ï
-                System.out.println("µÚ" + i + "´Î£ºCount = " + count.m_count);
+                endGate.await(); //è®¡æ•°çº¿ç¨‹å…¨éƒ¨è®¡æ•°å®Œæ¯•
+                System.out.println("ç¬¬" + i + "æ¬¡ï¼šCount = " + count.m_count);
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
@@ -74,7 +74,7 @@ class Count {
 }
 
 /**
- * Ô­×Ó¼ÆÊıÀà¡£
+ * åŸå­è®¡æ•°ç±»ã€‚
  */
 class AtomicCount {
 
@@ -85,28 +85,28 @@ class AtomicCount {
     }
 
     /**
-     * ¶àÏß³Ì¼ÆÊı¡£
+     * å¤šçº¿ç¨‹è®¡æ•°ã€‚
      */
     static void count() {
-        for (int i = 0; i < 10; i++) { //ÖØ¸´10´Î
-            final CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
-            final CountDownLatch endGate = new CountDownLatch(100); //ÖÕÖ¹±ÕËø
+        for (int i = 0; i < 10; i++) { //é‡å¤10æ¬¡
+            final CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
+            final CountDownLatch endGate = new CountDownLatch(100); //ç»ˆæ­¢é—­é”
 
-            final AtomicCount count = new AtomicCount(); //ÆÕÍ¨¼ÆÊı
-            for (int j = 0; j < 100; j++) { //´´½¨100¸ö¼ÆÊıÏß³Ì
+            final AtomicCount count = new AtomicCount(); //æ™®é€šè®¡æ•°
+            for (int j = 0; j < 100; j++) { //åˆ›å»º100ä¸ªè®¡æ•°çº¿ç¨‹
                 new Thread(new Runnable() {
 
                     public void run() {
                         try {
-                            startGate.await(); //ÆğÊ¼±ÕËø×èÈû
+                            startGate.await(); //èµ·å§‹é—­é”é˜»å¡
 
                             try {
-                                for (int i = 0; i < 100; i++) { //¼ÆÊı100´Î×ÔÔö
+                                for (int i = 0; i < 100; i++) { //è®¡æ•°100æ¬¡è‡ªå¢
                                     count.increment();
                                 }
 
                             } finally {
-                                endGate.countDown(); //ÖÕÖ¹±ÕËø¼ÆÊı
+                                endGate.countDown(); //ç»ˆæ­¢é—­é”è®¡æ•°
                             }
 
                         } catch (InterruptedException ex) {
@@ -117,11 +117,11 @@ class AtomicCount {
                 }).start();
             }
 
-            startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+            startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
             try {
-                endGate.await(); //¼ÆÊıÏß³ÌÈ«²¿¼ÆÊıÍê±Ï
-                System.out.println("µÚ" + i + "´Î£ºAtomicCount = " + count.m_count.get());
+                endGate.await(); //è®¡æ•°çº¿ç¨‹å…¨éƒ¨è®¡æ•°å®Œæ¯•
+                System.out.println("ç¬¬" + i + "æ¬¡ï¼šAtomicCount = " + count.m_count.get());
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();

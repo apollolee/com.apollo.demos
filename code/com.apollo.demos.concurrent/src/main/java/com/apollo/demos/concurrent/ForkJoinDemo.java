@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-8-4 ÏÂÎç3:35:56¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-8-4 ä¸‹åˆ3:35:56ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -68,7 +68,7 @@ public class ForkJoinDemo {
         String dir = "e:/etc";
 
         Date start = new Date();
-        System.out.println("¿ªÊ¼ForkJoin¶àÏß³Ìµİ¹é²éÕÒ\"" + dir + "\"...");
+        System.out.println("å¼€å§‹ForkJoinå¤šçº¿ç¨‹é€’å½’æŸ¥æ‰¾\"" + dir + "\"...");
 
         ForkJoinTask<Integer> fjt = new FileCounterTask(new File(dir));
         ForkJoinPool fjp = new ForkJoinPool();
@@ -76,7 +76,7 @@ public class ForkJoinDemo {
         fjp.submit(fjt);
 
         try {
-            System.out.println("\"" + dir + "\"" + "ÓĞ" + fjt.get() + "¸öÎÄ¼ş£¡");
+            System.out.println("\"" + dir + "\"" + "æœ‰" + fjt.get() + "ä¸ªæ–‡ä»¶ï¼");
 
             Date end = new Date();
             System.out.println(end.getTime() - start.getTime() + " total milliseconds.");
@@ -88,9 +88,9 @@ public class ForkJoinDemo {
         fjp.shutdown();
 
         start = new Date();
-        System.out.println("\n¿ªÊ¼µ¥Ïß³Ìµİ¹é²éÕÒ\"" + dir + "\"...");
+        System.out.println("\nå¼€å§‹å•çº¿ç¨‹é€’å½’æŸ¥æ‰¾\"" + dir + "\"...");
 
-        System.out.println("\"" + dir + "\"" + "ÓĞ" + getFileCount(new File(dir)) + "¸öÎÄ¼ş£¡");
+        System.out.println("\"" + dir + "\"" + "æœ‰" + getFileCount(new File(dir)) + "ä¸ªæ–‡ä»¶ï¼");
 
         Date end = new Date();
         System.out.println(end.getTime() - start.getTime() + " total milliseconds.");

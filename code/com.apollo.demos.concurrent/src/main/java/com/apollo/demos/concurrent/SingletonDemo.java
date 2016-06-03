@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê6ÔÂ5ÈÕ ÉÏÎç8:55:02¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´6æœˆ5æ—¥ ä¸Šåˆ8:55:02ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -17,17 +17,17 @@ public class SingletonDemo {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         /*
-         * ¶àÔËĞĞ¼¸´Î»á³öÏÖÒÔÏÂ´íÎó£º
-         * ¿ªÊ¼²âÊÔSingleton1...
+         * å¤šè¿è¡Œå‡ æ¬¡ä¼šå‡ºç°ä»¥ä¸‹é”™è¯¯ï¼š
+         * å¼€å§‹æµ‹è¯•Singleton1...
          *
-         * Singleton1·¢ÏÖ´íÎó£º
+         * Singleton1å‘ç°é”™è¯¯ï¼š
          * 0.com.apollo.demos.concurrent.Singleton1@3d4eac69
          * 1.com.apollo.demos.concurrent.Singleton1@42a57993
          * 2.com.apollo.demos.concurrent.Singleton1@42a57993
          * 3.com.apollo.demos.concurrent.Singleton1@42a57993
          * 4.com.apollo.demos.concurrent.Singleton1@42a57993
          *
-         * ½áÊø²âÊÔSingleton1¡£
+         * ç»“æŸæµ‹è¯•Singleton1ã€‚
          */
         Singleton1.test();
         //Singleton2.test();
@@ -37,7 +37,7 @@ public class SingletonDemo {
 }
 
 /*
- * Ò»°ã³£¼ûµÄµ¥Àı£¬¶àÏß³ÌÏÂ»áÓĞ´íÎó¡£
+ * ä¸€èˆ¬å¸¸è§çš„å•ä¾‹ï¼Œå¤šçº¿ç¨‹ä¸‹ä¼šæœ‰é”™è¯¯ã€‚
  */
 class Singleton1 {
 
@@ -52,7 +52,7 @@ class Singleton1 {
     }
 
     static void test() throws InterruptedException, ExecutionException {
-        System.out.println("\n¿ªÊ¼²âÊÔSingleton1...");
+        System.out.println("\nå¼€å§‹æµ‹è¯•Singleton1...");
 
         List<Future<Singleton1>> results = null;
 
@@ -60,21 +60,21 @@ class Singleton1 {
             Singleton1.s_singleton = null;
             results = test(Runtime.getRuntime().availableProcessors() + 1);
             if (results != null) {
-                System.out.println("\nSingleton1·¢ÏÖ´íÎó£º");
+                System.out.println("\nSingleton1å‘ç°é”™è¯¯ï¼š");
                 for (int j = 0, size = results.size(); j < size; j++) {
                     System.out.println(j + "." + results.get(j).get());
                 }
             }
         }
 
-        System.out.println("\n½áÊø²âÊÔSingleton1¡£\n");
+        System.out.println("\nç»“æŸæµ‹è¯•Singleton1ã€‚\n");
     }
 
     static List<Future<Singleton1>> test(int nThreads) throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 
-        CountDownLatch readyGate = new CountDownLatch(nThreads); //×¼±¸±ÕËø
-        CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
+        CountDownLatch readyGate = new CountDownLatch(nThreads); //å‡†å¤‡é—­é”
+        CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
 
         List<Future<Singleton1>> results = new ArrayList<Future<Singleton1>>();
 
@@ -83,9 +83,9 @@ class Singleton1 {
         }
 
         try {
-            readyGate.await(); //µÈ´ıËùÓĞÏß³Ì×¼±¸Íê±Ï
+            readyGate.await(); //ç­‰å¾…æ‰€æœ‰çº¿ç¨‹å‡†å¤‡å®Œæ¯•
 
-            startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+            startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
             Singleton1 first = results.get(0).get();
             for (Future<Singleton1> result : results) {
@@ -126,7 +126,7 @@ class Singleton1 {
 }
 
 /*
- * Ë«ÖØ¼ì²é¼ÓËøÄ£Ê½£¨DCL£©£¬±»ÀíÂÛÉÏÖ¤Ã÷ÊÇ·´Ä£Ê½£¬»áÓĞ¼¸ÂÊÔì³É»ñÈ¡µ½Ò»¸ö³õÊ¼»¯Ò»°ëµÄ¶ÔÏó£¬TODO Ä¿Ç°Î´ÓĞÓĞĞ§µÄ´úÂëÖ¤Ã÷ÓĞÎÊÌâ¡£
+ * åŒé‡æ£€æŸ¥åŠ é”æ¨¡å¼ï¼ˆDCLï¼‰ï¼Œè¢«ç†è®ºä¸Šè¯æ˜æ˜¯åæ¨¡å¼ï¼Œä¼šæœ‰å‡ ç‡é€ æˆè·å–åˆ°ä¸€ä¸ªåˆå§‹åŒ–ä¸€åŠçš„å¯¹è±¡ï¼ŒTODO ç›®å‰æœªæœ‰æœ‰æ•ˆçš„ä»£ç è¯æ˜æœ‰é—®é¢˜ã€‚
  */
 class Singleton2 {
 
@@ -146,7 +146,7 @@ class Singleton2 {
     }
 
     static void test() throws InterruptedException, ExecutionException {
-        System.out.println("\n¿ªÊ¼²âÊÔSingleton2...");
+        System.out.println("\nå¼€å§‹æµ‹è¯•Singleton2...");
 
         List<Future<Singleton2>> results = null;
 
@@ -154,21 +154,21 @@ class Singleton2 {
             Singleton2.s_singleton = null;
             results = test(Runtime.getRuntime().availableProcessors() + 1);
             if (results != null) {
-                System.out.println("\nSingleton2·¢ÏÖ´íÎó£º");
+                System.out.println("\nSingleton2å‘ç°é”™è¯¯ï¼š");
                 for (int j = 0, size = results.size(); j < size; j++) {
                     System.out.println(j + "." + results.get(j).get());
                 }
             }
         }
 
-        System.out.println("\n½áÊø²âÊÔSingleton2¡£\n");
+        System.out.println("\nç»“æŸæµ‹è¯•Singleton2ã€‚\n");
     }
 
     static List<Future<Singleton2>> test(int nThreads) throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 
-        CountDownLatch readyGate = new CountDownLatch(nThreads); //×¼±¸±ÕËø
-        CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
+        CountDownLatch readyGate = new CountDownLatch(nThreads); //å‡†å¤‡é—­é”
+        CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
 
         List<Future<Singleton2>> results = new ArrayList<Future<Singleton2>>();
 
@@ -177,9 +177,9 @@ class Singleton2 {
         }
 
         try {
-            readyGate.await(); //µÈ´ıËùÓĞÏß³Ì×¼±¸Íê±Ï
+            readyGate.await(); //ç­‰å¾…æ‰€æœ‰çº¿ç¨‹å‡†å¤‡å®Œæ¯•
 
-            startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+            startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
             Singleton2 first = results.get(0).get();
             for (Future<Singleton2> result : results) {
@@ -220,7 +220,7 @@ class Singleton2 {
 }
 
 /*
- * ÑÓ³Ù³õÊ¼»¯£¬ÍêÈ«°²È«µÄ·½Ê½¡£TODO ÓÉÓÚÎŞ·¨ÖØÖÃ³õÊ¼»¯Àà£¬Ä¿Ç°ÎŞ·¨ÓĞĞ§µÄÔÚµ¥½ø³ÌÖĞÑéÖ¤¡£
+ * å»¶è¿Ÿåˆå§‹åŒ–ï¼Œå®Œå…¨å®‰å…¨çš„æ–¹å¼ã€‚TODO ç”±äºæ— æ³•é‡ç½®åˆå§‹åŒ–ç±»ï¼Œç›®å‰æ— æ³•æœ‰æ•ˆçš„åœ¨å•è¿›ç¨‹ä¸­éªŒè¯ã€‚
  */
 class Singleton3 {
 
@@ -235,29 +235,29 @@ class Singleton3 {
     }
 
     static void test() throws InterruptedException, ExecutionException {
-        System.out.println("\n¿ªÊ¼²âÊÔSingleton3...");
+        System.out.println("\nå¼€å§‹æµ‹è¯•Singleton3...");
 
         List<Future<Singleton3>> results = null;
 
         for (int i = 0; i < 1; i++) {
-            //ÕâÀïÃ»·¨ÖØÖÃ£¬Ö»Ğè1´ÎÑ­»·
+            //è¿™é‡Œæ²¡æ³•é‡ç½®ï¼Œåªéœ€1æ¬¡å¾ªç¯
             results = test(Runtime.getRuntime().availableProcessors() + 1);
             if (results != null) {
-                System.out.println("\nSingleton3·¢ÏÖ´íÎó£º");
+                System.out.println("\nSingleton3å‘ç°é”™è¯¯ï¼š");
                 for (int j = 0, size = results.size(); j < size; j++) {
                     System.out.println(j + "." + results.get(j).get());
                 }
             }
         }
 
-        System.out.println("\n½áÊø²âÊÔSingleton3¡£\n");
+        System.out.println("\nç»“æŸæµ‹è¯•Singleton3ã€‚\n");
     }
 
     static List<Future<Singleton3>> test(int nThreads) throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 
-        CountDownLatch readyGate = new CountDownLatch(nThreads); //×¼±¸±ÕËø
-        CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
+        CountDownLatch readyGate = new CountDownLatch(nThreads); //å‡†å¤‡é—­é”
+        CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
 
         List<Future<Singleton3>> results = new ArrayList<Future<Singleton3>>();
 
@@ -266,9 +266,9 @@ class Singleton3 {
         }
 
         try {
-            readyGate.await(); //µÈ´ıËùÓĞÏß³Ì×¼±¸Íê±Ï
+            readyGate.await(); //ç­‰å¾…æ‰€æœ‰çº¿ç¨‹å‡†å¤‡å®Œæ¯•
 
-            startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+            startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
             Singleton3 first = results.get(0).get();
             for (Future<Singleton3> result : results) {

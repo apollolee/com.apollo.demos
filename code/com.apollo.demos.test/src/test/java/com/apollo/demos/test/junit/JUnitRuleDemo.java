@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ19ÈÕ ÉÏÎç11:13:02¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ19æ—¥ ä¸Šåˆ11:13:02ã€‚
  */
 package com.apollo.demos.test.junit;
 
@@ -49,10 +49,10 @@ public class JUnitRuleDemo {
     @Test
     public void test01() {
         m_expectedException.expect(IndexOutOfBoundsException.class);
-        m_expectedException.expectMessage("Index: 0, Size: 0"); //ExpectedException.expectXxxºÜÇ¿´ó£¬Èç¹ûĞèÒª£¬¿ÉÒÔÆ¥ÅäÌØ¶¨µ÷ÓÃÕ»ĞÅÏ¢¡£
+        m_expectedException.expectMessage("Index: 0, Size: 0"); //ExpectedException.expectXxxå¾ˆå¼ºå¤§ï¼Œå¦‚æœéœ€è¦ï¼Œå¯ä»¥åŒ¹é…ç‰¹å®šè°ƒç”¨æ ˆä¿¡æ¯ã€‚
 
         List<Integer> list = new ArrayList<Integer>();
-        list.get(0); //×¢Òâ£¬µ±Å×³öÒì³£ºó£¬ºóÃæµÄÓï¾äÊÇ²»»áÖ´ĞĞµÄ¡£
+        list.get(0); //æ³¨æ„ï¼Œå½“æŠ›å‡ºå¼‚å¸¸åï¼Œåé¢çš„è¯­å¥æ˜¯ä¸ä¼šæ‰§è¡Œçš„ã€‚
 
         System.out.println("This is not invoked.");
     }

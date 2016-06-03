@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-2-17 ÏÂÎç03:10:08¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-2-17 ä¸‹åˆ03:10:08ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -14,104 +14,104 @@ public class VolatileDemo {
 }
 
 /**
- * ¿É¼ûĞÔ£¬ËµÃ÷volatileÆğ×÷ÓÃµÄ³¡¾°¡£
+ * å¯è§æ€§ï¼Œè¯´æ˜volatileèµ·ä½œç”¨çš„åœºæ™¯ã€‚
  */
 @SuppressWarnings("all")
 class Visibility {
 
     /**
-     * ³ÉÔ±±äÁ¿m_booleanValueÊ¹ÓÃvolatileºÍ²»Ê¹ÓÃvolatile»áÓĞÃ÷ÏÔÇø±ğµÄ£¬±¾³ÌĞòĞèÒª¶àÊÔ¼¸´Î£¬¾ÍÄÜÖªµÀÁ½ÕßÖ®¼äµÄÇø±ğµÄ¡£
+     * æˆå‘˜å˜é‡m_booleanValueä½¿ç”¨volatileå’Œä¸ä½¿ç”¨volatileä¼šæœ‰æ˜æ˜¾åŒºåˆ«çš„ï¼Œæœ¬ç¨‹åºéœ€è¦å¤šè¯•å‡ æ¬¡ï¼Œå°±èƒ½çŸ¥é“ä¸¤è€…ä¹‹é—´çš„åŒºåˆ«çš„ã€‚
      */
     static void test() {
         final Visibility visibility = new Visibility();
 
-        new Thread(new Runnable() { //´´½¨²¢Æô¶¯Ò»¸öÎŞÏŞ½»»»valueÕæ¼ÙÖµµÄÏß³Ì¡£
+        new Thread(new Runnable() { //åˆ›å»ºå¹¶å¯åŠ¨ä¸€ä¸ªæ— é™äº¤æ¢valueçœŸå‡å€¼çš„çº¿ç¨‹ã€‚
 
             @Override
             public void run() {
-                System.out.println("½»»»Ïß³ÌÆô¶¯¡£");
+                System.out.println("äº¤æ¢çº¿ç¨‹å¯åŠ¨ã€‚");
 
                 while (true) {
                     visibility.swap();
-                    Thread.yield(); //ÕâÒ»¾ä·ÀÖ¹³ÌĞòËÀÑ­»·Ì«Õ¼CPU¡£
+                    Thread.yield(); //è¿™ä¸€å¥é˜²æ­¢ç¨‹åºæ­»å¾ªç¯å¤ªå CPUã€‚
                 }
             }
 
         }).start();
 
-        int count = 0; //¼ÆÊıÆ÷¡£
-        while (true) { //ÎŞÏŞ´´½¨ÑéÖ¤Ïß³Ì£¬Èç¹ûĞèÒªµÄ»°¡£
+        int count = 0; //è®¡æ•°å™¨ã€‚
+        while (true) { //æ— é™åˆ›å»ºéªŒè¯çº¿ç¨‹ï¼Œå¦‚æœéœ€è¦çš„è¯ã€‚
             final int current = count++;
 
             Thread test = new Thread(new Runnable() {
 
                 @Override
                 public void run() {
-                    System.out.println("ÑéÖ¤Ïß³ÌÆô¶¯¡£µÚ" + current + "´Î");
+                    System.out.println("éªŒè¯çº¿ç¨‹å¯åŠ¨ã€‚ç¬¬" + current + "æ¬¡");
 
-                    while (visibility.isEqual()) { //µ±value×Ô¼ººÍ×Ô¼ºÏàµÈÊ±ÍË³ö£¬½áÊøÏß³Ì¡£
-                        Thread.yield(); //ÕâÒ»¾ä·ÀÖ¹³ÌĞòËÀÑ­»·Ì«Õ¼CPU¡£
+                    while (visibility.isEqual()) { //å½“valueè‡ªå·±å’Œè‡ªå·±ç›¸ç­‰æ—¶é€€å‡ºï¼Œç»“æŸçº¿ç¨‹ã€‚
+                        Thread.yield(); //è¿™ä¸€å¥é˜²æ­¢ç¨‹åºæ­»å¾ªç¯å¤ªå CPUã€‚
                     }
                 }
 
             });
 
-            test.start(); //Æô¶¯ÑéÖ¤Ïß³Ì¡£
+            test.start(); //å¯åŠ¨éªŒè¯çº¿ç¨‹ã€‚
 
             try {
-                test.join(); //µÈ´ıÑéÖ¤Ïß³Ì½áÊø¡£
+                test.join(); //ç­‰å¾…éªŒè¯çº¿ç¨‹ç»“æŸã€‚
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
 
-            Thread.yield(); //ÕâÒ»¾ä·ÀÖ¹³ÌĞòËÀÑ­»·Ì«Õ¼CPU¡£
+            Thread.yield(); //è¿™ä¸€å¥é˜²æ­¢ç¨‹åºæ­»å¾ªç¯å¤ªå CPUã€‚
         }
     }
 
     /**
-     * ²»¼ÓvolatileĞŞÊÎÊ±£¬´òÓ¡»á×îÖÕÍ£ÔÚÄ³´ÎµÄÑéÖ¤Ïß³Ì´¦£¬Ò²¾ÍÊÇÑéÖ¤Ïß³Ì±ØÓĞÒ»´Î»áÒ»Ö±³öÏÖm_value == m_value£¬¾¡¹Ü´ËÊ±valueÖµÔÚÆµ·±µÄ½»»»Õæ¼ÙÖµ¡£
-     * ¼ÓvolatileĞŞÊÎÊ±Ôò²»»á£¬ÑéÖ¤Ïß³Ì»áÒ»Ö±Ñ­»·´òÓ¡ÏÂÈ¥¡£
+     * ä¸åŠ volatileä¿®é¥°æ—¶ï¼Œæ‰“å°ä¼šæœ€ç»ˆåœåœ¨æŸæ¬¡çš„éªŒè¯çº¿ç¨‹å¤„ï¼Œä¹Ÿå°±æ˜¯éªŒè¯çº¿ç¨‹å¿…æœ‰ä¸€æ¬¡ä¼šä¸€ç›´å‡ºç°m_value == m_valueï¼Œå°½ç®¡æ­¤æ—¶valueå€¼åœ¨é¢‘ç¹çš„äº¤æ¢çœŸå‡å€¼ã€‚
+     * åŠ volatileä¿®é¥°æ—¶åˆ™ä¸ä¼šï¼ŒéªŒè¯çº¿ç¨‹ä¼šä¸€ç›´å¾ªç¯æ‰“å°ä¸‹å»ã€‚
      */
     volatile boolean m_value;
 
     /**
-     * ÅĞ¶ÏvalueÊÇ·ñÓë×Ô¼ºÏàµÈ£¬¿´ÉÏÈ¥ÓĞĞ©Ææ¹Ö¡£
+     * åˆ¤æ–­valueæ˜¯å¦ä¸è‡ªå·±ç›¸ç­‰ï¼Œçœ‹ä¸Šå»æœ‰äº›å¥‡æ€ªã€‚
      */
     boolean isEqual() {
         /*
-         * ÕâÌõÓï¾äÖĞ´æÔÚÁ½¸ö¶ÔvalueµÄuse²Ù×÷£¨use²Ù×÷ÊÇJMMÎª¹¤×÷ÄÚ´æºÍÖ÷ÄÚ´æ¼äÍ¬²½¶¨ÒåµÄ8¸ö²Ù×÷Ö®Ò»£©¡£
-         * Èç¹ûvalueÊÇ·ÇvolatileÊ±£¬JVM²»±£Ö¤Ã¿¸öuse²Ù×÷Ç°¶¼»á´æÔÚload²Ù×÷¡£¼´²»±£Ö¤Ã¿¸öuse¶¯×÷ÄÜÊ¹ÓÃ×îĞÂµÄÖ÷ÄÚ´æÖĞµÄvalue¡£
-         * Èç¹ûvalueÊÇvolatileÊ±£¬JVM»á±£Ö¤Ã¿¸öuse²Ù×÷Ç°¶¼»á´æÔÚload²Ù×÷¡£¼´±£Ö¤Ã¿¸öuse¶¯×÷ÄÜÊ¹ÓÃ×îĞÂµÄÖ÷ÄÚ´æÖĞµÄvalue¡£
-         * ½áÂÛ£º
-         *     1.valueÊÇ·Çvolatile£ºµ±Ïß³ÌAÖĞvalueÆµ·±±ä»¯Ê±£¬Ïß³ÌBÖĞµÄm_value == m_value¿ÉÄÜÒ»Ö±·µ»Øtrue£¬ÒòÎªÓĞ¿ÉÄÜvalueÒ»Ö±Ã»ÓĞ´ÓÖ÷ÄÚ´æÖĞ¸üĞÂ¡£
-         *     2.valueÊÇvolatile£ºµ±Ïß³ÌAÖĞvalueÆµ·±±ä»¯Ê±£¬Ïß³ÌBÖĞµÄm_value == m_value²»¿ÉÄÜÒ»Ö±·µ»Øtrue£¬ÒòÎªÕâÁ½¸övalue¶¼»áÈçÊµ·´À¡Ç°ºó2¸öÊ±¿ÌÖ÷ÄÚ´æÖĞvalueµÄÖµ¡£
+         * è¿™æ¡è¯­å¥ä¸­å­˜åœ¨ä¸¤ä¸ªå¯¹valueçš„useæ“ä½œï¼ˆuseæ“ä½œæ˜¯JMMä¸ºå·¥ä½œå†…å­˜å’Œä¸»å†…å­˜é—´åŒæ­¥å®šä¹‰çš„8ä¸ªæ“ä½œä¹‹ä¸€ï¼‰ã€‚
+         * å¦‚æœvalueæ˜¯évolatileæ—¶ï¼ŒJVMä¸ä¿è¯æ¯ä¸ªuseæ“ä½œå‰éƒ½ä¼šå­˜åœ¨loadæ“ä½œã€‚å³ä¸ä¿è¯æ¯ä¸ªuseåŠ¨ä½œèƒ½ä½¿ç”¨æœ€æ–°çš„ä¸»å†…å­˜ä¸­çš„valueã€‚
+         * å¦‚æœvalueæ˜¯volatileæ—¶ï¼ŒJVMä¼šä¿è¯æ¯ä¸ªuseæ“ä½œå‰éƒ½ä¼šå­˜åœ¨loadæ“ä½œã€‚å³ä¿è¯æ¯ä¸ªuseåŠ¨ä½œèƒ½ä½¿ç”¨æœ€æ–°çš„ä¸»å†…å­˜ä¸­çš„valueã€‚
+         * ç»“è®ºï¼š
+         *     1.valueæ˜¯évolatileï¼šå½“çº¿ç¨‹Aä¸­valueé¢‘ç¹å˜åŒ–æ—¶ï¼Œçº¿ç¨‹Bä¸­çš„m_value == m_valueå¯èƒ½ä¸€ç›´è¿”å›trueï¼Œå› ä¸ºæœ‰å¯èƒ½valueä¸€ç›´æ²¡æœ‰ä»ä¸»å†…å­˜ä¸­æ›´æ–°ã€‚
+         *     2.valueæ˜¯volatileï¼šå½“çº¿ç¨‹Aä¸­valueé¢‘ç¹å˜åŒ–æ—¶ï¼Œçº¿ç¨‹Bä¸­çš„m_value == m_valueä¸å¯èƒ½ä¸€ç›´è¿”å›trueï¼Œå› ä¸ºè¿™ä¸¤ä¸ªvalueéƒ½ä¼šå¦‚å®åé¦ˆå‰å2ä¸ªæ—¶åˆ»ä¸»å†…å­˜ä¸­valueçš„å€¼ã€‚
          */
         return m_value == m_value;
     }
 
     /**
-     * ½»»»valueµÄÕæ¼ÙÖµ¡£
+     * äº¤æ¢valueçš„çœŸå‡å€¼ã€‚
      */
     void swap() {
-        m_value = !m_value; //ÕâÀïÍ¬Ñù´æÔÚisEqual()ÖĞµÄÇé¿ö£¬Ö»²»¹ı°Ñ¶Á²Ù×÷»»³ÉĞ´²Ù×÷£¬Ô­ÀíÀàËÆ¡£
+        m_value = !m_value; //è¿™é‡ŒåŒæ ·å­˜åœ¨isEqual()ä¸­çš„æƒ…å†µï¼Œåªä¸è¿‡æŠŠè¯»æ“ä½œæ¢æˆå†™æ“ä½œï¼ŒåŸç†ç±»ä¼¼ã€‚
     }
 
 }
 
 /**
- * Í¬²½£¬ËµÃ÷volatile²»Æğ×÷ÓÃµÄ³¡¾°£¬ÎŞ·¨Ìæ´úÍ¬²½»úÖÆ¡£
+ * åŒæ­¥ï¼Œè¯´æ˜volatileä¸èµ·ä½œç”¨çš„åœºæ™¯ï¼Œæ— æ³•æ›¿ä»£åŒæ­¥æœºåˆ¶ã€‚
  */
 class Synchronized {
 
     /**
-     * ·´¸´ÑéÖ¤ab»¥»»³¡¾°ÊÇ·ñ´æÔÚ¡£
+     * åå¤éªŒè¯abäº’æ¢åœºæ™¯æ˜¯å¦å­˜åœ¨ã€‚
      */
     static void test() {
-        while (true) { //ÎŞÏŞÑéÖ¤ab»¥»»µÄ²âÊÔ¡£
+        while (true) { //æ— é™éªŒè¯abäº’æ¢çš„æµ‹è¯•ã€‚
             final Synchronized sync = new Synchronized();
 
-            final Thread ab = new Thread(new Runnable() { //´´½¨a=bÏß³Ì¡£
+            final Thread ab = new Thread(new Runnable() { //åˆ›å»ºa=bçº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -120,7 +120,7 @@ class Synchronized {
 
             });
 
-            final Thread ba = new Thread(new Runnable() { //´´½¨b=aÏß³Ì¡£
+            final Thread ba = new Thread(new Runnable() { //åˆ›å»ºb=açº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -132,7 +132,7 @@ class Synchronized {
             ab.start();
             ba.start();
 
-            new Thread(new Runnable() { //´´½¨¼ì²éab»¥»»µÄÏß³Ì¡£
+            new Thread(new Runnable() { //åˆ›å»ºæ£€æŸ¥abäº’æ¢çš„çº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -144,8 +144,8 @@ class Synchronized {
                         ex.printStackTrace();
                     }
 
-                    if (sync.m_a != sync.m_b) { //ÒòÎªÇ°ÃæµÄjoin£¬ÕâÀï²»»áÓĞ¹ØÓÚa»òbµÄÊı¾İ¾ºÕù£¬¾¡¹ÜÊÇÔÚ¶à¸öÏß³ÌÖĞ·ÃÎÊ¡£
-                        //ÀıÈç£ºThread-52829: a=2 b=1
+                    if (sync.m_a != sync.m_b) { //å› ä¸ºå‰é¢çš„joinï¼Œè¿™é‡Œä¸ä¼šæœ‰å…³äºaæˆ–bçš„æ•°æ®ç«äº‰ï¼Œå°½ç®¡æ˜¯åœ¨å¤šä¸ªçº¿ç¨‹ä¸­è®¿é—®ã€‚
+                        //ä¾‹å¦‚ï¼šThread-52829: a=2 b=1
                         System.out.println(Thread.currentThread().getName() + ": a=" + sync.m_a + " b=" + sync.m_b);
                         System.exit(0);
                     }
@@ -158,20 +158,20 @@ class Synchronized {
     }
 
     /**
-     * ÕâÀïa,bÎŞÂÛÊÇ·ñÊ¹ÓÃvolatileĞŞÊÎ£¬¶¼»á³öÏÖ a¡¢bÖµ½»»»¡£ÒòÎªÕâÀïµÄ¾ºÌ¬Ìõ¼şÉæ¼°aºÍbÁ½¸ö±äÁ¿£¬volatileÔÚÕâÀïÎŞ·¨±£Ö¤Ô­×ÓĞÔ¡£
-     * ÕâÀïÖ»ÓĞÊ¹ÓÃÍ¬²½²ÅÄÜ±ÜÃâ³öÏÖab»¥»»µÄÇé¿ö¡£±ÈÈç¶Ôab()ºÍba()Í¬Ê±Ìí¼ÓsynchronizedĞŞÊÎ¡£
+     * è¿™é‡Œa,bæ— è®ºæ˜¯å¦ä½¿ç”¨volatileä¿®é¥°ï¼Œéƒ½ä¼šå‡ºç° aã€bå€¼äº¤æ¢ã€‚å› ä¸ºè¿™é‡Œçš„ç«æ€æ¡ä»¶æ¶‰åŠaå’Œbä¸¤ä¸ªå˜é‡ï¼Œvolatileåœ¨è¿™é‡Œæ— æ³•ä¿è¯åŸå­æ€§ã€‚
+     * è¿™é‡Œåªæœ‰ä½¿ç”¨åŒæ­¥æ‰èƒ½é¿å…å‡ºç°abäº’æ¢çš„æƒ…å†µã€‚æ¯”å¦‚å¯¹ab()å’Œba()åŒæ—¶æ·»åŠ synchronizedä¿®é¥°ã€‚
      */
     int m_a = 1, m_b = 2;
 
     /**
-     * a=b¡£
+     * a=bã€‚
      */
     void ab() {
         m_a = m_b;
     }
 
     /**
-     * b=a¡£
+     * b=aã€‚
      */
     void ba() {
         m_b = m_a;
@@ -180,18 +180,18 @@ class Synchronized {
 }
 
 /**
- * ÖØÅÅĞò£¬Ò»¸ö¹ØÓÚÖØÅÅĞòµÄ´íÎóÑéÖ¤£¬·´¸´Æô¶¯¶à´Î²ÅÄÜ³öÏÖ¡£
+ * é‡æ’åºï¼Œä¸€ä¸ªå…³äºé‡æ’åºçš„é”™è¯¯éªŒè¯ï¼Œåå¤å¯åŠ¨å¤šæ¬¡æ‰èƒ½å‡ºç°ã€‚
  */
 class Reordering {
 
     /**
-     * ·´¸´ÑéÖ¤x == 0, y == 0ÊÇ·ñ´æÔÚ¡£
+     * åå¤éªŒè¯x == 0, y == 0æ˜¯å¦å­˜åœ¨ã€‚
      */
     static void test() {
-        while (true) { //ÎŞÏŞÑéÖ¤x == 0, y == 0µÄ²âÊÔ¡£
+        while (true) { //æ— é™éªŒè¯x == 0, y == 0çš„æµ‹è¯•ã€‚
             final Reordering reordering = new Reordering();
 
-            final Thread a1xb = new Thread(new Runnable() { //´´½¨a=1;x=bÏß³Ì¡£
+            final Thread a1xb = new Thread(new Runnable() { //åˆ›å»ºa=1;x=bçº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -200,7 +200,7 @@ class Reordering {
 
             });
 
-            final Thread b1ya = new Thread(new Runnable() { //´´½¨b=1;y=aÏß³Ì¡£
+            final Thread b1ya = new Thread(new Runnable() { //åˆ›å»ºb=1;y=açº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -212,7 +212,7 @@ class Reordering {
             a1xb.start();
             b1ya.start();
 
-            new Thread(new Runnable() { //´´½¨¼ì²éx == 0, y == 0µÄÏß³Ì¡£
+            new Thread(new Runnable() { //åˆ›å»ºæ£€æŸ¥x == 0, y == 0çš„çº¿ç¨‹ã€‚
 
                 @Override
                 public void run() {
@@ -224,8 +224,8 @@ class Reordering {
                         ex.printStackTrace();
                     }
 
-                    if (reordering.m_x == 0 && reordering.m_y == 0) { //ÒòÎªÇ°ÃæµÄjoin£¬ÕâÀï²»»áÓĞ¹ØÓÚx»òyµÄÊı¾İ¾ºÕù£¬¾¡¹ÜÊÇÔÚ¶à¸öÏß³ÌÖĞ·ÃÎÊ¡£
-                        //ÀıÈç£ºThread-70898: x=0 y=0
+                    if (reordering.m_x == 0 && reordering.m_y == 0) { //å› ä¸ºå‰é¢çš„joinï¼Œè¿™é‡Œä¸ä¼šæœ‰å…³äºxæˆ–yçš„æ•°æ®ç«äº‰ï¼Œå°½ç®¡æ˜¯åœ¨å¤šä¸ªçº¿ç¨‹ä¸­è®¿é—®ã€‚
+                        //ä¾‹å¦‚ï¼šThread-70898: x=0 y=0
                         System.out.println(Thread.currentThread().getName() + ": x=" + reordering.m_x + " y=" + reordering.m_y);
                         System.exit(0);
                     }
@@ -238,15 +238,15 @@ class Reordering {
     }
 
     /**
-     * Õâ¸öÀı×ÓÊÇ¡¶Java Concurrency in Practice¡·P279µÄÀı×Ó£¬ÊÇÎªÁËÖ¤Ã÷ÖØÅÅĞòµÄ´æÔÚ£¬µ±³öÏÖx=0 y=0µÄ½á¹ûÊ±£¬¼´¿ÉÖ¤Ã÷¡£
-     * ÎÒÈÏÎªÕâ¸öÀı×Ó»¹ÊÇ´æÔÚÎÊÌâµÄ£¬ÒòÎª´ÓJMMµÄÃèÊöÀ´¿´£¬x=0 y=0µÄ½á¹ûÀí½âÎª¡°¹¤×÷ÄÚ´æÍ¬Ö÷ÄÚ´æµÄÍ¬²½ÑÓ³Ù¡±¸üÎªºÏÀí¡£
+     * è¿™ä¸ªä¾‹å­æ˜¯ã€ŠJava Concurrency in Practiceã€‹P279çš„ä¾‹å­ï¼Œæ˜¯ä¸ºäº†è¯æ˜é‡æ’åºçš„å­˜åœ¨ï¼Œå½“å‡ºç°x=0 y=0çš„ç»“æœæ—¶ï¼Œå³å¯è¯æ˜ã€‚
+     * æˆ‘è®¤ä¸ºè¿™ä¸ªä¾‹å­è¿˜æ˜¯å­˜åœ¨é—®é¢˜çš„ï¼Œå› ä¸ºä»JMMçš„æè¿°æ¥çœ‹ï¼Œx=0 y=0çš„ç»“æœç†è§£ä¸ºâ€œå·¥ä½œå†…å­˜åŒä¸»å†…å­˜çš„åŒæ­¥å»¶è¿Ÿâ€æ›´ä¸ºåˆç†ã€‚
      */
     int m_a = 0, m_b = 0;
 
     int m_x = 0, m_y = 0;
 
     /**
-     * a=1;x=b¡£
+     * a=1;x=bã€‚
      */
     void a1xb() {
         m_a = 1;
@@ -254,7 +254,7 @@ class Reordering {
     }
 
     /**
-     * b=1;y=a¡£
+     * b=1;y=aã€‚
      */
     void b1ya() {
         m_b = 1;

@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ20ÈÕ ÏÂÎç2:27:33¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ20æ—¥ ä¸‹åˆ2:27:33ã€‚
  */
 package com.apollo.demos.test.mockito;
 
@@ -48,11 +48,11 @@ public class MockitoAnnotationDemo {
     }
 
     public MockitoAnnotationDemo() {
-        MockitoAnnotations.initMocks(this); //Õâ¸öµ÷ÓÃºÍ@RunWith(MockitoJUnitRunner.class)Ê¹ÓÃÆäÖĞÒ»¸ö¼´¿É¡£
+        MockitoAnnotations.initMocks(this); //è¿™ä¸ªè°ƒç”¨å’Œ@RunWith(MockitoJUnitRunner.class)ä½¿ç”¨å…¶ä¸­ä¸€ä¸ªå³å¯ã€‚
     }
 
     @Mock
-    private List<Integer> m_mock; //MockÊôĞÔÊÇ²»ÊÇstaticÓ°Ïì²»´ó£¬¿ÉÄÜÊÇÓĞresetµÄ¹ØÏµ¡£
+    private List<Integer> m_mock; //Mockå±æ€§æ˜¯ä¸æ˜¯staticå½±å“ä¸å¤§ï¼Œå¯èƒ½æ˜¯æœ‰resetçš„å…³ç³»ã€‚
 
     @Test
     public void test01() {
@@ -69,7 +69,7 @@ public class MockitoAnnotationDemo {
     }
 
     @Spy
-    private List<Integer> m_spy = new ArrayList<Integer>(); //SpyÊôĞÔÊÇ²»ÊÇstaticÓ°ÏìºÜ´ó£¬Èç¹ûÊÇstaticÊ±ÉèÖÃµÄÊı¾İÊÇ»áÓ°ÏìºóÃæÔËĞĞµÄTest¡£
+    private List<Integer> m_spy = new ArrayList<Integer>(); //Spyå±æ€§æ˜¯ä¸æ˜¯staticå½±å“å¾ˆå¤§ï¼Œå¦‚æœæ˜¯staticæ—¶è®¾ç½®çš„æ•°æ®æ˜¯ä¼šå½±å“åé¢è¿è¡Œçš„Testã€‚
 
     @Test
     public void test03() {
@@ -86,7 +86,7 @@ public class MockitoAnnotationDemo {
     }
 
     /**
-     * ×¢Òâ£ºËäÈ»captor¶ÔÏóÔÚÃ¿¸ötestÖĞÊÇ²»Í¬µÄ¶ÔÏó£¬²»»áÏà»¥Ó°Ïì£¬µ«ÊÇÔÚÍ¬Ò»¸ötestÖĞ£¬captorÖØ¸´Ê¹ÓÃÊÇ»áÀÛ¼ÆËÑ¼¯µÄ£¬²¢ÇÒcaptorÄ¿Ç°Ã»ÓĞÏñmockÄÇÑùµÄreset¶¯×÷£¬Ê¹ÓÃÊ±ĞèÒª×¢Òâ¡£
+     * æ³¨æ„ï¼šè™½ç„¶captorå¯¹è±¡åœ¨æ¯ä¸ªtestä¸­æ˜¯ä¸åŒçš„å¯¹è±¡ï¼Œä¸ä¼šç›¸äº’å½±å“ï¼Œä½†æ˜¯åœ¨åŒä¸€ä¸ªtestä¸­ï¼Œcaptoré‡å¤ä½¿ç”¨æ˜¯ä¼šç´¯è®¡æœé›†çš„ï¼Œå¹¶ä¸”captorç›®å‰æ²¡æœ‰åƒmocké‚£æ ·çš„resetåŠ¨ä½œï¼Œä½¿ç”¨æ—¶éœ€è¦æ³¨æ„ã€‚
      */
     @Captor
     private ArgumentCaptor<Comparator<Integer>> m_captor;
@@ -109,7 +109,7 @@ public class MockitoAnnotationDemo {
     }
 
     @Mock
-    private Map<String, String> m_wordMap; //Õâ¸ömock»á±»×¢Èëµ½m_myDictionaryÖĞ£¬ÕâÀïÃû³Æ×îºÃºÍMyDictionary.m_wordMap±£³ÖÒ»ÖÂ£¬ÒòÎªInject¹æÔòÊÇÏÈÀàĞÍÆ¥Åä£¬ÔÙÃû³ÆÆ¥Åä¡£
+    private Map<String, String> m_wordMap; //è¿™ä¸ªmockä¼šè¢«æ³¨å…¥åˆ°m_myDictionaryä¸­ï¼Œè¿™é‡Œåç§°æœ€å¥½å’ŒMyDictionary.m_wordMapä¿æŒä¸€è‡´ï¼Œå› ä¸ºInjectè§„åˆ™æ˜¯å…ˆç±»å‹åŒ¹é…ï¼Œå†åç§°åŒ¹é…ã€‚
 
     @InjectMocks
     private MyDictionary m_myDictionary = new MyDictionary();

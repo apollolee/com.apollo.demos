@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-4-17 ÉÏÎç09:14:22¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-4-17 ä¸Šåˆ09:14:22ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -10,7 +10,7 @@ import java.util.concurrent.FutureTask;
 public class FutureTaskDemo {
 
     /**
-     * ÈÎÎñ£¬ºÄ·ÑÎåÃë£¬È»ºó·µ»ØÒ»¸ö×Ö·û´®¡£
+     * ä»»åŠ¡ï¼Œè€—è´¹äº”ç§’ï¼Œç„¶åè¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²ã€‚
      */
     private static FutureTask<String> s_task = new FutureTask<String>(new Callable<String>() {
 
@@ -19,9 +19,9 @@ public class FutureTaskDemo {
          */
         @Override
         public String call() throws Exception {
-            System.out.println("ÈÎÎñÏß³Ì¿ªÊ¼£¡");
+            System.out.println("ä»»åŠ¡çº¿ç¨‹å¼€å§‹ï¼");
             Thread.sleep(5000);
-            System.out.println("ÈÎÎñÏß³Ì½áÊø£¡");
+            System.out.println("ä»»åŠ¡çº¿ç¨‹ç»“æŸï¼");
 
             return "TestFutureTask";
         }
@@ -32,7 +32,7 @@ public class FutureTaskDemo {
         new Thread(s_task).start();
 
         try {
-            System.out.println("Ö÷Ïß³Ì»ñÈ¡£º " + s_task.get());
+            System.out.println("ä¸»çº¿ç¨‹è·å–ï¼š " + s_task.get());
 
         } catch (InterruptedException ex) {
             ex.printStackTrace();

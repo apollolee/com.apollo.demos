@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ19ÈÕ ÏÂÎç2:08:36¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ19æ—¥ ä¸‹åˆ2:08:36ã€‚
  */
 package com.apollo.demos.test.junit;
 
@@ -46,35 +46,35 @@ public class JUnitTheoriesDemo {
     @Theory
     public void test1(int a, int b) {
         //System.out.println("Begin test1: a = " + a + " , b = " + b);
-        assertTrue(a + b == b + a);//¼Ó·¨½»»»ÂÉ
+        assertTrue(a + b == b + a);//åŠ æ³•äº¤æ¢å¾‹
         //System.out.println("  End test1: a = " + a + " , b = " + b);
     }
 
     @Theory
     public void test2(int a, int b, int c) {
         //System.out.println("Begin test2: a = " + a + " , b = " + b);
-        assertTrue((a + b) + c == a + (b + c));//¼Ó·¨½áºÏÂÉ
+        assertTrue((a + b) + c == a + (b + c));//åŠ æ³•ç»“åˆå¾‹
         //System.out.println("  End test2: a = " + a + " , b = " + b);
     }
 
     @Theory
     public void test3(int a, int b) {
         //System.out.println("Begin test3: a = " + a + " , b = " + b);
-        assertTrue(a * b == b * a);//³Ë·¨½»»»ÂÉ
+        assertTrue(a * b == b * a);//ä¹˜æ³•äº¤æ¢å¾‹
         //System.out.println("  End test3: a = " + a + " , b = " + b);
     }
 
     @Theory
     public void test4(int a, int b, int c) {
         //System.out.println("Begin test4: a = " + a + " , b = " + b + " , c = " + c);
-        assertTrue((a * b) * c == a * (b * c));//³Ë·¨½áºÏÂÉ
+        assertTrue((a * b) * c == a * (b * c));//ä¹˜æ³•ç»“åˆå¾‹
         //System.out.println("  End test4: a = " + a + " , b = " + b + " , c = " + c);
     }
 
     @Theory
     public void test5(int a, int b, int c) {
         //System.out.println("Begin test5: a = " + a + " , b = " + b + " , c = " + c);
-        assertTrue((a + b) * c == a * c + b * c);//³Ë·¨·ÖÅäÂÉ
+        assertTrue((a + b) * c == a * c + b * c);//ä¹˜æ³•åˆ†é…å¾‹
         //System.out.println("  End test5: a = " + a + " , b = " + b + " , c = " + c);
     }
 

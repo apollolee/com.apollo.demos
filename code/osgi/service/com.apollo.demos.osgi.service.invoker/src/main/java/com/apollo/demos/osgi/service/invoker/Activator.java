@@ -9,7 +9,7 @@ import com.apollo.demos.osgi.service.invoker.impl.AppleWatch;
 import com.apollo.demos.osgi.service.invoker.impl.BadAppleWatch;
 
 /*
- * ServiceµÄµ÷ÓÃÕß£¬ÎªÁË²»ÒÀÀµÆô¶¯Ë³Ğò£¬Ê¹ÓÃÁËServiceTracker½øĞĞ´¦Àí¡£
+ * Serviceçš„è°ƒç”¨è€…ï¼Œä¸ºäº†ä¸ä¾èµ–å¯åŠ¨é¡ºåºï¼Œä½¿ç”¨äº†ServiceTrackerè¿›è¡Œå¤„ç†ã€‚
  */
 public class Activator implements BundleActivator {
 

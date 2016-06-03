@@ -12,7 +12,7 @@ import com.apollo.demos.osgi.service.provider.impl.BadSiriImpl;
 import com.apollo.demos.osgi.service.provider.impl.SiriImpl;
 
 /*
- * ServiceµÄÌá¹©Õß£¬Æô¶¯BundleÊ±×¢²á¡£
+ * Serviceçš„æä¾›è€…ï¼Œå¯åŠ¨Bundleæ—¶æ³¨å†Œã€‚
  */
 public class Activator implements BundleActivator {
 

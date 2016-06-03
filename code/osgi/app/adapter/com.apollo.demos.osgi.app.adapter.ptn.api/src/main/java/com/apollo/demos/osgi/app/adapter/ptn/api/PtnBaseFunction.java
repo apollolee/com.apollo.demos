@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2016Äê5ÔÂ20ÈÕ ÏÂÎç2:22:37¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2016å¹´5æœˆ20æ—¥ ä¸‹åˆ2:22:37ã€‚
  */
 package com.apollo.demos.osgi.app.adapter.ptn.api;
 
@@ -14,7 +14,7 @@ import org.osgi.service.component.ComponentFactory;
 import com.apollo.demos.osgi.app.adapter.api.BaseFunction;
 import com.apollo.demos.osgi.app.adapter.api.Processor;
 
-/*¼Ó±ê×¢ÊÇÎªÁËÈÃmaven-scr-pluginÄÜÕıÈ·µÄÉú³ÉDSÅäÖÃÎÄ¼ş¡£*/
+/*åŠ æ ‡æ³¨æ˜¯ä¸ºäº†è®©maven-scr-pluginèƒ½æ­£ç¡®çš„ç”ŸæˆDSé…ç½®æ–‡ä»¶ã€‚*/
 @Component
 public abstract class PtnBaseFunction extends BaseFunction {
 

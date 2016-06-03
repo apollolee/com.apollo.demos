@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê12ÔÂ26ÈÕ ÉÏÎç10:10:22¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´12æœˆ26æ—¥ ä¸Šåˆ10:10:22ã€‚
  */
 package com.apollo.demos.osgi.service.provider.impl;
 
@@ -19,7 +19,7 @@ public class BadSiriImpl implements IBadSiri {
 
     @Override
     public String sayHello() {
-        return "Hello, I am a bad Siri. [ID = " + ID + "]"; //ÕâÀïµÄIDÊ¼ÖÕ¶¼ÊÇ×îĞÂµÄ£¬ÆäÊµÊÇ±àÒëÓÅ»¯ÒıÆğµÄ£¬²¢²»ÊÇOSGiÖĞ´æÔÚ2¸öIBadSiri¡£
+        return "Hello, I am a bad Siri. [ID = " + ID + "]"; //è¿™é‡Œçš„IDå§‹ç»ˆéƒ½æ˜¯æœ€æ–°çš„ï¼Œå…¶å®æ˜¯ç¼–è¯‘ä¼˜åŒ–å¼•èµ·çš„ï¼Œå¹¶ä¸æ˜¯OSGiä¸­å­˜åœ¨2ä¸ªIBadSiriã€‚
     }
 
     @Override

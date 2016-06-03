@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-4-17 ÉÏÎç10:14:02¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-4-17 ä¸Šåˆ10:14:02ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -11,8 +11,8 @@ import java.util.concurrent.Semaphore;
 public class SemaphoreDemo {
 
     /**
-     * »ñµÃËæ»úÊı¡£
-     * @return Ëæ»úÊı¡£
+     * è·å¾—éšæœºæ•°ã€‚
+     * @return éšæœºæ•°ã€‚
      */
     private static String random() {
         return String.valueOf((int) (Math.random() * 1000));
@@ -21,7 +21,7 @@ public class SemaphoreDemo {
     public static void main(String[] args) {
         final BoundedSet<String> set = new BoundedSet<String>(10);
 
-        new Thread(new Runnable() { //Ìí¼ÓÏß³Ì¡£
+        new Thread(new Runnable() { //æ·»åŠ çº¿ç¨‹ã€‚
 
             /**
              * @see java.lang.Runnable#run()
@@ -31,7 +31,7 @@ public class SemaphoreDemo {
                 while (true) {
                     try {
                         if (set.add(random())) {
-                            System.out.println("Ìí¼Ó³É¹¦£¡¼¯ºÏ´óĞ¡Îª£º" + set.size());
+                            System.out.println("æ·»åŠ æˆåŠŸï¼é›†åˆå¤§å°ä¸ºï¼š" + set.size());
                             Thread.yield();
                         }
 
@@ -43,7 +43,7 @@ public class SemaphoreDemo {
 
         }).start();
 
-        new Thread(new Runnable() { //ÒÆ³ıÏß³Ì¡£
+        new Thread(new Runnable() { //ç§»é™¤çº¿ç¨‹ã€‚
 
             /**
              * @see java.lang.Runnable#run()
@@ -52,7 +52,7 @@ public class SemaphoreDemo {
             public void run() {
                 while (true) {
                     if (set.remove((random()))) {
-                        System.out.println("ÒÆ³ı³É¹¦£¡¼¯ºÏ´óĞ¡Îª£º" + set.size());
+                        System.out.println("ç§»é™¤æˆåŠŸï¼é›†åˆå¤§å°ä¸ºï¼š" + set.size());
                         Thread.yield();
                     }
                 }
@@ -64,23 +64,23 @@ public class SemaphoreDemo {
 }
 
 /**
- * ÓĞ½ç¼¯ºÏ¡£
+ * æœ‰ç•Œé›†åˆã€‚
  */
 class BoundedSet<T> {
 
     /**
-     * ĞÅºÅÁ¿¡£
+     * ä¿¡å·é‡ã€‚
      */
     private final Semaphore m_semaphore;
 
     /**
-     * ÎŞ½ç¼¯ºÏ¡£
+     * æ— ç•Œé›†åˆã€‚
      */
     private final Set<T> m_set;
 
     /**
-     * ¹¹Ôì·½·¨¡£
-     * @param bound ½çÖµ¡£
+     * æ„é€ æ–¹æ³•ã€‚
+     * @param bound ç•Œå€¼ã€‚
      */
     public BoundedSet(int bound) {
         m_semaphore = new Semaphore(bound);
@@ -88,15 +88,15 @@ class BoundedSet<T> {
     }
 
     /**
-     * Ìí¼ÓÒ»¸ö¶ÔÏó¡£
-     * @param object ¶ÔÏó¡£
-     * @return ±êÊ¶Ìí¼ÓÊÇ·ñ³É¹¦¡£
-     * @throws InterruptedException »ñµÃĞÅºÅÁ¿Ê±£¬Èç¹û×èÈû£¬´ËÊ±ÓĞÖĞ¶ÏĞÅºÅÔòÅ×´ËÒì³£¡£
+     * æ·»åŠ ä¸€ä¸ªå¯¹è±¡ã€‚
+     * @param object å¯¹è±¡ã€‚
+     * @return æ ‡è¯†æ·»åŠ æ˜¯å¦æˆåŠŸã€‚
+     * @throws InterruptedException è·å¾—ä¿¡å·é‡æ—¶ï¼Œå¦‚æœé˜»å¡ï¼Œæ­¤æ—¶æœ‰ä¸­æ–­ä¿¡å·åˆ™æŠ›æ­¤å¼‚å¸¸ã€‚
      */
     public boolean add(T object) throws InterruptedException {
-        m_semaphore.acquire(); //»ñµÃĞÅºÅÁ¿£¬Èç¹ûÃ»ÓĞ¾Í×èÈû£¬µÈµ½ÓĞÆäËûĞÅºÅÁ¿ÊÍ·Å¡£
+        m_semaphore.acquire(); //è·å¾—ä¿¡å·é‡ï¼Œå¦‚æœæ²¡æœ‰å°±é˜»å¡ï¼Œç­‰åˆ°æœ‰å…¶ä»–ä¿¡å·é‡é‡Šæ”¾ã€‚
 
-        boolean wasAdded = false; //±êÊ¶ÊÇ·ñÒÑ¾­Ìí¼Ó¡£
+        boolean wasAdded = false; //æ ‡è¯†æ˜¯å¦å·²ç»æ·»åŠ ã€‚
 
         try {
             wasAdded = m_set.add(object);
@@ -104,21 +104,21 @@ class BoundedSet<T> {
             return wasAdded;
 
         } finally {
-            if (!wasAdded) { //Èç¹ûÃ»ÓĞÌí¼Ó³É¹¦£¬¾ÍÊÍ·ÅÒ»¸öĞÅºÅÁ¿¡£
+            if (!wasAdded) { //å¦‚æœæ²¡æœ‰æ·»åŠ æˆåŠŸï¼Œå°±é‡Šæ”¾ä¸€ä¸ªä¿¡å·é‡ã€‚
                 m_semaphore.release();
             }
         }
     }
 
     /**
-     * ÒÆ³ıÒ»¸ö¶ÔÏó¡£
-     * @param object ¶ÔÏó¡£
-     * @return ±êÊ¶ÒÆ³ı¶ÔÏóÊÇ·ñ³É¹¦¡£
+     * ç§»é™¤ä¸€ä¸ªå¯¹è±¡ã€‚
+     * @param object å¯¹è±¡ã€‚
+     * @return æ ‡è¯†ç§»é™¤å¯¹è±¡æ˜¯å¦æˆåŠŸã€‚
      */
     public boolean remove(Object object) {
         boolean wasRemoved = m_set.remove(object);
 
-        if (wasRemoved) { //Èç¹ûÒÆ³ı³É¹¦£¬ÔòÊÍ·ÅÒ»¸öĞÅºÅÁ¿¡£
+        if (wasRemoved) { //å¦‚æœç§»é™¤æˆåŠŸï¼Œåˆ™é‡Šæ”¾ä¸€ä¸ªä¿¡å·é‡ã€‚
             m_semaphore.release();
         }
 
@@ -126,8 +126,8 @@ class BoundedSet<T> {
     }
 
     /**
-     * ¼¯ºÏ´óĞ¡¡£
-     * @return ¼¯ºÏ´óĞ¡¡£
+     * é›†åˆå¤§å°ã€‚
+     * @return é›†åˆå¤§å°ã€‚
      */
     public int size() {
         return m_set.size();

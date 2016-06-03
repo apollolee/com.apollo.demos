@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ18ÈÕ ÏÂÎç5:04:00¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ18æ—¥ ä¸‹åˆ5:04:00ã€‚
  */
 package com.apollo.demos.test.junit;
 
@@ -124,7 +124,7 @@ public class JUnitBaseDemo {
         Integer expected = new Integer(5);
         Integer actual = new Integer(5);
 
-        assertSame(expected, actual); //×¢Òâ£ºÏàÍ¬ºÍÏàµÈÊÇ²»Ò»ÑùµÄ¸ÅÄî¡£
+        assertSame(expected, actual); //æ³¨æ„ï¼šç›¸åŒå’Œç›¸ç­‰æ˜¯ä¸ä¸€æ ·çš„æ¦‚å¿µã€‚
     }
 
     @Test

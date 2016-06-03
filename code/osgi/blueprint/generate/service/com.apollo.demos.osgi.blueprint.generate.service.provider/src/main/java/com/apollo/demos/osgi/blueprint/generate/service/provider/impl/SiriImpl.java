@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2016Äê1ÔÂ4ÈÕ ÏÂÎç5:24:21¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2016å¹´1æœˆ4æ—¥ ä¸‹åˆ5:24:21ã€‚
  */
 package com.apollo.demos.osgi.blueprint.generate.service.provider.impl;
 

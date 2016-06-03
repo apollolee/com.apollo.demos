@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2016Äê5ÔÂ20ÈÕ ÏÂÎç2:46:24¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2016å¹´5æœˆ20æ—¥ ä¸‹åˆ2:46:24ã€‚
  */
 package com.apollo.demos.osgi.app.adapter.ptn.impl.function;
 

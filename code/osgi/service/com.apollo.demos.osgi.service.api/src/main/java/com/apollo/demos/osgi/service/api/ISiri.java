@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê12ÔÂ24ÈÕ ÉÏÎç10:14:59¡£
+ * æ­¤ä»£ç åˆ›å»ºäºŽ 2015å¹´12æœˆ24æ—¥ ä¸Šåˆ10:14:59ã€‚
  */
 package com.apollo.demos.osgi.service.api;
 

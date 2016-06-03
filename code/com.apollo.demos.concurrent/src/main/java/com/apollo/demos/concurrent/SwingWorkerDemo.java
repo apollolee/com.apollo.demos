@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-3-27 ÏÂÎç03:27:40¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-3-27 ä¸‹åˆ03:27:40ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -44,15 +44,15 @@ public class SwingWorkerDemo {
 }
 
 /**
- * ²éÕÒËØÊı´°¿Ú¡£
+ * æŸ¥æ‰¾ç´ æ•°çª—å£ã€‚
  */
 @SuppressWarnings("all")
 class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeListener {
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇËØÊı¡£Ê±¼ä¸´ÔÓ¶ÈO(n)¡£
-     * @param number Êı×Ö¡£
-     * @return ±êÊ¶ÊÇ·ñÊÇËØÊı¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ç´ æ•°ã€‚æ—¶é—´å¤æ‚åº¦O(n)ã€‚
+     * @param number æ•°å­—ã€‚
+     * @return æ ‡è¯†æ˜¯å¦æ˜¯ç´ æ•°ã€‚
      */
     public static final boolean isPrime1(int number) {
         if (number < 2) {
@@ -69,9 +69,9 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇËØÊı¡£¸Ä½ø£¬È¥µôÅ¼ÊıµÄÅĞ¶Ï£¬Ê±¼ä¸´ÔÓ¶ÈO(n/2)£¬ËÙ¶ÈÌá¸ßÒ»±¶¡£
-     * @param number Êı×Ö¡£
-     * @return ±êÊ¶ÊÇ·ñÊÇËØÊı¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ç´ æ•°ã€‚æ”¹è¿›ï¼Œå»æ‰å¶æ•°çš„åˆ¤æ–­ï¼Œæ—¶é—´å¤æ‚åº¦O(n/2)ï¼Œé€Ÿåº¦æé«˜ä¸€å€ã€‚
+     * @param number æ•°å­—ã€‚
+     * @return æ ‡è¯†æ˜¯å¦æ˜¯ç´ æ•°ã€‚
      */
     public static final Boolean isPrime2(int number) {
         if (number < 2) {
@@ -92,13 +92,13 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇËØÊı¡£½øÒ»²½¼õÉÙÅĞ¶ÏµÄ·¶Î§£¬Ê±¼ä¸´ÔÓ¶ÈO(sqrt(n)/2)£¬ËÙ¶ÈÌá¸ßO((n-sqrt(n))/2)¡£
-     * <p>¶¨Àí£ºÈç¹ûn²»ÊÇËØÊı£¬ÔònÓĞÂú×ã1<d<=sqrt(n)µÄÒ»¸öÒò×Ód¡£</p>
-     * <p>Ö¤Ã÷£ºÈç¹ûn²»ÊÇËØÊı£¬ÔòÓÉ¶¨ÒånÓĞÒ»¸öÒò×ÓdÂú×ã1<d<n¡£</p>
-     * <p>Èç¹ûd´óÓÚsqrt(n)£¬Ôòn/dÊÇÂú×ã1<n/d<=sqrt(n)µÄÒ»¸öÒò×Ó¡£</p>
-     * <p>¸ü¶à¸ßĞ§Ëã·¨Çë²é¿´http://www.cnblogs.com/luluping/archive/2010/03/03/1677552.html¡£</p>
-     * @param number Êı×Ö¡£
-     * @return ±êÊ¶ÊÇ·ñÊÇËØÊı¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ç´ æ•°ã€‚è¿›ä¸€æ­¥å‡å°‘åˆ¤æ–­çš„èŒƒå›´ï¼Œæ—¶é—´å¤æ‚åº¦O(sqrt(n)/2)ï¼Œé€Ÿåº¦æé«˜O((n-sqrt(n))/2)ã€‚
+     * <p>å®šç†ï¼šå¦‚æœnä¸æ˜¯ç´ æ•°ï¼Œåˆ™næœ‰æ»¡è¶³1<d<=sqrt(n)çš„ä¸€ä¸ªå› å­dã€‚</p>
+     * <p>è¯æ˜ï¼šå¦‚æœnä¸æ˜¯ç´ æ•°ï¼Œåˆ™ç”±å®šä¹‰næœ‰ä¸€ä¸ªå› å­dæ»¡è¶³1<d<nã€‚</p>
+     * <p>å¦‚æœdå¤§äºsqrt(n)ï¼Œåˆ™n/dæ˜¯æ»¡è¶³1<n/d<=sqrt(n)çš„ä¸€ä¸ªå› å­ã€‚</p>
+     * <p>æ›´å¤šé«˜æ•ˆç®—æ³•è¯·æŸ¥çœ‹http://www.cnblogs.com/luluping/archive/2010/03/03/1677552.htmlã€‚</p>
+     * @param number æ•°å­—ã€‚
+     * @return æ ‡è¯†æ˜¯å¦æ˜¯ç´ æ•°ã€‚
      */
     public static final boolean isPrime3(int number) {
         if (number < 2) {
@@ -119,29 +119,29 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * ²éÕÒËØÊıµÄ¹¤×÷Õß¡£
+     * æŸ¥æ‰¾ç´ æ•°çš„å·¥ä½œè€…ã€‚
      */
     protected class FindPrimeWorker extends SwingWorker<List<Integer>, Integer> {
 
         /**
-         * µ±Ç°Êı×Ö¡£
+         * å½“å‰æ•°å­—ã€‚
          */
         protected int m_currentNumber;
 
         /**
-         * ×ÜÊı¡£
+         * æ€»æ•°ã€‚
          */
         protected int m_sum;
 
         /**
-         * ¼ÆÊı¡£
+         * è®¡æ•°ã€‚
          */
         protected int m_count = 1;
 
         /**
-         * ¹¹Ôì·½·¨¡£
-         * @param startNumber ÆğÊ¼Êı×Ö¡£
-         * @param sum ×ÜÊı¡£
+         * æ„é€ æ–¹æ³•ã€‚
+         * @param startNumber èµ·å§‹æ•°å­—ã€‚
+         * @param sum æ€»æ•°ã€‚
          */
         public FindPrimeWorker(int startNumber, int sum) {
             m_currentNumber = startNumber;
@@ -201,7 +201,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
                 ex.printStackTrace();
             }
 
-            m_result.append(isCancelled() ? "ÒÑÈ¡Ïû£¡" : "ÒÑ²éÕÒÍê±Ï£¬¹²²éÕÒ " + primes.size() + " ¸öËØÊı£¡");
+            m_result.append(isCancelled() ? "å·²å–æ¶ˆï¼" : "å·²æŸ¥æ‰¾å®Œæ¯•ï¼Œå…±æŸ¥æ‰¾ " + primes.size() + " ä¸ªç´ æ•°ï¼");
 
             removePropertyChangeListener(FindPrimeWindow.this);
             m_findPrimeWorker = null;
@@ -211,27 +211,27 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * ÊäÈë¿ò------ÆğÊ¼Êı×Ö¡£
+     * è¾“å…¥æ¡†------èµ·å§‹æ•°å­—ã€‚
      */
     protected IntegerField m_startNumber = new IntegerField(4, 0, 999999, 0);
 
     /**
-     * ÊäÈë¿ò------×ÜÊı¡£
+     * è¾“å…¥æ¡†------æ€»æ•°ã€‚
      */
     protected IntegerField m_sum = new IntegerField(4, 0, 999999, 10000);
 
     /**
-     * ÏÔÊ¾ÇøÓò------½á¹û¡£
+     * æ˜¾ç¤ºåŒºåŸŸ------ç»“æœã€‚
      */
     protected JTextArea m_result = new JTextArea();
 
     /**
-     * ½ø¶ÈÌõ------²éÕÒ½ø¶È¡£
+     * è¿›åº¦æ¡------æŸ¥æ‰¾è¿›åº¦ã€‚
      */
     protected JProgressBar m_progress = new JProgressBar(0, 100);
 
     /**
-     * ¶¯×÷------¿ªÊ¼¡£
+     * åŠ¨ä½œ------å¼€å§‹ã€‚
      */
     protected Action m_start = new AbstractAction() {
 
@@ -249,7 +249,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     };
 
     /**
-     * ¶¯×÷------È¡Ïû¡£
+     * åŠ¨ä½œ------å–æ¶ˆã€‚
      */
     protected Action m_cancel = new AbstractAction() {
 
@@ -267,7 +267,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     };
 
     /**
-     * ¶¯×÷------¹Ø±Õ¡£
+     * åŠ¨ä½œ------å…³é—­ã€‚
      */
     protected Action m_close = new AbstractAction() {
 
@@ -285,22 +285,22 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     };
 
     /**
-     * ²éÕÒËØÊıµÄ¹¤×÷Õß¡£
+     * æŸ¥æ‰¾ç´ æ•°çš„å·¥ä½œè€…ã€‚
      */
     protected FindPrimeWorker m_findPrimeWorker = null;
 
     /**
-     * ¹¹Ôì·½·¨¡£
+     * æ„é€ æ–¹æ³•ã€‚
      */
     public FindPrimeWindow() {
-        super("²éÕÒËØÊı");
+        super("æŸ¥æ‰¾ç´ æ•°");
 
         m_result.setEditable(false);
         JScrollPane resultView = new JScrollPane(m_result);
-        resultView.setBorder(BorderFactory.createTitledBorder("²éÕÒ½á¹û"));
+        resultView.setBorder(BorderFactory.createTitledBorder("æŸ¥æ‰¾ç»“æœ"));
 
         m_progress.setStringPainted(true);
-        m_progress.setBorder(BorderFactory.createTitledBorder("²éÕÒ½ø¶È"));
+        m_progress.setBorder(BorderFactory.createTitledBorder("æŸ¥æ‰¾è¿›åº¦"));
 
         m_startNumber.setMinimumSize(m_startNumber.getPreferredSize());
         m_sum.setMinimumSize(m_sum.getPreferredSize());
@@ -309,9 +309,9 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
         BaseUtilities.addComponentWithBothFill(view, resultView, 0, 0, GBC_REMAINDER, 1, GBC_WEST);
         BaseUtilities.addComponentWithHorizontalFill(view, m_progress, 0, 1, GBC_REMAINDER, 1, GBC_WEST);
         BaseUtilities.addComponentWithNoSpace(view, new JLabel(), 0, 2, 1, 1, 1.0, 0.0, GBC_WEST, GBC_HORIZONTAL);
-        BaseUtilities.addComponentWithNoneFill(view, new JLabel("ÆğÊ¼Êı×Ö£º"), GBC_RELATIVE, 2, GBC_EAST);
+        BaseUtilities.addComponentWithNoneFill(view, new JLabel("èµ·å§‹æ•°å­—ï¼š"), GBC_RELATIVE, 2, GBC_EAST);
         BaseUtilities.addComponentWithNoneFill(view, m_startNumber, GBC_RELATIVE, 2, GBC_EAST);
-        BaseUtilities.addComponentWithNoneFill(view, new JLabel("²éÕÒ×ÜÊı£º"), GBC_RELATIVE, 2, GBC_EAST);
+        BaseUtilities.addComponentWithNoneFill(view, new JLabel("æŸ¥æ‰¾æ€»æ•°ï¼š"), GBC_RELATIVE, 2, GBC_EAST);
         BaseUtilities.addComponentWithNoneFill(view, m_sum, GBC_RELATIVE, 2, GBC_EAST);
         BaseUtilities.addComponentWithNoneFill(view, new JButton(m_start), GBC_RELATIVE, 2, GBC_EAST);
         BaseUtilities.addComponentWithNoneFill(view, new JButton(m_cancel), GBC_RELATIVE, 2, GBC_EAST);
@@ -353,7 +353,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * Ô¼Êø¡£
+     * çº¦æŸã€‚
      */
     protected void constrain() {
         boolean hasFindPrimeWorker = m_findPrimeWorker != null;
@@ -365,7 +365,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * ¿ªÊ¼¡£
+     * å¼€å§‹ã€‚
      */
     protected void start() {
         if (m_findPrimeWorker != null) {
@@ -376,7 +376,7 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
             m_startNumber.commitEdit();
 
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "´íÎó", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
             m_startNumber.requestFocusInWindow();
             return;
         }
@@ -385,13 +385,13 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
             m_sum.commitEdit();
 
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "´íÎó", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
             m_sum.requestFocusInWindow();
             return;
         }
 
         m_result.setText("");
-        m_result.append("¿ªÊ¼²éÕÒ£º\n");
+        m_result.append("å¼€å§‹æŸ¥æ‰¾ï¼š\n");
 
         m_findPrimeWorker = new FindPrimeWorker(m_startNumber.getInteger().intValue(), m_sum.getInteger().intValue());
         constrain();
@@ -400,14 +400,14 @@ class FindPrimeWindow extends JFrame implements IBaseConstants, PropertyChangeLi
     }
 
     /**
-     * È¡Ïû¡£
+     * å–æ¶ˆã€‚
      */
     protected void cancel() {
         m_findPrimeWorker.cancel(true);
     }
 
     /**
-     * ¹Ø±Õ¡£
+     * å…³é—­ã€‚
      */
     protected void close() {
         if (m_findPrimeWorker != null) {

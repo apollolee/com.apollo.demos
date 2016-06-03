@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2016Äê6ÔÂ2ÈÕ ÉÏÎç10:55:06¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2016å¹´6æœˆ2æ—¥ ä¸Šåˆ10:55:06ã€‚
  */
 package com.apollo.demos.osgi.app.adapter.api;
 
@@ -14,10 +14,10 @@ public final class AdapterUtilities implements IAdapterConstants {
     }
 
     /**
-     * ¹¹Ôì·½·¨¡£
+     * æ„é€ æ–¹æ³•ã€‚
      */
     private AdapterUtilities() {
-        /* ½ûÖ¹´ÓÍâ²¿ÊµÀı»¯´ËÀà */
+        /* ç¦æ­¢ä»å¤–éƒ¨å®ä¾‹åŒ–æ­¤ç±» */
     }
 
 }

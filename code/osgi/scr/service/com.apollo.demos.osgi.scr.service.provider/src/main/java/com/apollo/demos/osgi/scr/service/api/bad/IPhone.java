@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê12ÔÂ26ÈÕ ÏÂÎç1:44:39¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´12æœˆ26æ—¥ ä¸‹åˆ1:44:39ã€‚
  */
 package com.apollo.demos.osgi.scr.service.api.bad;
 
@@ -17,7 +17,7 @@ public class IPhone {
     }
 
     public String sayHello() {
-        return "Hello, I am an IPhone 6s Plus 16GB. [ID = " + ID + "]"; //ÕâÀïµÄIDÊ¼ÖÕ¶¼ÊÇÀÏµÄ£¬ÕâÀïIDÊÇ·ñ½øĞĞÁË±àÒëÓÅ»¯¶¼²»Ó°Ïì½á¹û£¬ÒòÎªsayHello·½·¨¾ÍÊÇÀÏµÄ¡£
+        return "Hello, I am an IPhone 6s Plus 16GB. [ID = " + ID + "]"; //è¿™é‡Œçš„IDå§‹ç»ˆéƒ½æ˜¯è€çš„ï¼Œè¿™é‡ŒIDæ˜¯å¦è¿›è¡Œäº†ç¼–è¯‘ä¼˜åŒ–éƒ½ä¸å½±å“ç»“æœï¼Œå› ä¸ºsayHelloæ–¹æ³•å°±æ˜¯è€çš„ã€‚
     }
 
 }

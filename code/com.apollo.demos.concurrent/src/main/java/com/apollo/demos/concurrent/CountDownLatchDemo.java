@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-4-17 ÉÏÎç09:35:41¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-4-17 ä¸Šåˆ09:35:41ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -8,10 +8,10 @@ import java.util.concurrent.CountDownLatch;
 public class CountDownLatchDemo {
 
     public static void main(String[] args) {
-        final int threadSum = 100; //Ïß³ÌÊı
-        final CountDownLatch readyGate = new CountDownLatch(threadSum); //Ô¤±¸ÆğÊ¼±ÕËø
-        final CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
-        final CountDownLatch endGate = new CountDownLatch(threadSum); //ÖÕÖ¹±ÕËø
+        final int threadSum = 100; //çº¿ç¨‹æ•°
+        final CountDownLatch readyGate = new CountDownLatch(threadSum); //é¢„å¤‡èµ·å§‹é—­é”
+        final CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
+        final CountDownLatch endGate = new CountDownLatch(threadSum); //ç»ˆæ­¢é—­é”
 
         for (int i = 0; i < threadSum; i++) {
             new Thread(new Runnable() {
@@ -21,7 +21,7 @@ public class CountDownLatchDemo {
                  */
                 @Override
                 public void run() {
-                    System.out.println(Thread.currentThread().getName() + "×¼±¸£¡");
+                    System.out.println(Thread.currentThread().getName() + "å‡†å¤‡ï¼");
 
                     readyGate.countDown();
 
@@ -29,12 +29,12 @@ public class CountDownLatchDemo {
                         startGate.await();
 
                         try {
-                            System.out.println(Thread.currentThread().getName() + "¿ªÊ¼£¡");
+                            System.out.println(Thread.currentThread().getName() + "å¼€å§‹ï¼");
 
                             Thread.sleep(3000);
 
                         } finally {
-                            System.out.println(Thread.currentThread().getName() + "½áÊø£¡");
+                            System.out.println(Thread.currentThread().getName() + "ç»“æŸï¼");
                             endGate.countDown();
                         }
 
@@ -51,13 +51,13 @@ public class CountDownLatchDemo {
 
             readyGate.await();
 
-            System.out.println("¿ªÊ¼ÃÅÒÑ´ò¿ª£¡");
+            System.out.println("å¼€å§‹é—¨å·²æ‰“å¼€ï¼");
 
             startGate.countDown();
 
             endGate.await();
 
-            System.out.println("½áÊøÃÅÒÑ´ò¿ª£¡ÒÑºÄ·ÑÊ±¼ä£º" + (System.currentTimeMillis() - startTime) + "ºÁÃë");
+            System.out.println("ç»“æŸé—¨å·²æ‰“å¼€ï¼å·²è€—è´¹æ—¶é—´ï¼š" + (System.currentTimeMillis() - startTime) + "æ¯«ç§’");
 
         } catch (InterruptedException ex) {
             ex.printStackTrace();

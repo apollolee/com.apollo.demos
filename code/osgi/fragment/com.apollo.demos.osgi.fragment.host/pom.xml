@@ -16,7 +16,7 @@
 
   <name>com.apollo.demos.osgi.fragment.host</name>
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/fragment/com.apollo.demos.osgi.fragment.host</url>
-  <description>%HostBundleDescription</description><!-- 这个地方Felix无法从fragment中读取国际化信息，但在其Activator中可以读到，估计是初始化顺序问题，在Equinox中无此问题。 -->
+  <description>%HostBundleDescription</description><!-- 杩欎釜鍦版柟Felix鏃犳硶浠巉ragment涓鍙栧浗闄呭寲淇℃伅锛屼絾鍦ㄥ叾Activator涓彲浠ヨ鍒帮紝浼拌鏄垵濮嬪寲椤哄簭闂锛屽湪Equinox涓棤姝ら棶棰樸�� -->
 
   <properties>
     <bundle.activator>com.apollo.demos.osgi.fragment.host.Activator</bundle.activator>

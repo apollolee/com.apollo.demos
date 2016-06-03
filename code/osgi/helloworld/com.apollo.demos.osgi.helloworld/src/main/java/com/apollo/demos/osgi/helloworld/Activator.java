@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
- * ÕâÊÇ×î¼òµ¥µÄÒ»¸öOSGi³ÌĞò¡£
+ * è¿™æ˜¯æœ€ç®€å•çš„ä¸€ä¸ªOSGiç¨‹åºã€‚
  */
 public class Activator implements BundleActivator {
 

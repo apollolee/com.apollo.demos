@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-8-4 ÏÂÎç3:00:19¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-8-4 ä¸‹åˆ3:00:19ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -51,7 +51,7 @@ public class ExecutorServiceDemo {
 
         service.shutdown();
 
-        System.out.println("È«²¿½áÊø£¡");
+        System.out.println("å…¨éƒ¨ç»“æŸï¼");
     }
 
     protected static void runnableWait() {
@@ -83,7 +83,7 @@ public class ExecutorServiceDemo {
 
         try {
             service.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
-            System.out.println("È«²¿½áÊø£¡");
+            System.out.println("å…¨éƒ¨ç»“æŸï¼");
 
         } catch (InterruptedException ex) {
             ex.printStackTrace();

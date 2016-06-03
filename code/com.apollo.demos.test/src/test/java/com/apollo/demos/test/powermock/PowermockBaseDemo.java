@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ20ÈÕ ÏÂÎç4:20:02¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ20æ—¥ ä¸‹åˆ4:20:02ã€‚
  */
 package com.apollo.demos.test.powermock;
 
@@ -61,16 +61,16 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * Ä£ÄâprivateµÄ·½·¨¡£
+     * æ¨¡æ‹Ÿprivateçš„æ–¹æ³•ã€‚
      * @throws Exception
      */
     @Test
     @PrepareForTest(A.class)
     public void test01() throws Exception {
-        A spy = spy(new A()); //Ë½ÓĞ·½·¨Ò»°ãÊ¹ÓÃspy£¬ÒòÎª´¥·¢Ë½ÓĞ·½·¨µÄ²¿·Ö¶¼ÊÇÓĞ´úÂëÊµÏÖµÄ¡£
+        A spy = spy(new A()); //ç§æœ‰æ–¹æ³•ä¸€èˆ¬ä½¿ç”¨spyï¼Œå› ä¸ºè§¦å‘ç§æœ‰æ–¹æ³•çš„éƒ¨åˆ†éƒ½æ˜¯æœ‰ä»£ç å®ç°çš„ã€‚
 
         doReturn("This is mock A.").when(spy, "getA", 1);
-        assertEquals("This is mock A.", spy.getMessage(1)); //Ë½ÓĞ·½·¨Ò»°ãÊ¹ÓÃ¹«ÓĞ½Ó¿Ú½øĞĞ¼ä½Ó²âÊÔ¡£
+        assertEquals("This is mock A.", spy.getMessage(1)); //ç§æœ‰æ–¹æ³•ä¸€èˆ¬ä½¿ç”¨å…¬æœ‰æ¥å£è¿›è¡Œé—´æ¥æµ‹è¯•ã€‚
         assertEquals("This is A. [n = 2]", spy.getMessage(2));
 
         doReturn("This is mock A.").when(spy, "getA", anyInt());
@@ -81,13 +81,13 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * Ä£Äâstatic·½·¨¡£
+     * æ¨¡æ‹Ÿstaticæ–¹æ³•ã€‚
      * @throws Exception
      */
     @Test
     @PrepareForTest(B.class)
     public void test02() {
-        mockStatic(B.class); //static·½·¨Ö»ÄÜmock£¬²»ÄÜspy¡£
+        mockStatic(B.class); //staticæ–¹æ³•åªèƒ½mockï¼Œä¸èƒ½spyã€‚
         when(B.getMessage(999)).thenReturn("This is mock B.");
         when(B.getMessage(888)).thenCallRealMethod();
 
@@ -95,12 +95,12 @@ public class PowermockBaseDemo {
         assertEquals("This is B. [n = 888]", B.getMessage(888));
         assertNull(B.getMessage(777));
 
-        verifyStatic(times(3)); //ÕâÀïÑéÖ¤µÄÄ¿±ê¾²Ì¬·½·¨ÊÇ½ô¸úÔÚÕâÒ»¾äÖ®ºóµÄ¾²Ì¬·½·¨µ÷ÓÃ£¬Õâ2¾ä±ØĞë³É¶Ô³öÏÖ£¬ÊÇÒ»ÖÖÌØ¶¨¹æÔò¡£
-        B.getMessage(anyInt()); //ÕâÒ»¾ä²»»áÕæÕıµ÷ÓÃ¾²Ì¬·½·¨£¬½öÊÇ¸ö¾²Ì¬·½·¨µÄÃèÊö¡£
+        verifyStatic(times(3)); //è¿™é‡ŒéªŒè¯çš„ç›®æ ‡é™æ€æ–¹æ³•æ˜¯ç´§è·Ÿåœ¨è¿™ä¸€å¥ä¹‹åçš„é™æ€æ–¹æ³•è°ƒç”¨ï¼Œè¿™2å¥å¿…é¡»æˆå¯¹å‡ºç°ï¼Œæ˜¯ä¸€ç§ç‰¹å®šè§„åˆ™ã€‚
+        B.getMessage(anyInt()); //è¿™ä¸€å¥ä¸ä¼šçœŸæ­£è°ƒç”¨é™æ€æ–¹æ³•ï¼Œä»…æ˜¯ä¸ªé™æ€æ–¹æ³•çš„æè¿°ã€‚
     }
 
     /**
-     * Ä£Äâprivate static·½·¨¡£
+     * æ¨¡æ‹Ÿprivate staticæ–¹æ³•ã€‚
      * @throws Exception
      */
     @Test
@@ -108,7 +108,7 @@ public class PowermockBaseDemo {
     public void test03() throws Exception {
         mockStatic(C.class);
         doCallRealMethod().when(C.class, "throwException");
-        doNothing().when(C.class, "doNotInvoke"); //Õâ¾ä²»¼ÓÒ²Ã»ÓĞ¹ØÏµ£¬ÒòÎªmock¶ÔÏóÄ¬ÈÏ¾ÍÊÇdoNothingµÄ¡£
+        doNothing().when(C.class, "doNotInvoke"); //è¿™å¥ä¸åŠ ä¹Ÿæ²¡æœ‰å…³ç³»ï¼Œå› ä¸ºmockå¯¹è±¡é»˜è®¤å°±æ˜¯doNothingçš„ã€‚
 
         try {
             C.doNotInvoke();
@@ -126,13 +126,13 @@ public class PowermockBaseDemo {
         } catch (RuntimeException ex) {
         }
 
-        verifyPrivate(C.class).invoke("throwException"); //ÑéÖ¤throwExceptionÖ»µ÷ÓÃÁËÒ»´Î¡£
+        verifyPrivate(C.class).invoke("throwException"); //éªŒè¯throwExceptionåªè°ƒç”¨äº†ä¸€æ¬¡ã€‚
         verifyStatic(times(2));
         C.doNotInvoke();
     }
 
     /**
-     * Ä£ÄâfinalÀà¡¢final·½·¨ºÍfinal¾²Ì¬·½·¨¡£
+     * æ¨¡æ‹Ÿfinalç±»ã€finalæ–¹æ³•å’Œfinalé™æ€æ–¹æ³•ã€‚
      */
     @Test
     @PrepareForTest({ D1.class, D2.class, D3.class })
@@ -155,7 +155,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * finalÀàÔÚMockitoÖĞÊÇÎŞ·¨Ä£ÄâµÄ¡£
+     * finalç±»åœ¨Mockitoä¸­æ˜¯æ— æ³•æ¨¡æ‹Ÿçš„ã€‚
      */
     @Test
     @Ignore
@@ -167,7 +167,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * final·½·¨ÔÚMockitoÖĞÊÇÎŞ·¨Ä£ÄâµÄ¡£
+     * finalæ–¹æ³•åœ¨Mockitoä¸­æ˜¯æ— æ³•æ¨¡æ‹Ÿçš„ã€‚
      */
     @Test
     @Ignore
@@ -179,7 +179,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * ¶Ônew¶¯×÷½øĞĞmock£¬×¢Òâ@PrepareForTestÖĞÌîĞ´µÄÊÇ±»Ó°ÏìµÄÀà£¬¶ø²»ÊÇÌî±»MockµÄÀà¡£
+     * å¯¹newåŠ¨ä½œè¿›è¡Œmockï¼Œæ³¨æ„@PrepareForTestä¸­å¡«å†™çš„æ˜¯è¢«å½±å“çš„ç±»ï¼Œè€Œä¸æ˜¯å¡«è¢«Mockçš„ç±»ã€‚
      * @throws Exception
      */
     @Test
@@ -198,7 +198,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * ¹¹Ôì·½·¨ÄÚ²¿Òì³£ÊÇÎÒÃÇÊ¹ÓÃwhenNewµÄÖ÷ÒªÔ­Òò¡£
+     * æ„é€ æ–¹æ³•å†…éƒ¨å¼‚å¸¸æ˜¯æˆ‘ä»¬ä½¿ç”¨whenNewçš„ä¸»è¦åŸå› ã€‚
      * @throws Exception
      */
     @Test
@@ -216,7 +216,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * ¾²Ì¬³õÊ¼»¯¿éÒì³£»áµ¼ÖÂÀà¼ÓÔØÊ§°Ü£¬Ö±½ÓÒÖÖÆµôÊÇÄ¿Ç°Î¨Ò»µÄ´¦Àí·½·¨¡£
+     * é™æ€åˆå§‹åŒ–å—å¼‚å¸¸ä¼šå¯¼è‡´ç±»åŠ è½½å¤±è´¥ï¼Œç›´æ¥æŠ‘åˆ¶æ‰æ˜¯ç›®å‰å”¯ä¸€çš„å¤„ç†æ–¹æ³•ã€‚
      * @throws Exception
      */
     @Test
@@ -235,7 +235,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * verifyNew²»ÄÜÔÚÃ»ÓĞmockµÄÇé¿öÏÂ½øĞĞ£¬Õâ¸öºÍmockitoÊÇÀàËÆµÄ¡£
+     * verifyNewä¸èƒ½åœ¨æ²¡æœ‰mockçš„æƒ…å†µä¸‹è¿›è¡Œï¼Œè¿™ä¸ªå’Œmockitoæ˜¯ç±»ä¼¼çš„ã€‚
      * @throws Exception
      */
     @Test
@@ -251,7 +251,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * verifyNewµÄÇ°ÌáÊÇwhenNewµÄÊ±ºòÉèÖÃÁËmock£¬ÕâÑù¿ò¼Ü²ÅÄÜÊÕ¼¯Ïà¹ØĞÅÏ¢½øĞĞverify¡£
+     * verifyNewçš„å‰ææ˜¯whenNewçš„æ—¶å€™è®¾ç½®äº†mockï¼Œè¿™æ ·æ¡†æ¶æ‰èƒ½æ”¶é›†ç›¸å…³ä¿¡æ¯è¿›è¡Œverifyã€‚
      * @throws Exception
      */
     @Test
@@ -271,7 +271,7 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * setInternalState£¬powermockµÄWhiteboxÇ¿´óÁËºÜ¶à£¬µ«ÒÀÈ»¸Ğ¾õÓÃµÄµØ·½²»ÊÇºÜ¶à¡£
+     * setInternalStateï¼Œpowermockçš„Whiteboxå¼ºå¤§äº†å¾ˆå¤šï¼Œä½†ä¾ç„¶æ„Ÿè§‰ç”¨çš„åœ°æ–¹ä¸æ˜¯å¾ˆå¤šã€‚
      * @throws Exception
      */
     @Test
@@ -293,13 +293,13 @@ public class PowermockBaseDemo {
     }
 
     /**
-     * ÑİÊ¾@PowerMockIgnoreµÄ×÷ÓÃ¡£
+     * æ¼”ç¤º@PowerMockIgnoreçš„ä½œç”¨ã€‚
      * @throws Exception
      */
     @Test
     @PowerMockIgnore({ "java.awt.*", "javax.swing.*" })
     public void test09() {
-        //TODO @PowerMockIgnoreÊÇ½â¾öÒ»Ğ©powermockÀà¼ÓÔØÆ÷ÒıÈëµÄClassCastExceptionÎÊÌâµÄÎ¨Ò»·½·¨£¬ºÜÖØÒª£¬ÔİÊ±»¹Ã»ÕÒµ½ºÏÊÊµÄÀı×Ó¡£
+        //TODO @PowerMockIgnoreæ˜¯è§£å†³ä¸€äº›powermockç±»åŠ è½½å™¨å¼•å…¥çš„ClassCastExceptioné—®é¢˜çš„å”¯ä¸€æ–¹æ³•ï¼Œå¾ˆé‡è¦ï¼Œæš‚æ—¶è¿˜æ²¡æ‰¾åˆ°åˆé€‚çš„ä¾‹å­ã€‚
     }
 
 }

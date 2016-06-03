@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2015Äê11ÔÂ19ÈÕ ÏÂÎç5:05:10¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2015å¹´11æœˆ19æ—¥ ä¸‹åˆ5:05:10ã€‚
  */
 package com.apollo.demos.test.mockito;
 
@@ -78,7 +78,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ÑéÖ¤µ÷ÓÃĞĞÎª¡£
+     * éªŒè¯è°ƒç”¨è¡Œä¸ºã€‚
      */
     @Test
     public void test01() {
@@ -93,7 +93,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * Ò»¸öÕæÊµµÄ¶ÔÏóÊ±²»ÄÜ½øĞĞÑéÖ¤µÄ¡£
+     * ä¸€ä¸ªçœŸå®çš„å¯¹è±¡æ—¶ä¸èƒ½è¿›è¡ŒéªŒè¯çš„ã€‚
      */
     @Test
     @Ignore
@@ -103,12 +103,12 @@ public class MockitoBaseDemo {
         mock.add(1);
         mock.clear();
 
-        verify(mock).add(1); //Ò»¸öÕæÊµµÄ¶ÔÏóÊ±²»ÄÜ½øĞĞÑéÖ¤µÄ¡£
+        verify(mock).add(1); //ä¸€ä¸ªçœŸå®çš„å¯¹è±¡æ—¶ä¸èƒ½è¿›è¡ŒéªŒè¯çš„ã€‚
         verify(mock).clear();
     }
 
     /**
-     * ¼ä½ÓµÄµ÷ÓÃÒ²ÄÜÑéÖ¤£¬²»¹ıÏÈÒªÄÜ¹»¼ä½Óµ÷ÓÃ¡£
+     * é—´æ¥çš„è°ƒç”¨ä¹Ÿèƒ½éªŒè¯ï¼Œä¸è¿‡å…ˆè¦èƒ½å¤Ÿé—´æ¥è°ƒç”¨ã€‚
      */
     @Test
     public void test02() {
@@ -123,7 +123,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ¼ä½Óµ÷ÓÃ²¢Ã»ÓĞÊµ¼Êµ÷ÓÃµ½¡£
+     * é—´æ¥è°ƒç”¨å¹¶æ²¡æœ‰å®é™…è°ƒç”¨åˆ°ã€‚
      */
     @Test
     @Ignore
@@ -134,18 +134,18 @@ public class MockitoBaseDemo {
         mock.contains(1);
 
         verify(mock).contains(1);
-        verify(mock).indexOf(1); //containsÃ»ÓĞ½øĞĞwhenµÄÉèÖÃ£¬²»»áµ÷ÓÃÕæÊµµÄ·½·¨£¬¾Í²»»áµ÷ÓÃµ½indexOfÁË¡£
+        verify(mock).indexOf(1); //containsæ²¡æœ‰è¿›è¡Œwhençš„è®¾ç½®ï¼Œä¸ä¼šè°ƒç”¨çœŸå®çš„æ–¹æ³•ï¼Œå°±ä¸ä¼šè°ƒç”¨åˆ°indexOfäº†ã€‚
     }
 
     /**
-     * ½Ó¿ÚÃ»ÓĞÕæÊµµÄµ÷ÓÃÊµÏÖ¡£
+     * æ¥å£æ²¡æœ‰çœŸå®çš„è°ƒç”¨å®ç°ã€‚
      */
     @Test
     @Ignore
     public void test02_02() {
         @SuppressWarnings("unchecked")
         List<Integer> mock = mock(List.class);
-        when(mock.contains(1)).thenCallRealMethod(); //ListÊÇ½Ó¿Ú£¬Ã»ÓĞÕæÊµ·½·¨£¬ÕâÀï»á±¨´í¡£
+        when(mock.contains(1)).thenCallRealMethod(); //Listæ˜¯æ¥å£ï¼Œæ²¡æœ‰çœŸå®æ–¹æ³•ï¼Œè¿™é‡Œä¼šæŠ¥é”™ã€‚
 
         mock.contains(1);
 
@@ -154,21 +154,21 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * Ê¹ÓÃspy¶ÔÏó¿ÉÒÔ±ÜÃâÊ¹ÓÃwhenÉèÖÃÔ¤ÆÚĞĞÎª¡£
+     * ä½¿ç”¨spyå¯¹è±¡å¯ä»¥é¿å…ä½¿ç”¨whenè®¾ç½®é¢„æœŸè¡Œä¸ºã€‚
      */
     @Test
     public void test03() {
         List<Integer> list = new ArrayList<Integer>();
         List<Integer> spy = spy(list);
 
-        spy.contains(1); //spy¶ÔÏóËùÓĞ·½·¨È±Ê¡¾ÍÊÇµ÷ÓÃÕæÊµ·½·¨µÄ¡£
+        spy.contains(1); //spyå¯¹è±¡æ‰€æœ‰æ–¹æ³•ç¼ºçœå°±æ˜¯è°ƒç”¨çœŸå®æ–¹æ³•çš„ã€‚
 
         verify(spy).contains(1);
         verify(spy).indexOf(1);
     }
 
     /**
-     * ÒªÃ÷°×ÕæÊµ¶ÔÏó¡¢mock¶ÔÏóÒÔ¼°spy¶ÔÏóµÄÇø±ğ¡£
+     * è¦æ˜ç™½çœŸå®å¯¹è±¡ã€mockå¯¹è±¡ä»¥åŠspyå¯¹è±¡çš„åŒºåˆ«ã€‚
      */
     @Test
     public void test04() {
@@ -184,7 +184,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * mock¶ÔÏóËùÓĞ·½·¨È±Ê¡Ê²Ã´¶¼²»×ö»ò·µ»Ønull£¬È±Ê¡ÖµµÈ¡£
+     * mockå¯¹è±¡æ‰€æœ‰æ–¹æ³•ç¼ºçœä»€ä¹ˆéƒ½ä¸åšæˆ–è¿”å›nullï¼Œç¼ºçœå€¼ç­‰ã€‚
      */
     @Test
     @Ignore
@@ -194,22 +194,22 @@ public class MockitoBaseDemo {
 
         assertEquals(0, mock.size());
 
-        mock.add(1); //mock¶ÔÏóËùÓĞ·½·¨È±Ê¡Ê²Ã´¶¼²»×ö»ò·µ»Ønull£¬È±Ê¡ÖµµÈ¡£
+        mock.add(1); //mockå¯¹è±¡æ‰€æœ‰æ–¹æ³•ç¼ºçœä»€ä¹ˆéƒ½ä¸åšæˆ–è¿”å›nullï¼Œç¼ºçœå€¼ç­‰ã€‚
 
         assertEquals(1, mock.size());
         assertEquals(Integer.valueOf(1), mock.get(0));
     }
 
     /**
-     * Ä£ÄâÎÒÃÇËùÆÚÍûµÄ½á¹û¡£
+     * æ¨¡æ‹Ÿæˆ‘ä»¬æ‰€æœŸæœ›çš„ç»“æœã€‚
      */
     @Test
     public void test05() {
         @SuppressWarnings("unchecked")
         Iterator<Integer> mock = mock(Iterator.class);
 
-        when(mock.next()).thenReturn(1, 2, 3); //Ô¤Éèµ±iteratorµ÷ÓÃnext()Ê±µÚÒ»´Î·µ»Ø1£¬µÚ¶ş´Î·µ»Ø2£¬ºóÃæÎŞÂÛ¶àÉÙ´Î¶¼·µ»Ø3
-        //when(mock.next()).thenReturn(1).thenReturn(2).thenReturn(3); //ÕâÃ´Ğ´Ò²¿ÉÒÔ£¬ºÍÉÏÃæµÄÒ»Ñù¡£
+        when(mock.next()).thenReturn(1, 2, 3); //é¢„è®¾å½“iteratorè°ƒç”¨next()æ—¶ç¬¬ä¸€æ¬¡è¿”å›1ï¼Œç¬¬äºŒæ¬¡è¿”å›2ï¼Œåé¢æ— è®ºå¤šå°‘æ¬¡éƒ½è¿”å›3
+        //when(mock.next()).thenReturn(1).thenReturn(2).thenReturn(3); //è¿™ä¹ˆå†™ä¹Ÿå¯ä»¥ï¼Œå’Œä¸Šé¢çš„ä¸€æ ·ã€‚
 
         assertEquals(Integer.valueOf(1), mock.next());
         assertEquals(Integer.valueOf(2), mock.next());
@@ -222,7 +222,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ÁË½âwhenµÄ»ù±¾¹æÔò¡£
+     * äº†è§£whençš„åŸºæœ¬è§„åˆ™ã€‚
      */
     @Test
     @Ignore
@@ -230,9 +230,9 @@ public class MockitoBaseDemo {
         @SuppressWarnings("unchecked")
         Iterator<Integer> mock = mock(Iterator.class);
 
-        when(mock.next()).thenReturn(1); //ÎŞĞ§¡£
-        when(mock.next()).thenReturn(2); //ÎŞĞ§¡£
-        when(mock.next()).thenReturn(3); //ÕâÑù·Ö¿ªĞ´¾Í²»ĞĞÁË£¬×îºóÒ»¾ä»á¸²¸ÇÇ°ÃæµÄÉèÖÃ£¬Ê¹Ç°ÃæµÄÎŞĞ§¡£
+        when(mock.next()).thenReturn(1); //æ— æ•ˆã€‚
+        when(mock.next()).thenReturn(2); //æ— æ•ˆã€‚
+        when(mock.next()).thenReturn(3); //è¿™æ ·åˆ†å¼€å†™å°±ä¸è¡Œäº†ï¼Œæœ€åä¸€å¥ä¼šè¦†ç›–å‰é¢çš„è®¾ç½®ï¼Œä½¿å‰é¢çš„æ— æ•ˆã€‚
 
         assertEquals(Integer.valueOf(1), mock.next());
         assertEquals(Integer.valueOf(2), mock.next());
@@ -245,20 +245,20 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * Ä£ÄâÒì³£Å×³ö¡£
+     * æ¨¡æ‹Ÿå¼‚å¸¸æŠ›å‡ºã€‚
      * @throws IOException
      */
     @Test(expected = IOException.class)
     public void test06() throws IOException {
         OutputStream mock = mock(OutputStream.class);
 
-        doThrow(new IOException()).when(mock).close(); //Ô¤Éèµ±Á÷¹Ø±ÕÊ±Å×³öÒì³£¡£
+        doThrow(new IOException()).when(mock).close(); //é¢„è®¾å½“æµå…³é—­æ—¶æŠ›å‡ºå¼‚å¸¸ã€‚
 
         mock.close();
     }
 
     /**
-     * ¶àÌõwhen¿ÉÒÔÍ¨¹ı²ÎÊı¾«È·Æ¥ÅäÄ£Äâ²»Í¬µÄÊäÈëÊä³ö¡£
+     * å¤šæ¡whenå¯ä»¥é€šè¿‡å‚æ•°ç²¾ç¡®åŒ¹é…æ¨¡æ‹Ÿä¸åŒçš„è¾“å…¥è¾“å‡ºã€‚
      */
     @Test
     public void test07() {
@@ -270,11 +270,11 @@ public class MockitoBaseDemo {
 
         assertEquals(1, mock.compareTo("a"));
         assertEquals(2, mock.compareTo("b"));
-        assertEquals(0, mock.compareTo("c")); //¶ÔÓÚÃ»ÓĞÔ¤ÉèµÄÇé¿ö»á·µ»ØÄ¬ÈÏÖµ¡£
+        assertEquals(0, mock.compareTo("c")); //å¯¹äºæ²¡æœ‰é¢„è®¾çš„æƒ…å†µä¼šè¿”å›é»˜è®¤å€¼ã€‚
     }
 
     /**
-     * ³ıÁË¾«È·Æ¥ÅäÍâ£¬»¹¿ÉÒÔÆ¥Åä×Ô¼ºÏëÒªµÄÈÎÒâ²ÎÊı¡£
+     * é™¤äº†ç²¾ç¡®åŒ¹é…å¤–ï¼Œè¿˜å¯ä»¥åŒ¹é…è‡ªå·±æƒ³è¦çš„ä»»æ„å‚æ•°ã€‚
      */
     @Test
     public void test08() {
@@ -291,7 +291,7 @@ public class MockitoBaseDemo {
 
         };
 
-        when(mock.get(anyInt())).thenReturn(1); //Æ¥ÅäÈÎÒâ²ÎÊı¡£ 
+        when(mock.get(anyInt())).thenReturn(1); //åŒ¹é…ä»»æ„å‚æ•°ã€‚ 
         when(mock.contains(argThat(isValid))).thenReturn(true);
 
         assertEquals(Integer.valueOf(1), mock.get(0));
@@ -302,7 +302,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ĞèÒª×¢ÒâµÄÊÇÈç¹ûÄãÊ¹ÓÃÁË²ÎÊıÆ¥Åä£¬ÄÇÃ´ËùÓĞµÄ²ÎÊı¶¼±ØĞëÍ¨¹ımatchersÀ´Æ¥Åä¡£
+     * éœ€è¦æ³¨æ„çš„æ˜¯å¦‚æœä½ ä½¿ç”¨äº†å‚æ•°åŒ¹é…ï¼Œé‚£ä¹ˆæ‰€æœ‰çš„å‚æ•°éƒ½å¿…é¡»é€šè¿‡matchersæ¥åŒ¹é…ã€‚
      */
     @Test
     public void test09() {
@@ -311,11 +311,11 @@ public class MockitoBaseDemo {
 
         mock.compare("a", "b");
 
-        verify(mock).compare(anyString(), eq("b")); //Èç¹ûÄãÊ¹ÓÃÁË²ÎÊıÆ¥Åä£¬ÄÇÃ´ËùÓĞµÄ²ÎÊı¶¼±ØĞëÍ¨¹ımatchersÀ´Æ¥Åä¡£
+        verify(mock).compare(anyString(), eq("b")); //å¦‚æœä½ ä½¿ç”¨äº†å‚æ•°åŒ¹é…ï¼Œé‚£ä¹ˆæ‰€æœ‰çš„å‚æ•°éƒ½å¿…é¡»é€šè¿‡matchersæ¥åŒ¹é…ã€‚
     }
 
     /**
-     * ÏÂÃæÕâÑù¾Í²»ĞĞ¡£
+     * ä¸‹é¢è¿™æ ·å°±ä¸è¡Œã€‚
      */
     @Test
     @Ignore
@@ -325,11 +325,11 @@ public class MockitoBaseDemo {
 
         mock.compare("a", "b");
 
-        verify(mock).compare(anyString(), "b"); //ÎŞĞ§µÄ²ÎÊıÆ¥ÅäÊ¹ÓÃ¡£
+        verify(mock).compare(anyString(), "b"); //æ— æ•ˆçš„å‚æ•°åŒ¹é…ä½¿ç”¨ã€‚
     }
 
     /**
-     * whenµÄ²ÎÊıÆ¥Åä¹æÔòÒ²ÊÇÒ»Ñù£¬²»¹ı¿ÉÒÔÍ¬Ê±ÉèÖÃÆ¥ÅäºÍ¾«È·£¬²¢ÇÒ¾«È·ÓÅÏÈ¡£
+     * whençš„å‚æ•°åŒ¹é…è§„åˆ™ä¹Ÿæ˜¯ä¸€æ ·ï¼Œä¸è¿‡å¯ä»¥åŒæ—¶è®¾ç½®åŒ¹é…å’Œç²¾ç¡®ï¼Œå¹¶ä¸”ç²¾ç¡®ä¼˜å…ˆã€‚
      */
     @Test
     public void test10() {
@@ -337,14 +337,14 @@ public class MockitoBaseDemo {
         Comparator<String> mock = mock(Comparator.class);
 
         when(mock.compare(anyString(), eq("b"))).thenReturn(1);
-        when(mock.compare("c", "b")).thenReturn(2); //whenµÄ²ÎÊıÆ¥Åä¹æÔòÒ²ÊÇÒ»Ñù£¬²»¹ı¿ÉÒÔÍ¬Ê±ÉèÖÃÆ¥ÅäºÍ¾«È·£¬²¢ÇÒ¾«È·ÓÅÏÈ¡£
+        when(mock.compare("c", "b")).thenReturn(2); //whençš„å‚æ•°åŒ¹é…è§„åˆ™ä¹Ÿæ˜¯ä¸€æ ·ï¼Œä¸è¿‡å¯ä»¥åŒæ—¶è®¾ç½®åŒ¹é…å’Œç²¾ç¡®ï¼Œå¹¶ä¸”ç²¾ç¡®ä¼˜å…ˆã€‚
 
         assertEquals(1, mock.compare("a", "b"));
         assertEquals(2, mock.compare("c", "b"));
     }
 
     /**
-     * ÏÂÃæÕâÑùÉèÖÃÍ¬Ñù²»ĞĞ¡£
+     * ä¸‹é¢è¿™æ ·è®¾ç½®åŒæ ·ä¸è¡Œã€‚
      */
     @Test
     @Ignore
@@ -352,7 +352,7 @@ public class MockitoBaseDemo {
         @SuppressWarnings("unchecked")
         Comparator<String> mock = mock(Comparator.class);
 
-        when(mock.compare(anyString(), "b")).thenReturn(1); //ÎŞĞ§µÄ²ÎÊıÆ¥ÅäÊ¹ÓÃ¡£
+        when(mock.compare(anyString(), "b")).thenReturn(1); //æ— æ•ˆçš„å‚æ•°åŒ¹é…ä½¿ç”¨ã€‚
         when(mock.compare("c", "b")).thenReturn(2);
 
         assertEquals(1, mock.compare("a", "b"));
@@ -360,7 +360,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ¹ØÓÚÆ¥ÅäÆ÷Ê¹ÓÃĞèÒª×¢ÒâÔÚverifyÖĞ²»ÄÜ·ÖĞĞÊéĞ´£¬whenÖĞÎŞ´ËÏŞÖÆ¡£
+     * å…³äºåŒ¹é…å™¨ä½¿ç”¨éœ€è¦æ³¨æ„åœ¨verifyä¸­ä¸èƒ½åˆ†è¡Œä¹¦å†™ï¼Œwhenä¸­æ— æ­¤é™åˆ¶ã€‚
      */
     @Test
     @Ignore
@@ -369,17 +369,17 @@ public class MockitoBaseDemo {
         List<Integer> mock = mock(List.class);
 
         int anyInt = anyInt();
-        when(mock.get(anyInt)).thenReturn(999); //ÕâÀïanyInt·ÖÁ½ĞĞĞ´Ã»ÓĞÎÊÌâ¡£
+        when(mock.get(anyInt)).thenReturn(999); //è¿™é‡ŒanyIntåˆ†ä¸¤è¡Œå†™æ²¡æœ‰é—®é¢˜ã€‚
 
         assertEquals(Integer.valueOf(999), mock.get(10));
 
         anyInt = anyInt();
-        verify(mock).get(anyInt); //ÕâÀïanyInt·ÖÁ½ĞĞ»á³ö´í£¬Mockito»á¼ì²âµ÷ÓÃË³Ğò£¬ÒªÇóĞ´µ½Ò»ĞĞÖĞ¡£
-        //verify(mock).get(anyInt()); //ÕâÑù²»»áÓĞÎÊÌâ£¬MatchersÔÚverifyÖĞ¶¼ÑÏ¸ñÒªÇóÕâÖÖĞ´·¨¡£
+        verify(mock).get(anyInt); //è¿™é‡ŒanyIntåˆ†ä¸¤è¡Œä¼šå‡ºé”™ï¼ŒMockitoä¼šæ£€æµ‹è°ƒç”¨é¡ºåºï¼Œè¦æ±‚å†™åˆ°ä¸€è¡Œä¸­ã€‚
+        //verify(mock).get(anyInt()); //è¿™æ ·ä¸ä¼šæœ‰é—®é¢˜ï¼ŒMatchersåœ¨verifyä¸­éƒ½ä¸¥æ ¼è¦æ±‚è¿™ç§å†™æ³•ã€‚
     }
 
     /**
-     * ÑéÖ¤È·ÇĞµÄµ÷ÓÃ´ÎÊı¡£
+     * éªŒè¯ç¡®åˆ‡çš„è°ƒç”¨æ¬¡æ•°ã€‚
      */
     @Test
     public void test11() {
@@ -393,24 +393,24 @@ public class MockitoBaseDemo {
         mock.add(3);
         mock.add(3);
 
-        verify(mock).add(1); //ÑéÖ¤ÊÇ·ñ±»µ÷ÓÃÒ»´Î£¬µÈĞ§ÓÚÏÂÃæµÄtimes(1)¡£
-        verify(mock, times(1)).add(1); //ÕâÖÖÑéÖ¤¿ÉÒÔ·´¸´Ö´ĞĞ¶à´Î¡£
+        verify(mock).add(1); //éªŒè¯æ˜¯å¦è¢«è°ƒç”¨ä¸€æ¬¡ï¼Œç­‰æ•ˆäºä¸‹é¢çš„times(1)ã€‚
+        verify(mock, times(1)).add(1); //è¿™ç§éªŒè¯å¯ä»¥åå¤æ‰§è¡Œå¤šæ¬¡ã€‚
 
-        verify(mock, times(2)).add(2); //ÑéÖ¤ÊÇ·ñ±»µ÷ÓÃ2´Î ¡£
+        verify(mock, times(2)).add(2); //éªŒè¯æ˜¯å¦è¢«è°ƒç”¨2æ¬¡ ã€‚
 
-        verify(mock, times(3)).add(3); //ÑéÖ¤ÊÇ·ñ±»µ÷ÓÃ3´Î¡£
+        verify(mock, times(3)).add(3); //éªŒè¯æ˜¯å¦è¢«è°ƒç”¨3æ¬¡ã€‚
 
-        verify(mock, never()).add(4); //ÑéÖ¤ÊÇ·ñ´ÓÎ´±»µ÷ÓÃ¹ı¡£
+        verify(mock, never()).add(4); //éªŒè¯æ˜¯å¦ä»æœªè¢«è°ƒç”¨è¿‡ã€‚
 
-        verify(mock, atLeastOnce()).add(1); //ÑéÖ¤ÖÁÉÙµ÷ÓÃÒ»´Î¡£
+        verify(mock, atLeastOnce()).add(1); //éªŒè¯è‡³å°‘è°ƒç”¨ä¸€æ¬¡ã€‚
 
-        verify(mock, atLeast(2)).add(2); //ÑéÖ¤ÖÁÉÙµ÷ÓÃ2´Î¡£
+        verify(mock, atLeast(2)).add(2); //éªŒè¯è‡³å°‘è°ƒç”¨2æ¬¡ã€‚
 
-        verify(mock, atMost(3)).add(3); //ÑéÖ¤ÖÁ¶àµ÷ÓÃ3´Î¡£
+        verify(mock, atMost(3)).add(3); //éªŒè¯è‡³å¤šè°ƒç”¨3æ¬¡ã€‚
     }
 
     /**
-     * ÑéÖ¤Ö´ĞĞË³Ğò¡£
+     * éªŒè¯æ‰§è¡Œé¡ºåºã€‚
      */
     @Test
     public void test12() {
@@ -424,10 +424,10 @@ public class MockitoBaseDemo {
         mock1.add(2);
         mock2.add("b");
 
-        //½«ĞèÒªÅÅĞòµÄmock¶ÔÏó·ÅÈëInOrder¡£  
+        //å°†éœ€è¦æ’åºçš„mockå¯¹è±¡æ”¾å…¥InOrderã€‚  
         InOrder inOrder = inOrder(mock1, mock2);
 
-        //ÏÂÃæµÄ´úÂë²»ÄÜµßµ¹Ë³Ğò£¬ÑéÖ¤Ö´ĞĞË³Ğò¡£  
+        //ä¸‹é¢çš„ä»£ç ä¸èƒ½é¢ å€’é¡ºåºï¼ŒéªŒè¯æ‰§è¡Œé¡ºåºã€‚  
         inOrder.verify(mock1).add(1);
         inOrder.verify(mock2).add("a");
         inOrder.verify(mock1).add(2);
@@ -435,7 +435,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * È·±£Ä£Äâ¶ÔÏóÉÏÎŞ»¥¶¯·¢Éú¡£
+     * ç¡®ä¿æ¨¡æ‹Ÿå¯¹è±¡ä¸Šæ— äº’åŠ¨å‘ç”Ÿã€‚
      */
     @Test
     public void test13() {
@@ -451,11 +451,11 @@ public class MockitoBaseDemo {
         verify(mock1).add(1);
         verify(mock1, never()).add(2);
 
-        verifyZeroInteractions(mock2, mock3); //ÑéÖ¤Áã»¥¶¯ĞĞÎª¡£×¢Òâ£ºÕâÀï²»ÊÇÖ¸mock2ºÍmock3Ö®¼äÓĞ»¥Ïàµ÷ÓÃ£¬¶øÊÇÖ¸test13ÀïÃæmock2ºÍmock3Ã»ÓĞÈÎºÎ·½·¨±»µ÷ÓÃ¡£
+        verifyZeroInteractions(mock2, mock3); //éªŒè¯é›¶äº’åŠ¨è¡Œä¸ºã€‚æ³¨æ„ï¼šè¿™é‡Œä¸æ˜¯æŒ‡mock2å’Œmock3ä¹‹é—´æœ‰äº’ç›¸è°ƒç”¨ï¼Œè€Œæ˜¯æŒ‡test13é‡Œé¢mock2å’Œmock3æ²¡æœ‰ä»»ä½•æ–¹æ³•è¢«è°ƒç”¨ã€‚
     }
 
     /**
-     * ÕÒ³öÈßÓàµÄ»¥¶¯£¨¼´Î´±»ÑéÖ¤µ½µÄ£©¡£
+     * æ‰¾å‡ºå†—ä½™çš„äº’åŠ¨ï¼ˆå³æœªè¢«éªŒè¯åˆ°çš„ï¼‰ã€‚
      */
     @Test(expected = NoInteractionsWanted.class)
     public void test14() {
@@ -464,18 +464,18 @@ public class MockitoBaseDemo {
         mock1.add(1);
         mock1.add(2);
         verify(mock1, times(2)).add(anyInt());
-        verifyNoMoreInteractions(mock1); //¼ì²éÊÇ·ñÓĞÎ´±»ÑéÖ¤µÄ»¥¶¯ĞĞÎª£¬ÒòÎªadd(1)ºÍadd(2)¶¼»á±»ÉÏÃæµÄanyInt()ÑéÖ¤µ½£¬ËùÒÔÕâÀïµÄ´úÂë»áÍ¨¹ı¡£
+        verifyNoMoreInteractions(mock1); //æ£€æŸ¥æ˜¯å¦æœ‰æœªè¢«éªŒè¯çš„äº’åŠ¨è¡Œä¸ºï¼Œå› ä¸ºadd(1)å’Œadd(2)éƒ½ä¼šè¢«ä¸Šé¢çš„anyInt()éªŒè¯åˆ°ï¼Œæ‰€ä»¥è¿™é‡Œçš„ä»£ç ä¼šé€šè¿‡ã€‚
 
         @SuppressWarnings("unchecked")
         List<Integer> mock2 = mock(List.class);
         mock2.add(1);
         mock2.add(2);
         verify(mock2).add(1);
-        verifyNoMoreInteractions(mock2); //¼ì²éÊÇ·ñÓĞÎ´±»ÑéÖ¤µÄ»¥¶¯ĞĞÎª£¬ÒòÎªadd(2)Ã»ÓĞ±»ÑéÖ¤£¬ËùÒÔÏÂÃæµÄ´úÂë»áÊ§°ÜÅ×³öÒì³£¡£
+        verifyNoMoreInteractions(mock2); //æ£€æŸ¥æ˜¯å¦æœ‰æœªè¢«éªŒè¯çš„äº’åŠ¨è¡Œä¸ºï¼Œå› ä¸ºadd(2)æ²¡æœ‰è¢«éªŒè¯ï¼Œæ‰€ä»¥ä¸‹é¢çš„ä»£ç ä¼šå¤±è´¥æŠ›å‡ºå¼‚å¸¸ã€‚
     }
 
     /**
-     * Ê¹ÓÃ»Øµ÷Éú³ÉÆÚÍûÖµ¡£
+     * ä½¿ç”¨å›è°ƒç”ŸæˆæœŸæœ›å€¼ã€‚
      */
     @Test
     public void test15() {
@@ -492,7 +492,7 @@ public class MockitoBaseDemo {
             }
 
         };
-        when(mock.get(anyInt())).thenAnswer(answer); //Ê¹ÓÃAnswerÀ´Éú³ÉÎÒÃÇÎÒÃÇÆÚÍûµÄ·µ»Ø¡£
+        when(mock.get(anyInt())).thenAnswer(answer); //ä½¿ç”¨Answeræ¥ç”Ÿæˆæˆ‘ä»¬æˆ‘ä»¬æœŸæœ›çš„è¿”å›ã€‚
 
         assertEquals(Integer.valueOf(0), mock.get(0));
         assertEquals(Integer.valueOf(1), mock.get(1));
@@ -500,20 +500,20 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ¼à¿ØÕæÊµ¶ÔÏó£¬Ê¹ÓÃspyÀ´¼à¿ØÕæÊµµÄ¶ÔÏó£¬ĞèÒª×¢ÒâµÄÊÇ´ËÊ±ÎÒÃÇĞèÒª½÷É÷µÄÊ¹ÓÃwhen-thenÓï¾ä£¬¶ø¸ÄÓÃdo-whenÓï¾ä¡£
+     * ç›‘æ§çœŸå®å¯¹è±¡ï¼Œä½¿ç”¨spyæ¥ç›‘æ§çœŸå®çš„å¯¹è±¡ï¼Œéœ€è¦æ³¨æ„çš„æ˜¯æ­¤æ—¶æˆ‘ä»¬éœ€è¦è°¨æ…çš„ä½¿ç”¨when-thenè¯­å¥ï¼Œè€Œæ”¹ç”¨do-whenè¯­å¥ã€‚
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void test16() {
         List<Integer> list = new LinkedList<Integer>();
         List<Integer> spy = spy(list);
 
-        //when(spy.get(999)).thenReturn(999); //ÕâÑùÔ¤ÉèµÄspy.get(0)»á±¨´í£¬ÒòÎª»áµ÷ÓÃÕæÊµ¶ÔÏóµÄget(0)£¬»áÅ×³öÔ½½çÒì³£¡£  
-        doReturn(999).when(spy).get(999); //Ê¹ÓÃdoReturn-when¿ÉÒÔ±ÜÃâwhen-thenReturnµ÷ÓÃÕæÊµ¶ÔÏó¡£
+        //when(spy.get(999)).thenReturn(999); //è¿™æ ·é¢„è®¾çš„spy.get(0)ä¼šæŠ¥é”™ï¼Œå› ä¸ºä¼šè°ƒç”¨çœŸå®å¯¹è±¡çš„get(0)ï¼Œä¼šæŠ›å‡ºè¶Šç•Œå¼‚å¸¸ã€‚  
+        doReturn(999).when(spy).get(999); //ä½¿ç”¨doReturn-whenå¯ä»¥é¿å…when-thenReturnè°ƒç”¨çœŸå®å¯¹è±¡ã€‚
 
-        //when(spy.size()).thenReturn(100); //Ô¤Éèsize()ÆÚÍûÖµ£¬ÕâÑùµ÷ÓÃÍ¬Ñù»áµ÷ÓÃÕæÊµ¶ÔÏóµÄsize()£¬Ö»²»¹ı²»»á²úÉúÊ²Ã´ÑÏÖØÓ°Ïì¡£
-        doReturn(100).when(spy).size(); //½¨Òéspy¶¼°´ÕâÖÖ·½Ê½À´Ğ´¡£
+        //when(spy.size()).thenReturn(100); //é¢„è®¾size()æœŸæœ›å€¼ï¼Œè¿™æ ·è°ƒç”¨åŒæ ·ä¼šè°ƒç”¨çœŸå®å¯¹è±¡çš„size()ï¼Œåªä¸è¿‡ä¸ä¼šäº§ç”Ÿä»€ä¹ˆä¸¥é‡å½±å“ã€‚
+        doReturn(100).when(spy).size(); //å»ºè®®spyéƒ½æŒ‰è¿™ç§æ–¹å¼æ¥å†™ã€‚
 
-        //ÏÂÃæ¶¼»áµ÷ÓÃÕæÊµ¶ÔÏóµÄÊµ¼Ê·½·¨¡£
+        //ä¸‹é¢éƒ½ä¼šè°ƒç”¨çœŸå®å¯¹è±¡çš„å®é™…æ–¹æ³•ã€‚
         spy.add(1);
         spy.add(2);
 
@@ -525,11 +525,11 @@ public class MockitoBaseDemo {
         verify(spy).add(1);
         verify(spy).add(2);
 
-        spy.get(2); //ÕâÀï»¹ÊÇ»áÅ×IndexOutOfBoundsException³öÀ´¡£
+        spy.get(2); //è¿™é‡Œè¿˜æ˜¯ä¼šæŠ›IndexOutOfBoundsExceptionå‡ºæ¥ã€‚
     }
 
     /**
-     * ĞŞ¸Ä¶ÔÎ´Ô¤ÉèµÄµ÷ÓÃ·µ»ØÄ¬ÈÏÆÚÍûÖµ¡£
+     * ä¿®æ”¹å¯¹æœªé¢„è®¾çš„è°ƒç”¨è¿”å›é»˜è®¤æœŸæœ›å€¼ã€‚
      */
     @Test
     public void test17() {
@@ -537,20 +537,20 @@ public class MockitoBaseDemo {
 
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                return 999; //ÕâÀïÑİÊ¾´¦ÀíºÜ¼òµ¥´Ö±©£¬ÆäÊµÕâ¸öAnswerĞèÒª´¦Àímock¶ÔÏóµÄËùÓĞ·½·¨£¬ËùÒÔ²ÎÊıÊÇObject£¬ÊÊÓ¦ËùÓĞ²ÎÊı£¬²»Í¬·½·¨·µ»ØµÄ²ÎÊıÀàĞÍ¿ÉÄÜ¶¼²»Ò»Ñù¡£
+                return 999; //è¿™é‡Œæ¼”ç¤ºå¤„ç†å¾ˆç®€å•ç²—æš´ï¼Œå…¶å®è¿™ä¸ªAnsweréœ€è¦å¤„ç†mockå¯¹è±¡çš„æ‰€æœ‰æ–¹æ³•ï¼Œæ‰€ä»¥å‚æ•°æ˜¯Objectï¼Œé€‚åº”æ‰€æœ‰å‚æ•°ï¼Œä¸åŒæ–¹æ³•è¿”å›çš„å‚æ•°ç±»å‹å¯èƒ½éƒ½ä¸ä¸€æ ·ã€‚
             }
 
         };
 
         @SuppressWarnings("unchecked")
-        List<Integer> mock = mock(List.class, defaultAnswer); //mock¶ÔÏóÊ¹ÓÃAnswerÀ´¶ÔÎ´Ô¤ÉèµÄµ÷ÓÃ·µ»ØÄ¬ÈÏÆÚÍûÖµ¡£
+        List<Integer> mock = mock(List.class, defaultAnswer); //mockå¯¹è±¡ä½¿ç”¨Answeræ¥å¯¹æœªé¢„è®¾çš„è°ƒç”¨è¿”å›é»˜è®¤æœŸæœ›å€¼ã€‚
 
-        assertEquals(Integer.valueOf(999), mock.get(1)); //get(1)Ã»ÓĞÔ¤Éè£¬Í¨³£Çé¿öÏÂ»á·µ»ØNULL£¬µ«ÊÇÊ¹ÓÃÁËAnswer¸Ä±äÁËÄ¬ÈÏÆÚÍûÖµ¡£
-        assertEquals(999, mock.size()); //size()Ã»ÓĞÔ¤Éè£¬Í¨³£Çé¿öÏÂ»á·µ»Ø0£¬µ«ÊÇÊ¹ÓÃÁËAnswer¸Ä±äÁËÄ¬ÈÏÆÚÍûÖµ¡£
+        assertEquals(Integer.valueOf(999), mock.get(1)); //get(1)æ²¡æœ‰é¢„è®¾ï¼Œé€šå¸¸æƒ…å†µä¸‹ä¼šè¿”å›NULLï¼Œä½†æ˜¯ä½¿ç”¨äº†Answeræ”¹å˜äº†é»˜è®¤æœŸæœ›å€¼ã€‚
+        assertEquals(999, mock.size()); //size()æ²¡æœ‰é¢„è®¾ï¼Œé€šå¸¸æƒ…å†µä¸‹ä¼šè¿”å›0ï¼Œä½†æ˜¯ä½¿ç”¨äº†Answeræ”¹å˜äº†é»˜è®¤æœŸæœ›å€¼ã€‚
     }
 
     /**
-     * ²¶»ñ²ÎÊıÀ´½øÒ»²½¶ÏÑÔ¡£
+     * æ•è·å‚æ•°æ¥è¿›ä¸€æ­¥æ–­è¨€ã€‚
      */
     @Test
     public void test18() {
@@ -560,16 +560,16 @@ public class MockitoBaseDemo {
         String[] strings = new String[] { "a", "b" };
         Arrays.sort(strings, mock);
 
-        ArgumentCaptor<String> argument1 = ArgumentCaptor.forClass(String.class); //Captor±¾Éí´ú±íany£¬·ÇanyµÄCaptorÄ¿Ç°Ã»ÓĞ£¬¹Ù·½ËµÃ÷ºóĞø»á¿¼ÂÇÔö¼Ó£¬ÆäÊµÄ¿Ç°×Ô¼ºĞ´Matcher¿ÉÒÔ¸ã¶¨¡£
+        ArgumentCaptor<String> argument1 = ArgumentCaptor.forClass(String.class); //Captoræœ¬èº«ä»£è¡¨anyï¼Œéanyçš„Captorç›®å‰æ²¡æœ‰ï¼Œå®˜æ–¹è¯´æ˜åç»­ä¼šè€ƒè™‘å¢åŠ ï¼Œå…¶å®ç›®å‰è‡ªå·±å†™Matcherå¯ä»¥æå®šã€‚
         ArgumentCaptor<String> argument2 = ArgumentCaptor.forClass(String.class);
-        verify(mock).compare(argument1.capture(), argument2.capture()); //×¢Òâ£ºÕâ±¾Éí¾ÍÊÇÒ»¸öÑéÖ¤£¬Ö»ÊÇÔÚÑéÖ¤¹ı³ÌÖĞË³±ãÊÕ¼¯²ÎÊı¡£
+        verify(mock).compare(argument1.capture(), argument2.capture()); //æ³¨æ„ï¼šè¿™æœ¬èº«å°±æ˜¯ä¸€ä¸ªéªŒè¯ï¼Œåªæ˜¯åœ¨éªŒè¯è¿‡ç¨‹ä¸­é¡ºä¾¿æ”¶é›†å‚æ•°ã€‚
 
         assertEquals("b", argument1.getValue());
         assertEquals("a", argument2.getValue());
     }
 
     /**
-     * ²¶»ñ²ÎÊı¼¯À´½øÒ»²½¶ÏÑÔ¡£
+     * æ•è·å‚æ•°é›†æ¥è¿›ä¸€æ­¥æ–­è¨€ã€‚
      */
     @Test
     public void test19() {
@@ -583,7 +583,7 @@ public class MockitoBaseDemo {
         ArgumentCaptor<String> argument2 = ArgumentCaptor.forClass(String.class);
         verify(mock, times(3)).compare(argument1.capture(), argument2.capture());
 
-        List<String> argument1Values = argument1.getAllValues(); //ÕâÀïĞèÒªÌØ±ğ×¢Òâ£ºCaptorÖØ¸´Ê¹ÓÃ»áÀÛ¼ÆÊÕ¼¯£¬²¢ÇÒÃ»ÓĞÏñMockÄÇÑùµÄreset¶¯×÷£¬Ô¤¼ÆºóĞøÓ¦¸Ã»áÔö¼Óreset¹¦ÄÜ¡£
+        List<String> argument1Values = argument1.getAllValues(); //è¿™é‡Œéœ€è¦ç‰¹åˆ«æ³¨æ„ï¼šCaptoré‡å¤ä½¿ç”¨ä¼šç´¯è®¡æ”¶é›†ï¼Œå¹¶ä¸”æ²¡æœ‰åƒMocké‚£æ ·çš„resetåŠ¨ä½œï¼Œé¢„è®¡åç»­åº”è¯¥ä¼šå¢åŠ resetåŠŸèƒ½ã€‚
         assertEquals("b", argument1Values.get(0));
         assertEquals("c", argument1Values.get(1));
         assertEquals("d", argument1Values.get(2));
@@ -595,7 +595,7 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * ÖØÖÃmock¡£
+     * é‡ç½®mockã€‚
      */
     @Test
     @SuppressWarnings("unchecked")
@@ -607,26 +607,26 @@ public class MockitoBaseDemo {
         assertEquals(10, mock.size());
         verify(mock).add(1);
 
-        reset(mock); //ÖØÖÃmock£¬Çå³ıËùÓĞµÄ»¥¶¯ºÍÔ¤Éè¡£
+        reset(mock); //é‡ç½®mockï¼Œæ¸…é™¤æ‰€æœ‰çš„äº’åŠ¨å’Œé¢„è®¾ã€‚
         assertEquals(0, mock.size());
         verify(mock, never()).add(1);
     }
 
     /**
-     * spy¶ÔÏóµÄdoNothingµÄ×÷ÓÃ¾ÍºÍmock¶ÔÏóµÄthenCallRealMethodÀàËÆ£¬µ«¹¦ÄÜÕıºÃÏà·´¡£
-     * doNothing¡£
+     * spyå¯¹è±¡çš„doNothingçš„ä½œç”¨å°±å’Œmockå¯¹è±¡çš„thenCallRealMethodç±»ä¼¼ï¼Œä½†åŠŸèƒ½æ­£å¥½ç›¸åã€‚
+     * doNothingã€‚
      */
     @Test
     public void test21() {
         A spy = spy(new A());
 
-        doNothing().when(spy).doNotInvoke(); //mock²»ÓÃthenCallRealMethod»á¼Ó´ómockÄÑ¶È£¬µ«¶ÔÓÚspyÀ´Ëµ£¬²»ÓÃdoNothingÓĞÊ±¾ÍÎŞ·¨Íê³É²âÊÔÁË¡£
+        doNothing().when(spy).doNotInvoke(); //mockä¸ç”¨thenCallRealMethodä¼šåŠ å¤§mockéš¾åº¦ï¼Œä½†å¯¹äºspyæ¥è¯´ï¼Œä¸ç”¨doNothingæœ‰æ—¶å°±æ— æ³•å®Œæˆæµ‹è¯•äº†ã€‚
         spy.doNotInvoke();
         verify(spy).doNotInvoke();
     }
 
     /**
-     * returnsFirstArg¡£
+     * returnsFirstArgã€‚
      */
     @Test
     public void test22() {
@@ -643,18 +643,18 @@ public class MockitoBaseDemo {
     }
 
     /**
-     * setInternalState£¬¸Ğ¾õÓÃµÄµØ·½²»ÊÇºÜ¶à£¬¸Ä±äÄÚ²¿×´Ì¬Ò»°ã²»ÈçÖ±½Ómockµ÷ÓÃ½Ó¿ÚÀ´µÄÖ±½Ó¡£
+     * setInternalStateï¼Œæ„Ÿè§‰ç”¨çš„åœ°æ–¹ä¸æ˜¯å¾ˆå¤šï¼Œæ”¹å˜å†…éƒ¨çŠ¶æ€ä¸€èˆ¬ä¸å¦‚ç›´æ¥mockè°ƒç”¨æ¥å£æ¥çš„ç›´æ¥ã€‚
      */
     @Test
     public void test23() {
         B spy = spy(new B());
-        setInternalState(spy, "m_value", 999); //¹À¼Æµ÷ÓÃÁËjavaµÄ·´Éä½Ó¿Ú£¬´Ó½Ó¿Ú×¢ÊÍÉÏ¿´£¬ÕâÀïÖ»ÄÜÉèÖÃ×Ö¶Î£¬ÊÇ²»ÊÇË½ÓĞÎŞËùÎ½¡£
+        setInternalState(spy, "m_value", 999); //ä¼°è®¡è°ƒç”¨äº†javaçš„åå°„æ¥å£ï¼Œä»æ¥å£æ³¨é‡Šä¸Šçœ‹ï¼Œè¿™é‡Œåªèƒ½è®¾ç½®å­—æ®µï¼Œæ˜¯ä¸æ˜¯ç§æœ‰æ— æ‰€è°“ã€‚
         assertEquals(999, spy.getValue());
         verify(spy).getValue();
     }
 
     /**
-     * Ã÷È··ºĞÍ²ÎÊı£¬×¢Òâ£ºÕâÀï²»ÊÇÊÊÅä£¬ÊÊÅä»¹ÊÇĞèÒª×Ô¼ºĞ´Matcher¡£
+     * æ˜ç¡®æ³›å‹å‚æ•°ï¼Œæ³¨æ„ï¼šè¿™é‡Œä¸æ˜¯é€‚é…ï¼Œé€‚é…è¿˜æ˜¯éœ€è¦è‡ªå·±å†™Matcherã€‚
      */
     @Test
     @SuppressWarnings("unchecked")
@@ -667,9 +667,9 @@ public class MockitoBaseDemo {
         mock.process(Collections.unmodifiableCollection(Arrays.asList("g", "h")));
         mock.process(Collections.unmodifiableCollection(Arrays.asList("i", "j", "k")));
 
-        verify(mock, times(3)).process(any(List.class)); //²»ÍÆ¼ö£¬ÕâÑùĞ´ÎŞ·¨Ö¸¶¨²ÎÊıÀàĞÍ£¬»áÓĞ¸ö¾¯¸æ£¬µ«²»»á²úÉúÎÊÌâ£¬ÒòÎªjavaµÄ·½·¨Ç©Ãû²»¶Ô·ºĞÍ²ÎÊı½øĞĞÊ¶±ğ¡£
-        verify(mock, times(3)).process(Matchers.<List<String>> any()); //any·µ»ØÖµ±¾ÉíÊÇÓĞ²ÎÊı»¯µÄ£¬µ«ÓĞ³åÍ»µÄÇé¿öÏÂ¾ÍĞèÒªÃ÷È·Ö¸¶¨¡£
-        verify(mock, times(3)).process(anyListOf(String.class)); //Õâ¸öºÍÉÏÃæĞ§¹ûÒ»Ñù£¬µ«ÔÚÀàĞÍÉÏÓĞ¾ÖÏŞĞÔ¡£
+        verify(mock, times(3)).process(any(List.class)); //ä¸æ¨èï¼Œè¿™æ ·å†™æ— æ³•æŒ‡å®šå‚æ•°ç±»å‹ï¼Œä¼šæœ‰ä¸ªè­¦å‘Šï¼Œä½†ä¸ä¼šäº§ç”Ÿé—®é¢˜ï¼Œå› ä¸ºjavaçš„æ–¹æ³•ç­¾åä¸å¯¹æ³›å‹å‚æ•°è¿›è¡Œè¯†åˆ«ã€‚
+        verify(mock, times(3)).process(Matchers.<List<String>> any()); //anyè¿”å›å€¼æœ¬èº«æ˜¯æœ‰å‚æ•°åŒ–çš„ï¼Œä½†æœ‰å†²çªçš„æƒ…å†µä¸‹å°±éœ€è¦æ˜ç¡®æŒ‡å®šã€‚
+        verify(mock, times(3)).process(anyListOf(String.class)); //è¿™ä¸ªå’Œä¸Šé¢æ•ˆæœä¸€æ ·ï¼Œä½†åœ¨ç±»å‹ä¸Šæœ‰å±€é™æ€§ã€‚
 
         verify(mock, times(2)).process(any(Collection.class));
         verify(mock, times(2)).process(Matchers.<Collection<String>> any());

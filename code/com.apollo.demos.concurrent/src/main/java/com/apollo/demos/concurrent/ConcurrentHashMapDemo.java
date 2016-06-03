@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-3-12 ÏÂÎç03:03:57¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-3-12 ä¸‹åˆ03:03:57ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -28,7 +28,7 @@ class PerformanceCompare {
     }
 
     static void test(Map<Long, Long> map, int size) throws InterruptedException {
-        System.out.println("\n¿ªÊ¼²âÊÔ " + map.getClass().getName());
+        System.out.println("\nå¼€å§‹æµ‹è¯• " + map.getClass().getName());
 
         long sum = 0;
         for (int i = 0; i < size; i++) {
@@ -36,15 +36,15 @@ class PerformanceCompare {
             sum += test(map);
         }
 
-        System.out.println("½áÊø²âÊÔ " + map.getClass().getName() + " : Æ½¾ùÏûºÄ£º" + sum / size + " " + TimeUnit.MILLISECONDS);
+        System.out.println("ç»“æŸæµ‹è¯• " + map.getClass().getName() + " : å¹³å‡æ¶ˆè€—ï¼š" + sum / size + " " + TimeUnit.MILLISECONDS);
     }
 
     static long test(Map<Long, Long> map) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(200);
 
-        CountDownLatch readyGate = new CountDownLatch(200); //×¼±¸±ÕËø
-        CountDownLatch startGate = new CountDownLatch(1); //ÆğÊ¼±ÕËø
-        CountDownLatch endGate = new CountDownLatch(200); //ÖÕÖ¹±ÕËø
+        CountDownLatch readyGate = new CountDownLatch(200); //å‡†å¤‡é—­é”
+        CountDownLatch startGate = new CountDownLatch(1); //èµ·å§‹é—­é”
+        CountDownLatch endGate = new CountDownLatch(200); //ç»ˆæ­¢é—­é”
 
         for (int i = 0; i < 100; i++) {
             executor.execute(getReadTask(map, readyGate, startGate, endGate));
@@ -57,14 +57,14 @@ class PerformanceCompare {
             }
         }
 
-        readyGate.await(); //µÈ´ıËùÓĞÏß³Ì×¼±¸Íê±Ï
+        readyGate.await(); //ç­‰å¾…æ‰€æœ‰çº¿ç¨‹å‡†å¤‡å®Œæ¯•
 
         long startTime = System.currentTimeMillis();
-        startGate.countDown(); //ËùÓĞÏß³Ì¿ªÊ¼¼ÆÊı
+        startGate.countDown(); //æ‰€æœ‰çº¿ç¨‹å¼€å§‹è®¡æ•°
 
-        endGate.await(); //¼ÆÊıÏß³ÌÈ«²¿¼ÆÊıÍê±Ï
+        endGate.await(); //è®¡æ•°çº¿ç¨‹å…¨éƒ¨è®¡æ•°å®Œæ¯•
         long elapsed = System.currentTimeMillis() - startTime;
-        System.out.println(map.getClass().getName() + " : ¹²¼ÆÏûºÄ£º" + elapsed + " " + TimeUnit.MILLISECONDS + " Map.Size = " + map.size());
+        System.out.println(map.getClass().getName() + " : å…±è®¡æ¶ˆè€—ï¼š" + elapsed + " " + TimeUnit.MILLISECONDS + " Map.Size = " + map.size());
 
         executor.shutdown();
         executor.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
@@ -175,7 +175,7 @@ class PerformanceCompare {
     }
 
     static long getRandom() {
-        return (long) (Math.random() * Long.MAX_VALUE); //Ëæ»úÊı·¶Î§¿ÉÒÔµ÷ÕûMAP·Ö²¼Çø¼äµÄ´óĞ¡
+        return (long) (Math.random() * Long.MAX_VALUE); //éšæœºæ•°èŒƒå›´å¯ä»¥è°ƒæ•´MAPåˆ†å¸ƒåŒºé—´çš„å¤§å°
     }
 
 }

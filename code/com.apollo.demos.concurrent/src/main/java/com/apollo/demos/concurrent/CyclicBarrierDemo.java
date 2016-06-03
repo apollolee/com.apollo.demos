@@ -1,5 +1,5 @@
 /*
- * ´Ë´úÂë´´½¨ÓÚ 2013-4-17 ÏÂÎç04:36:08¡£
+ * æ­¤ä»£ç åˆ›å»ºäº 2013-4-17 ä¸‹åˆ04:36:08ã€‚
  */
 package com.apollo.demos.concurrent;
 
@@ -17,7 +17,7 @@ public class CyclicBarrierDemo {
              */
             @Override
             public void run() {
-                System.out.println("Õ¤À¸ÒÑ´ò¿ª£¡");
+                System.out.println("æ …æ å·²æ‰“å¼€ï¼");
             }
 
         });
@@ -30,7 +30,7 @@ public class CyclicBarrierDemo {
                  */
                 @Override
                 public void run() {
-                    System.out.println(Thread.currentThread().getName() + "ÒÑÆô¶¯£¡");
+                    System.out.println(Thread.currentThread().getName() + "å·²å¯åŠ¨ï¼");
 
                     try {
                         Thread.sleep(3000);
@@ -39,7 +39,7 @@ public class CyclicBarrierDemo {
                         ex.printStackTrace();
                     }
 
-                    System.out.println(Thread.currentThread().getName() + "ÒÑµ½µ×Õ¤À¸£¡");
+                    System.out.println(Thread.currentThread().getName() + "å·²åˆ°åº•æ …æ ï¼");
 
                     try {
                         barrier.await();
