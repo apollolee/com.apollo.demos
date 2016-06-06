@@ -18,7 +18,7 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/app/adapter/com.apollo.demos.osgi.app.adapter.feature</url>
 
   <properties>
-    <deploy.output>../../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.app.adapter.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/app/adapter</deploy.home>
   </properties>
 

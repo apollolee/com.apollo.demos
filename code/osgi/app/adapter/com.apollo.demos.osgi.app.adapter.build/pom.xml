@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom</groupId>
+    <artifactId>build</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi.app.adapter</groupId>
+  <artifactId>build</artifactId>
+  <version>${version}</version>
+  <packaging>pom</packaging>
+
+  <name>com.apollo.demos.osgi.app.adapter.build</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/app/adapter/com.apollo.demos.osgi.app.adapter.build</url>
+
+  <modules>
+    <module>../com.apollo.demos.osgi.app.adapter.api</module>
+    <module>../com.apollo.demos.osgi.app.adapter.core</module>
+    <module>../com.apollo.demos.osgi.app.adapter.ptn.api</module>
+    <module>../com.apollo.demos.osgi.app.adapter.ptn.impl</module>
+    <module>../com.apollo.demos.osgi.app.adapter.sender</module>
+    <module>../com.apollo.demos.osgi.app.adapter.feature</module>
+  </modules>
+</project>
