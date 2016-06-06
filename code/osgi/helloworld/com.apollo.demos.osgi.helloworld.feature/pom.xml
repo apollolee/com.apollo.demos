@@ -18,14 +18,14 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/helloworld/com.apollo.demos.osgi.helloworld.feature</url>
 
   <properties>
-    <deploy.output>../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.helloworld.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/helloworld</deploy.home>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.apollo.demos.osgi</groupId>
-      <artifactId>helloworld</artifactId>
+      <groupId>com.apollo.demos.osgi.helloworld</groupId>
+      <artifactId>impl</artifactId>
       <version>${version}</version>
     </dependency>
   </dependencies>

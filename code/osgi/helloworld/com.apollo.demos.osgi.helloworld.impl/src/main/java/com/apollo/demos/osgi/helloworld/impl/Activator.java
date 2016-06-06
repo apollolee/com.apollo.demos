@@ -1,4 +1,4 @@
-package com.apollo.demos.osgi.helloworld;
+package com.apollo.demos.osgi.helloworld.impl;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
@@ -23,7 +23,7 @@ public class Activator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     public void start(BundleContext bundleContext) throws Exception {
-        s_logger.info("Start com.apollo.demos.osgi.helloworld.");
+        s_logger.info("Start com.apollo.demos.osgi.helloworld.impl.");
 
         Activator.context = bundleContext;
 
@@ -37,7 +37,7 @@ public class Activator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     public void stop(BundleContext bundleContext) throws Exception {
-        s_logger.info("Stop com.apollo.demos.osgi.helloworld.");
+        s_logger.info("Stop com.apollo.demos.osgi.helloworld.impl.");
 
         Activator.context = null;
     }
