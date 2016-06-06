@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>com.apollo.demos.osgi.karaf.shell</groupId>
-  <artifactId>apollo-demos-osgi-karaf-shell</artifactId>
+  <artifactId>apollo-demos-karaf-shell</artifactId>
   <version>${version}</version>
   <packaging>feature</packaging>
 
