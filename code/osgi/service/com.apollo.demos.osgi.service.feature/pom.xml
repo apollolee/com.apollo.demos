@@ -18,7 +18,7 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/service/com.apollo.demos.osgi.service.feature</url>
 
   <properties>
-    <deploy.output>../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.service.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/service</deploy.home>
   </properties>
 

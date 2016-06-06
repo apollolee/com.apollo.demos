@@ -25,7 +25,7 @@
     <bundle.import.package>
       *
     </bundle.import.package>
-    <deploy.output>../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.service.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/service</deploy.home>
   </properties>
 
