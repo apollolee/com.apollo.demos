@@ -9,23 +9,23 @@
     <version>1.0.0</version>
   </parent>
 
-  <groupId>com.apollo.demos.karaf</groupId>
-  <artifactId>shell</artifactId>
+  <groupId>com.apollo.demos.osgi.karaf.shell</groupId>
+  <artifactId>impl</artifactId>
   <version>${version}</version>
   <packaging>bundle</packaging>
 
-  <name>com.apollo.demos.karaf.shell</name>
-  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/karaf/shell/com.apollo.demos.karaf.shell</url>
+  <name>com.apollo.demos.osgi.karaf.shell.impl</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/karaf/shell/com.apollo.demos.osgi.karaf.shell.impl</url>
 
   <properties>
-    <bundle.activator>com.apollo.demos.karaf.shell.Activator</bundle.activator>
+    <bundle.activator>com.apollo.demos.osgi.karaf.shell.impl.Activator</bundle.activator>
     <bundle.export.package>
     </bundle.export.package>
     <bundle.import.package>
       *
     </bundle.import.package>
-    <deploy.output>../../../build/output</deploy.output>
-    <deploy.home>com/apollo/demos/karaf</deploy.home>
+    <deploy.output>../com.apollo.demos.osgi.karaf.shell.build/output</deploy.output>
+    <deploy.home>com/apollo/demos/osgi/karaf/shell</deploy.home>
   </properties>
 
   <dependencies>

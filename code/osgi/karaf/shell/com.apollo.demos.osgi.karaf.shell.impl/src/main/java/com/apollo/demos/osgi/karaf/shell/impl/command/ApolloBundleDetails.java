@@ -1,7 +1,7 @@
 /*
  * 此代码创建于 2016年1月4日 上午10:07:23。
  */
-package com.apollo.demos.karaf.shell.impl.command;
+package com.apollo.demos.osgi.karaf.shell.impl.command;
 
 import java.util.Set;
 

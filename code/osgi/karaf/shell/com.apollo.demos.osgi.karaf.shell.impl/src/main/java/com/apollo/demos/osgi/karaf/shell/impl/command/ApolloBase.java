@@ -1,7 +1,7 @@
 /*
  * 此代码创建于 2016年1月4日 上午10:07:23。
  */
-package com.apollo.demos.karaf.shell.impl.command;
+package com.apollo.demos.osgi.karaf.shell.impl.command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apollo.demos.karaf.shell.Activator;
+import com.apollo.demos.osgi.karaf.shell.impl.Activator;
 
 public abstract class ApolloBase extends OsgiCommandSupport {
 

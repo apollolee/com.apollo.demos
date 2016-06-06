@@ -1,7 +1,7 @@
 /*
  * 此代码创建于 2016年1月4日 下午1:28:12。
  */
-package com.apollo.demos.karaf.shell.impl.completer;
+package com.apollo.demos.osgi.karaf.shell.impl.completer;
 
 import java.util.List;
 

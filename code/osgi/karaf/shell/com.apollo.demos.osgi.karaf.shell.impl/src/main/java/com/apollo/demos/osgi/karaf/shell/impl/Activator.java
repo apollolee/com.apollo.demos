@@ -1,7 +1,7 @@
 /*
- * 此代码创建于 2016年1月4日 下午1:55:06。
+ * 此代码创建于 2016年6月6日 下午2:48:11。
  */
-package com.apollo.demos.karaf.shell;
+package com.apollo.demos.osgi.karaf.shell.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -22,7 +22,7 @@ public class Activator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     public void start(BundleContext bundleContext) throws Exception {
-        s_logger.info("Start com.apollo.demos.karaf.shell.");
+        s_logger.info("Start com.apollo.demos.osgi.karaf.shell.impl.");
 
         Activator.context = bundleContext;
     }
@@ -31,7 +31,7 @@ public class Activator implements BundleActivator {
      * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     public void stop(BundleContext bundleContext) throws Exception {
-        s_logger.info("Stop com.apollo.demos.karaf.shell.");
+        s_logger.info("Stop com.apollo.demos.osgi.karaf.shell.impl.");
 
         Activator.context = null;
     }
