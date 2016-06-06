@@ -18,7 +18,7 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/app/message/com.apollo.demos.osgi.app.message.feature</url>
 
   <properties>
-    <deploy.output>../../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.app.message.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/app/message</deploy.home>
   </properties>
 

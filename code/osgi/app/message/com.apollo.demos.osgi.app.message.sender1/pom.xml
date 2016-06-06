@@ -24,7 +24,7 @@
     <bundle.import.package>
       *
     </bundle.import.package>
-    <deploy.output>../../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.app.message.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/app/message</deploy.home>
   </properties>
 

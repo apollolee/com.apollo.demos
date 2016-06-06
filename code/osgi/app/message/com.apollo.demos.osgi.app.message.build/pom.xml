@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom</groupId>
+    <artifactId>build</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi.app.message</groupId>
+  <artifactId>build</artifactId>
+  <version>${version}</version>
+  <packaging>pom</packaging>
+
+  <name>com.apollo.demos.osgi.app.message.build</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/app/message/com.apollo.demos.osgi.app.message.build</url>
+
+  <modules>
+    <module>../com.apollo.demos.osgi.app.message.api</module>
+    <module>../com.apollo.demos.osgi.app.message.core</module>
+    <module>../com.apollo.demos.osgi.app.message.receiver1</module>
+    <module>../com.apollo.demos.osgi.app.message.receiver2</module>
+    <module>../com.apollo.demos.osgi.app.message.sender1</module>
+    <module>../com.apollo.demos.osgi.app.message.sender2</module>
+    <module>../com.apollo.demos.osgi.app.message.feature</module>
+  </modules>
+</project>
