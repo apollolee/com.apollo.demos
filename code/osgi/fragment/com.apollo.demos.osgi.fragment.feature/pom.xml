@@ -18,7 +18,7 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/fragment/com.apollo.demos.osgi.fragment.feature</url>
 
   <properties>
-    <deploy.output>../../../build/output</deploy.output>
+    <deploy.output>../com.apollo.demos.osgi.fragment.build/output</deploy.output>
     <deploy.home>com/apollo/demos/osgi/fragment</deploy.home>
   </properties>
 
