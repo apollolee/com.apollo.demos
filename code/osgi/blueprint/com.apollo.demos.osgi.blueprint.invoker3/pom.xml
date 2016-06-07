@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom.osgi</groupId>
+    <artifactId>bundle</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi.blueprint</groupId>
+  <artifactId>invoker3</artifactId>
+  <version>${version}</version>
+  <packaging>bundle</packaging>
+
+  <name>com.apollo.demos.osgi.blueprint.invoker3</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/blueprint/com.apollo.demos.osgi.blueprint.invoker3</url>
+
+  <properties>
+    <bundle.activator></bundle.activator>
+    <bundle.export.package>
+    </bundle.export.package>
+    <bundle.import.package>
+      *
+    </bundle.import.package>
+    <bundle.blueprint.annotation>true</bundle.blueprint.annotation>
+    <deploy.output>../com.apollo.demos.osgi.blueprint.build/output</deploy.output>
+    <deploy.home>com/apollo/demos/osgi/blueprint</deploy.home>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.apollo.demos.osgi.blueprint</groupId>
+      <artifactId>api</artifactId>
+      <version>${version}</version>
+    </dependency>
+  </dependencies>
+</project>

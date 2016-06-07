@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
-  <reference id="SiriService" interface="com.apollo.demos.osgi.blueprint.service.api.ISiri" timeout="0">
-    <reference-listener bind-method="bindSiri" unbind-method="unbindSiri" ref="AppleWatch" />
-  </reference>
-
-  <bean id="AppleWatch" class="com.apollo.demos.osgi.blueprint.service.invoker.impl.AppleWatch" />
-</blueprint>

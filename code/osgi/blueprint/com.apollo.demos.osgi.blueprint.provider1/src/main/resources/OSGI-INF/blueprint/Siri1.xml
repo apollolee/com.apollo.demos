@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+  <service id="Siri1" ref="Siri1Impl" interface="com.apollo.demos.osgi.blueprint.api.ISiri1" />
+  <bean id="Siri1Impl" class="com.apollo.demos.osgi.blueprint.provider1.impl.Siri1Impl" />
+</blueprint>
