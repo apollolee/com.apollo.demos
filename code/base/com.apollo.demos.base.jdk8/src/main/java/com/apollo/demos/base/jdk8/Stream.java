@@ -183,6 +183,9 @@ public class Stream {
         System.out.println(asList(data).subList(0, 10).stream().map(String::valueOf).collect(joining(",", "[", "]")));
         parallelPrefix(data, Integer::sum); //parallelPrefix会修改原数组，产生的结果通过data体现。
         System.out.println(asList(data).subList(0, 10).stream().map(String::valueOf).collect(joining(",", "[", "]")));
+
+        //peek可以用于记录日志和添加调试断点。
+        System.out.println("Count = " + numbers.stream().filter(i -> i % 2 == 0).peek(i -> System.out.println(i)).count());
     }
 
     private static boolean isOdd(Integer i) {
