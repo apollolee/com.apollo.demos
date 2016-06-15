@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>com.apollo.demos.maven</groupId>
-  <artifactId>plugin</artifactId>
+  <artifactId>apollo-maven-plugin</artifactId><!-- 注意：artifactId会显示到maven构建过程中。另外，xxx-maven-plugin是官方推荐的名字，maven-xxx-plugin对maven是商标侵权（Maven官网已发声明，尽管很多插件都是这么起名的）。 -->
   <version>${version}</version>
   <packaging>maven-plugin</packaging>
 

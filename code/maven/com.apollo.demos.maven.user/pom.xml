@@ -20,7 +20,7 @@
     <plugins>
       <plugin>
         <groupId>com.apollo.demos.maven</groupId>
-        <artifactId>plugin</artifactId>
+        <artifactId>apollo-maven-plugin</artifactId>
         <version>${version}</version>
         <executions>
           <execution>
