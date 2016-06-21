@@ -53,7 +53,7 @@
             <id>default-generateFunction</id>
             <phase>compile</phase>
             <goals>
-              <goal>generateFunction</goal>
+              <goal>generateFunction</goal><!-- 注意：每次运行前需要先mvn clean一下，否则会因为用的class是上次编译的结果而报duplicate method错误。 -->
             </goals>
           </execution>
         </executions>
