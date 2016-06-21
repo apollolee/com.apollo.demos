@@ -64,7 +64,7 @@ public class Lambda {
         Fi1.hello(() -> "Nina");
 
         //返回Optional对象比返回null要好，配合Lambda表达式能大量减少代码中if (xxx == null)的出现。
-        Optional<String> o = of("Nina");
+        Optional<String> o = of("Nina"); //注意：of参数不允许为null，如果有可能为null需要使用ofNullable。
         o.ifPresent(n -> System.out.println("Hello " + n + "."));
         o = empty();
         System.out.println("Hello " + o.orElse("world."));

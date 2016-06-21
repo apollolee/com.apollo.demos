@@ -6,7 +6,7 @@ package com.apollo.demos.maven.plugin;
 import static java.io.File.separatorChar;
 import static java.util.Arrays.asList;
 import static java.util.Optional.empty;
-import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 import java.io.File;
 import java.util.Collection;
@@ -50,7 +50,7 @@ public class BaseMojo extends AbstractMojo {
 
         Optional<List<String>> classpaths = empty();
         try {
-            classpaths = of(mp.getCompileClasspathElements());
+            classpaths = ofNullable(mp.getCompileClasspathElements());
 
         } catch (DependencyResolutionRequiredException ex) {
             log.error(ex);
@@ -68,7 +68,7 @@ public class BaseMojo extends AbstractMojo {
         ClassPool pool = ClassPool.getDefault();
         Optional<ClassPath> ocp = empty();
         try {
-            ocp = of(pool.insertClassPath(classpath));
+            ocp = ofNullable(pool.insertClassPath(classpath));
 
         } catch (NotFoundException ex) {
             log.error(ex);
