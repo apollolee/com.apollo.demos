@@ -19,6 +19,7 @@
 
   <modules>
     <module>../com.apollo.demos.osgi.app.adapter.api</module>
+    <module>../com.apollo.demos.osgi.app.adapter.plugin</module>
     <module>../com.apollo.demos.osgi.app.adapter.core</module>
     <module>../com.apollo.demos.osgi.app.adapter.ptn.api</module>
     <module>../com.apollo.demos.osgi.app.adapter.ptn.impl</module>
