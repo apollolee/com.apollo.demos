@@ -25,7 +25,7 @@
         <executions>
           <execution>
             <id>default-helloworld</id>
-            <phase>compile</phase>
+            <phase>process-sources</phase>
             <goals>
               <goal>helloworld</goal>
             </goals>
@@ -33,7 +33,6 @@
 
           <execution>
             <id>default-base</id>
-            <phase>compile</phase>
             <goals>
               <goal>base</goal>
             </goals>
