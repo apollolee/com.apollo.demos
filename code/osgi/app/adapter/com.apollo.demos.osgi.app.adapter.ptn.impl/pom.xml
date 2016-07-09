@@ -34,12 +34,6 @@
       <artifactId>api</artifactId>
       <version>${version}</version>
     </dependency>
-
-    <dependency><!-- 由于adapter-maven-plugin没有找到依赖逐层解析的方法，目前这个依赖必须的。 -->
-      <groupId>com.apollo.demos.osgi.app.adapter</groupId>
-      <artifactId>api</artifactId>
-      <version>${version}</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -51,12 +45,18 @@
         <executions>
           <execution>
             <id>default-generateFunction</id>
-            <phase>compile</phase>
             <goals>
-              <goal>generateFunction</goal><!-- 注意：每次运行前需要先mvn clean一下，否则会因为用的class是上次编译的结果而报duplicate method错误。 -->
+              <goal>generateFunction</goal>
             </goals>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.apollo.demos.osgi.app.adapter</groupId>
+            <artifactId>api</artifactId>
+            <version>${version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
