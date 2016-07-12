@@ -123,6 +123,17 @@ public class Javassist {
             A1 a = (A1) f.getAnnotation(A1.class);
             System.out.println(f.getName() + ":" + a.value());
         }
+
+        //Javassist不支持jdk 1.5以上的语法。
+        cc = pool.makeClass("com.apollo.demos.base.javassist.Javassist$C6");
+        //cm = CtNewMethod.make("public void a() { java.util.Objects.hash(\"123\"); }", cc); //...等效于[]，虽然javac支持，但Javassist并不支持，这也可以证明Javassist并没有调用javac。
+        cm = CtNewMethod.make("public void a() { java.util.Objects.hash(new Object[] { \"123\" }); }", cc);
+        cc.addMethod(cm);
+        //cm = CtNewMethod.make("public void b() { java.util.Objects.equals(1, 2); }", cc); //很遗憾，自动装箱拆箱也不支持了。
+        cm = CtNewMethod.make("public void b() { java.util.Objects.equals(Integer.valueOf(1), Integer.valueOf(2)); }", cc);
+        cc.addMethod(cm);
+        //cm = CtNewMethod.make("public <T> String c(T a) { a.toString(); }", cc); //很遗憾，也不支持模板。
+        cc.toClass();
     }
 
     public static class C1 {
