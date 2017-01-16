@@ -288,9 +288,9 @@ object Helloworld extends App {
     }
     (for (row <- 1 to 9) yield makeRow(row)).mkString("\n")
   }
-  println(multiTableX) //本地函数灵活使用可以减少命名空间的污染。
+  println(multiTableX) //本地函数灵活使用可以减少命名空间的污染，同时也是一种信息隐藏手段。
 
-  val increase1 = (x: Int) => x + 1 //匿名函数可以赋值给变量，进行传递。以Java匿名内部类来看待这个东西会容易一些，这个东西在JDK8中有类比，但语法上更为简洁。
+  val increase1 = (x: Int) => x + 1 //匿名函数可以赋值给变量，进行传递。以Java匿名内部类来看待这个东西会容易一些，这个东西在JDK8中有类比，但这里语法上更为简洁。
   println(increase1(5))
   println(increase1(10))
 
@@ -303,15 +303,16 @@ object Helloworld extends App {
 
   val someNumbers = List(1, 2, 3, 4, 5)
   println(someNumbers.filter(_ > 3)) //这里编译器可以推断_类型，所以能省的都省了，看上去非常已经简化到不能再简化了。
-  someNumbers.foreach(println _) //这里_表示整个参数列表的占位符。
+  someNumbers.foreach(println _) //这里_表示整个参数列表的占位符。其实连_都可以省了，这个前面演示过。
 
   def sum(a: Int, b: Int, c: Int) = a + b + c
   val s1 = sum _ //整个参数列表占位符看得更明确一些。
   println(s1(1, 2, 3))
-  val s2 = sum(1, _: Int, 3) //偏函数。
+  val s2 = sum(1, _: Int, 3) //偏函数，即函数的部分调用。
   println(s2(2))
 
-  println(s1) //把一个函数对象打印出来会得到<functionX>
+  //Function和元组类似定义了22个，而且都是泛型的。Scala泛型的强大使得Scala基本不需要像JD8中那样为特定功能专门定制函数接口。
+  println(s1) //把一个函数对象打印出来会得到<function3>，这是特质scala.Function3.toString的输出。
 
   var more = 1
   val increase3 = (x: Int) => x + more
@@ -337,7 +338,7 @@ object Helloworld extends App {
   def curriedSum(x: Int)(y: Int) = x + y
   println(plainOldSum(1, 2))
   println(curriedSum(1)(2))
-  val onePlus1 = plainOldSum(1, _: Int) //部分实施。
+  val onePlus1 = plainOldSum(1, _: Int) //部分实施（偏函数）。
   val onePlus2 = curriedSum(1)_ //柯里化，抛开底层差异，就语法看，柯里化在这里比部分实施更简化。但柯里化和部分实施各有应用场景，差异还是很大的。
   println(onePlus1(5))
   println(onePlus2(5))
