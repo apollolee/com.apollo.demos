@@ -91,7 +91,7 @@ object TypeParameterization extends App {
   val people = List(new Person("Larry", "Wall"), new Person("Anders", "Hejlsberg"), new Person("Guido", "van Rossum"), new Person("Alan", "Kay"), new Person("Yukihiro", "Matsumoto"))
   val sortedPeople = orderedMergeSort(people)
   println(sortedPeople)
-  //println(orderedMergeSort(List(1, 2, 3))) //尽管这个例子很好的诠释了上界的用法，但对List的排序并不通用，这里Int并不是Ordered[Int]的子类。
+  //println(orderedMergeSort(List(1, 2, 3))) //尽管这个例子很好的诠释了上界的用法，但对List的排序并不通用，这里Int并不是Ordered[Int]的子类，在Implicit.Scala中会有更通用的做法。
 }
 
 trait Queue[T] {

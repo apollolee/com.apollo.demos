@@ -176,7 +176,7 @@ object PatternMatching extends App {
   println(second2.isDefinedAt(List())) //所谓的偏函数是相对于完整函数而言，偏函数对部分输入是不考虑输出的，即非法输入永远不会发生，这种函数其实非常多。
 
   new PartialFunction[List[Int], Int] { //second2等同于定义了下面的代码。
-    def apply(xs: List[Int]) = xs match {
+    def apply(xs: List[Int]) = xs match { //匹配不全。
       case x :: y :: _ => y
     }
     def isDefinedAt(xs: List[Int]) = xs match {
