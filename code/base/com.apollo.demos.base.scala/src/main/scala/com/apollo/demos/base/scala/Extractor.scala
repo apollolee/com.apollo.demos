@@ -1,6 +1,6 @@
 package com.apollo.demos.base.scala
 
-object Extractors extends App {
+object Extractor extends App {
   EMail.check("John@epfl.ch")
   EMail.check("John In EPFL")
 
