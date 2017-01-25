@@ -153,54 +153,41 @@ class ThreadPoolExecutorX extends ThreadPoolExecutor {
 
 class ThreadPoolMonitor {
 
-    static class T3 {
-
-        public T3(Thread thread, Runnable task, TimerTask timerTask) {
-            this.thread = thread;
-            this.task = task;
-            this.timerTask = timerTask;
-            startTime = System.currentTimeMillis();
-        }
-
-        Thread thread;
-
-        Runnable task;
-
-        TimerTask timerTask;
-
-        long startTime;
-
-    }
-
     static class TP {
 
         public TP(ThreadPoolExecutor tp) {
             this.tp = tp;
-            t3s = new ConcurrentHashMap<>();
+            tms = new ConcurrentHashMap<>();
         }
 
         ThreadPoolExecutor tp;
 
-        ConcurrentHashMap<Integer, T3> t3s;
+        ConcurrentHashMap<Integer, TimeMonitor> tms;
 
     }
 
     static class TimeMonitor extends TimerTask {
 
-        T3 m_t3;
+        Thread m_thread;
+
+        Runnable m_task;
+
+        long m_startTime;
 
         public TimeMonitor(Thread thread, Runnable task) {
-            m_t3 = new T3(thread, task, this);
+            m_thread = thread;
+            m_task = task;
+            m_startTime = System.currentTimeMillis();
         }
 
         @Override
         public void run() {
-            System.out.println("Task has elapsed 5 sec.[" + m_t3.thread.getName() + "]\n" + getStack());
+            System.out.println("Task has elapsed 5 sec.[" + m_thread.getName() + "]\n" + getStack());
         }
 
         String getStack() {
             StringBuilder sb = new StringBuilder();
-            for (StackTraceElement st : m_t3.thread.getStackTrace()) {
+            for (StackTraceElement st : m_thread.getStackTrace()) {
                 sb.append("  ").append(st).append("\n");
             }
             return sb.toString();
@@ -218,14 +205,14 @@ class ThreadPoolMonitor {
 
     public static void startTask(ThreadPoolExecutor tp, Thread thread, Runnable task) {
         TimeMonitor tm = new TimeMonitor(thread, task);
-        s_tps.get(id(tp)).t3s.put(id(task), tm.m_t3);
+        s_tps.get(id(tp)).tms.put(id(task), tm);
         s_timer.schedule(tm, 5000);
     }
 
     public static void endTask(ThreadPoolExecutor tp, Runnable task) {
-        T3 t3 = s_tps.get(id(tp)).t3s.remove(id(task));
-        System.out.println("Task is finished. Elapsed " + (System.currentTimeMillis() - t3.startTime) / 1000 + " sec.[" + t3.thread.getName() + "]");
-        t3.timerTask.cancel();
+        TimeMonitor tm = s_tps.get(id(tp)).tms.remove(id(task));
+        System.out.println("Task is finished. Elapsed " + (System.currentTimeMillis() - tm.m_startTime) / 1000 + " sec.[" + tm.m_thread.getName() + "]");
+        tm.cancel();
     }
 
     public static int id(Object obj) {
