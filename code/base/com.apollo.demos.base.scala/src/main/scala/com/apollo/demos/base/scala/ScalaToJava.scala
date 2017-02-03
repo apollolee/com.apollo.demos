@@ -17,4 +17,9 @@ object ScalaToJava extends App {
   println(id(is))
   varArgs(is: _*) //不是源数组了。
   varArgs(is) //一样也不是源数组了，注意：Any*无法从通过内层数组来改变外层数组，这和Java的...是不一样的。
+
+  def log4sX(msg: String, arguments: Any*) { log4s(msg, arguments) } //Any*直接传递时，不加_*展开。
+  log4s("Test.", List("x", "y", "z"): _*) //透传Any*时可以不加_*，效果和加_*时一样。
+  def varArgsX(arguments: Any*) { println(id(arguments)); varArgs(arguments) } //验证透传是否是同一对象。
+  varArgsX(is: _*) //依然还是不同对象。
 }
