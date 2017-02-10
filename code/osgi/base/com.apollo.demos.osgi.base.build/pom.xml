@@ -18,6 +18,10 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/base/com.apollo.demos.osgi.base.build</url>
 
   <modules>
+    <module>../com.apollo.demos.osgi.base.api</module>
+    <module>../com.apollo.demos.osgi.base.api.scala</module>
+    <module>../com.apollo.demos.osgi.base.impl</module>
+    <module>../com.apollo.demos.osgi.base.tester</module>
     <module>../com.apollo.demos.osgi.base.feature</module>
   </modules>
 </project>

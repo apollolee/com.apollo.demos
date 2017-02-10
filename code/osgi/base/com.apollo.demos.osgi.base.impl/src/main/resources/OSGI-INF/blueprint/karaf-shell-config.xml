@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+  <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+    <command>
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolList" />
+    </command>
+
+    <command>
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPools" />
+    </command>
+
+    <command>
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolTrace" />
+      <completers>
+        <ref component-id="threadPoolIdCompleter" />
+      </completers>
+    </command>
+
+    <command>
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolLogTrace" />
+      <completers>
+        <ref component-id="onOrOffCompleter" />
+      </completers>
+    </command>
+
+    <!--command>
+      <action class="com.zte.sdn.nesc.sm.impl.cnode.shell.command.NodeList" />
+      <completers>
+        <ref component-id="neIdCompleter" />
+      </completers>
+      <optional-completers>
+        <entry key="-t" value-ref="nodeCompleter"/>
+      </optional-completers>
+    </command>
+
+    <command>
+      <action class="com.zte.sdn.nesc.sm.impl.cnode.shell.command.NodeInfo" />
+      <completers>
+        <ref component-id="neIdCompleter" />
+        <ref component-id="nodeIdCompleter" />
+        <null />
+      </completers>
+    </command>
+
+    <command>
+      <action class="com.zte.sdn.nesc.sm.impl.cnode.shell.command.NodeTree" />
+      <completers>
+        <ref component-id="neIdCompleter" />
+        <ref component-id="nodeIdCompleter" />
+        <null />
+      </completers>
+    </command-->
+  </command-bundle>
+
+  <bean id="threadPoolIdCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.ThreadPoolId" />
+  <bean id="onOrOffCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.OnOrOff" />
+</blueprint>

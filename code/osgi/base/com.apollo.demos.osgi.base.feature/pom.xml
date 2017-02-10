@@ -58,5 +58,29 @@
       <artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
       <version>1.0.1</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.apollo.demos.osgi.base</groupId>
+      <artifactId>api</artifactId>
+      <version>${version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.apollo.demos.osgi.base.api</groupId>
+      <artifactId>scala</artifactId>
+      <version>${version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.apollo.demos.osgi.base</groupId>
+      <artifactId>impl</artifactId>
+      <version>${version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.apollo.demos.osgi.base</groupId>
+      <artifactId>tester</artifactId>
+      <version>${version}</version>
+    </dependency>
   </dependencies>
 </project>
