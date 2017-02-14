@@ -138,11 +138,13 @@ object Base extends App {
 
   println(ChecksumAccumulator.calculate("Hello"))
 
-  //String的三引号特殊语法，可以避免使用转意符。
+  //String的三引号特殊语法，可以避免使用转义符。
   println("""Hello,
              new String !""")
   println("""|Hello,
              |new String !""".stripMargin)
+  //注意："""虽然让转义变得更自然，但这里引入了平台差异性的问题，比如\n在windows平台下编译时被转义为\r\n，而在Unix下是\n。
+  //特别注意："""在scala编译时就进行平台识别转换控制字符的动作，而不是运行时。所以这个"""的用法需要特别注意，如果编译平台和运行平台不一致很容易引起问题。
 
   val symbol = 'abc //'打头的字面量会被映射为scala.Symbol，用于动态语言中指定标识符。
   println(symbol.getClass)
