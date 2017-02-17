@@ -9,13 +9,20 @@ import java.util.concurrent.Future;
 
 public interface IExecutors {
 
-    Future<?> submit(Runnable task);
+    Callable<Object> namedCallable(String name, Runnable task);
 
-    <T> Future<T> submit(Callable<T> task);
+    <T> Callable<T> namedCallable(String name, Runnable task, T result);
 
-    <T> Future<T> submit(Runnable task, T result);
+    <T> Callable<T> named(String name, Callable<T> task);
+
+    Future<?> submit(String name, Runnable task);
+
+    <T> Future<T> submit(String name, Runnable task, T result);
+
+    <T> Future<T> submit(String name, Callable<T> task);
 
     ExecutorService newThreadPool(String name, int count);
 
     ExecutorService newFixedThreadPool(String name, int count);
+
 }

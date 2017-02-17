@@ -1,13 +1,18 @@
 package com.apollo.demos.osgi.base.impl.thread
 
+import java.lang.System.getSecurityManager
+import java.lang.Thread.NORM_PRIORITY
+import java.lang.Thread.currentThread
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.RejectedExecutionHandler
 import java.util.concurrent.SynchronousQueue
+import java.util.concurrent.ThreadFactory
 import java.util.concurrent.{ ThreadPoolExecutor => ThreadPoolExecutor4J }
 import java.util.concurrent.ThreadPoolExecutor.AbortPolicy
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.SECONDS
+import java.util.concurrent.atomic.AtomicInteger
 
 import com.apollo.demos.osgi.base.impl.Utilities.{ currentState => cs }
 import com.apollo.demos.osgi.base.impl.Utilities.{ id => uid }
@@ -48,8 +53,23 @@ class ThreadPoolExecutor(val name: String,
                          unit: TimeUnit,
                          workQueue: BlockingQueue[Runnable],
                          handler: RejectedExecutionHandler)
-    extends ThreadPoolExecutor4J(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, NamedThreadFactory(name), handler) {
+    extends ThreadPoolExecutor4J(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, handler) {
+  class NamedThreadFactory extends ThreadFactory {
+    private[this] val group: ThreadGroup = Option(getSecurityManager).map(_.getThreadGroup).getOrElse(currentThread.getThreadGroup)
+    private[this] val threadNumber = new AtomicInteger(1)
+    private[this] val nameSuffix = "@" + id
+
+    def newThread(task: Runnable) = {
+      val thread = new Thread(group, task, "", 0)
+      thread.setName("Thread-" + threadNumber.getAndIncrement + "(" + uid(thread) + ")" + nameSuffix)
+      if (thread.isDaemon) thread.setDaemon(false)
+      if (thread.getPriority != NORM_PRIORITY) thread.setPriority(NORM_PRIORITY)
+      thread
+    }
+  }
+
   start(this)
+  setThreadFactory(new NamedThreadFactory)
 
   def id = name + "(" + uid(this) + ")"
   def currentState = cs(this)

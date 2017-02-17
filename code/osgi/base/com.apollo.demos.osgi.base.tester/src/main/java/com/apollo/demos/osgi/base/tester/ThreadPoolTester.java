@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.apache.felix.scr.annotations.Activate;
@@ -40,12 +41,17 @@ public class ThreadPoolTester {
     protected void activate(ComponentContext context) {
         s_logger.info("Activate.");
 
-        testCommonPool(1000, 10000, 3000, 200, 100);
-        testCommonPool(1000, 5000, 1000, 100, 20);
-        testDefaultPool("DefaultPool-Slow", 50, 5, 1000, 10000, 3000, 200, 100);
-        testDefaultPool("DefaultPool-Fast", 50, 5, 1000, 5000, 1000, 100, 20);
-        testFixedPool("FixedPool-Slow", 20, 5, 1000, 10000, 3000, 200, 100);
-        testFixedPool("FixedPool-Fast", 20, 5, 1000, 5000, 1000, 100, 20);
+        testCommonPool("CommonPool-Slow", 1000, 10000, 3000, 200, 100);
+        testCommonPool("CommonPool-Fast", 1000, 5000, 1000, 100, 20);
+
+        testDefaultPool("DefaultPool-Slow", 50, 5, 1000, 10000, 3000, 200, 100, true);
+        testDefaultPool("DefaultPool-Fast", 50, 5, 1000, 5000, 1000, 100, 20, true);
+
+        testFixedPool("FixedPool-Slow", 20, 5, 1000, 10000, 3000, 200, 100, true);
+        testFixedPool("FixedPool-Fast", 20, 5, 1000, 5000, 1000, 100, 20, true);
+
+        testDefaultPool("DefaultPool-NoTaskName", 10, 2, 500, 5000, 1000, 100, 20, false);
+        testFixedPool("FixedPool-NoTaskName", 5, 2, 500, 5000, 1000, 100, 20, false);
     }
 
     @Deactivate
@@ -61,8 +67,8 @@ public class ThreadPoolTester {
 
     private List<ExecutorService> m_pools = new ArrayList<>();
 
-    void testCommonPool(int taskNum, int taskSleep, int taskMinSleep, int submitSleep, int submitMinSleep) {
-        mockTasks(m_executors::submit, empty(), taskNum, taskSleep, taskMinSleep, submitSleep, submitMinSleep);
+    void testCommonPool(String mockName, int taskNum, int taskSleep, int taskMinSleep, int submitSleep, int submitMinSleep) {
+        mock(m_executors::submit, mockName, empty(), taskNum, taskSleep, taskMinSleep, submitSleep, submitMinSleep);
     }
 
     void testDefaultPool(String name,
@@ -72,14 +78,17 @@ public class ThreadPoolTester {
                          int taskSleep,
                          int taskMinSleep,
                          int submitSleep,
-                         int submitMinSleep) {
-        testPool(i -> m_executors.newThreadPool(name + "-" + i, count),
+                         int submitMinSleep,
+                         boolean hasTaskName) {
+        testPool(name,
+                 i -> m_executors.newThreadPool(name + "-" + i, count),
                  poolNum,
                  taskNum,
                  taskSleep,
                  taskMinSleep,
                  submitSleep,
-                 submitMinSleep);
+                 submitMinSleep,
+                 hasTaskName);
     }
 
     void testFixedPool(String name,
@@ -89,43 +98,56 @@ public class ThreadPoolTester {
                        int taskSleep,
                        int taskMinSleep,
                        int submitSleep,
-                       int submitMinSleep) {
-        testPool(i -> m_executors.newFixedThreadPool(name + "-" + i, count),
+                       int submitMinSleep,
+                       boolean hasTaskName) {
+        testPool(name,
+                 i -> m_executors.newFixedThreadPool(name + "-" + i, count),
                  poolNum,
                  taskNum,
                  taskSleep,
                  taskMinSleep,
                  submitSleep,
-                 submitMinSleep);
+                 submitMinSleep,
+                 hasTaskName);
     }
 
-    void testPool(Function<Integer, ExecutorService> newPool,
+    void testPool(String name,
+                  Function<Integer, ExecutorService> newPool,
                   int poolNum,
                   int taskNum,
                   int taskSleep,
                   int taskMinSleep,
                   int submitSleep,
-                  int submitMinSleep) {
+                  int submitMinSleep,
+                  boolean hasTaskName) {
         for (int i = 0; i < poolNum; i++) {
             ExecutorService pool = newPool.apply(i);
             m_pools.add(pool);
-            mockTasks(pool::submit, of(pool), taskNum, taskSleep, taskMinSleep, submitSleep, submitMinSleep);
+            mock((n, t) -> hasTaskName ? pool.submit(m_executors.namedCallable(n, t)) : pool.submit(t),
+                 name + "-" + i,
+                 of(pool),
+                 taskNum,
+                 taskSleep,
+                 taskMinSleep,
+                 submitSleep,
+                 submitMinSleep);
         }
     }
 
-    void mockTasks(Function<Runnable, Future<?>> submit,
-                   Optional<ExecutorService> pool,
-                   int taskNum,
-                   int taskSleep,
-                   int taskMinSleep,
-                   int submitSleep,
-                   int submitMinSleep) {
-        m_executors.submit(() -> {
+    void mock(BiFunction<String, Runnable, Future<?>> submit,
+              String mockName,
+              Optional<ExecutorService> pool,
+              int taskNum,
+              int taskSleep,
+              int taskMinSleep,
+              int submitSleep,
+              int submitMinSleep) {
+        m_executors.submit("Mock-Tasks-" + mockName, () -> {
             for (int i = 0; i < taskNum; i++) {
-                submit.apply(() -> sleepRandom(taskSleep, taskMinSleep));
+                submit.apply("Task-" + i, () -> sleepRandom(taskSleep, taskMinSleep));
                 sleepRandom(submitSleep, submitMinSleep);
             }
-            pool.ifPresent(p -> submit.apply(() -> p.shutdown()));
+            pool.ifPresent(p -> submit.apply("Mock-Shutdown-" + mockName, () -> p.shutdown()));
         });
     }
 
