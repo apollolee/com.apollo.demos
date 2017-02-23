@@ -4,9 +4,9 @@ object TypeParameterization extends App {
   val q = Queue("a", "b", "c")
   println(q.append("d").tail.tail.tail.head)
 
-  class Queue1[T]; //val q1:Queue1[AnyRef] = new Queue1[String] //非协变（严谨的）。
-  class Queue2[+T]; val q2: Queue2[AnyRef] = new Queue2[String] //协变。Java中无法做到。
-  class Queue3[-T]; val q3: Queue3[String] = new Queue3[AnyRef] //逆变。Java中无法做到。
+  class Queue1[T]; //val q1:Queue1[AnyRef] = new Queue1[String] //非协变（严谨的、不变）。
+  class Queue2[+T]; val q2: Queue2[AnyRef] = new Queue2[String] //协变。
+  class Queue3[-T]; val q3: Queue3[String] = new Queue3[AnyRef] //逆变。
 
   val a1 = Array("a", "b", "c")
   //val a2:Array[Any] = a1 //Java中的数组类型参数是协变的，而Scala中是非协变的。
