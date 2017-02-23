@@ -82,6 +82,16 @@ object Lambda extends App {
   def myAssert2(predicate: => Boolean) = if (!predicate) throw new AssertionError //传名参数，更为简化。
   myAssert1(() => 5 > 3)
   myAssert2(5 > 3) //调用时体现了精简。
+
+  //PartialFunction和Option的作用是类似的，只不过Option是用于数据，而PartialFunction用于函数。
+  val pf: PartialFunction[Int, Any] = { case _ => 1 / 0 } //这个pf一调用就会抛异常，因为匹配了所有情况，并且分母为0。
+  val sample = 1 to 10
+  val isEven: PartialFunction[Int, String] = { case x if x % 2 == 0 => x + " is even" }
+  val evenNumbers = sample collect isEven
+  println(evenNumbers)
+  val isOdd: PartialFunction[Int, String] = { case x if x % 2 == 1 => x + " is odd" }
+  val numbers = sample map (isEven orElse isOdd)
+  println(numbers)
 }
 
 object FileMatcher {
