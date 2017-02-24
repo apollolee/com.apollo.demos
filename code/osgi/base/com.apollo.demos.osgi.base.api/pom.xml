@@ -18,7 +18,7 @@
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/base/com.apollo.demos.osgi.base.api</url>
 
   <properties>
-    <bundle.activator></bundle.activator>
+    <bundle.activator>com.apollo.demos.osgi.base.api.impl.Activator</bundle.activator>
     <bundle.export.package>
       com.apollo.demos.osgi.base.api
     </bundle.export.package>

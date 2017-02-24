@@ -3,7 +3,10 @@ package com.apollo.demos.osgi.base.impl
 import java.util.UUID
 import java.util.UUID.randomUUID
 
+import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.Component
+import org.apache.felix.scr.annotations.Deactivate
+import org.apache.felix.scr.annotations.Modified
 import org.apache.felix.scr.annotations.Service
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
@@ -11,14 +14,20 @@ import org.slf4j.LoggerFactory.getLogger
 import com.apollo.demos.osgi.base.api.ILogHelper
 import com.apollo.demos.osgi.base.api.scala.{ LogHelper => LogHelperApi }
 
-@Component
+@Component(immediate = true)
 @Service
 class LogHelperImpl extends LogHelperApi {
+  private val logger = getLogger(getClass)
+
   def trace(logger: Logger, msg: String, arguments: Any*) { log(logger.isTraceEnabled, logger.trace(_, _: _*), _.trace, logger, msg, arguments: _*) }
   def debug(logger: Logger, msg: String, arguments: Any*) { log(logger.isDebugEnabled, logger.debug(_, _: _*), _.debug, logger, msg, arguments: _*) }
   def info(logger: Logger, msg: String, arguments: Any*) { log(logger.isInfoEnabled, logger.info(_, _: _*), _.info, logger, msg, arguments: _*) }
   def warn(logger: Logger, msg: String, arguments: Any*) { log(logger.isWarnEnabled, logger.warn(_, _: _*), _.warn, logger, msg, arguments: _*) }
   def error(logger: Logger, msg: String, arguments: Any*) { log(logger.isErrorEnabled, logger.error(_, _: _*), _.error, logger, msg, arguments: _*) }
+
+  @Activate def activate() { logger.debug("Activate.") }
+  @Deactivate def deactivate() { logger.debug("Deactivate.") }
+  @Modified def modified() { logger.debug("Modified.") }
 
   private def log(isEnabled: => Boolean, logging: (String, Object*) => Unit, dataLogging: Data => Unit, logger: Logger, msg: String, arguments: Any*) {
     val format = arguments.map(a => "[{}]").mkString
@@ -66,12 +75,18 @@ class LogHelperImpl extends LogHelperApi {
 
 object LogHelper extends LogHelperImpl
 
-@Component
+@Component(immediate = true)
 @Service
 class LogHelperImpl4J extends ILogHelper {
+  private val logger = getLogger(getClass)
+
   def trace(logger: Logger, msg: String, arguments: Object*) { LogHelper.trace(logger, msg, arguments: _*) }
   def debug(logger: Logger, msg: String, arguments: Object*) { LogHelper.debug(logger, msg, arguments: _*) }
   def info(logger: Logger, msg: String, arguments: Object*) { LogHelper.info(logger, msg, arguments: _*) }
   def warn(logger: Logger, msg: String, arguments: Object*) { LogHelper.warn(logger, msg, arguments: _*) }
   def error(logger: Logger, msg: String, arguments: Object*) { LogHelper.error(logger, msg, arguments: _*) }
+
+  @Activate def activate() { logger.debug("Activate.") }
+  @Deactivate def deactivate() { logger.debug("Deactivate.") }
+  @Modified def modified() { logger.debug("Modified.") }
 }
