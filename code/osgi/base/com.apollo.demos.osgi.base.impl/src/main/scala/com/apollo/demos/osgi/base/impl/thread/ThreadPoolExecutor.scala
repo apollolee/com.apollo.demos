@@ -18,10 +18,8 @@ import com.apollo.demos.osgi.base.impl.Utilities.{ currentState => cs }
 import com.apollo.demos.osgi.base.impl.Utilities.{ id => uid }
 
 import ComplexThreadPoolExecutor.handler
-import ThreadPoolMonitor.end
-import ThreadPoolMonitor.endTask
-import ThreadPoolMonitor.start
-import ThreadPoolMonitor.startTask
+import PoolMonitor.endTask
+import PoolMonitor.startTask
 
 object ThreadPoolExecutor {
   private val defaultHandler: RejectedExecutionHandler = new AbortPolicy()
@@ -53,7 +51,8 @@ class ThreadPoolExecutor(val name: String,
                          unit: TimeUnit,
                          workQueue: BlockingQueue[Runnable],
                          handler: RejectedExecutionHandler)
-    extends ThreadPoolExecutor4J(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, handler) {
+    extends ThreadPoolExecutor4J(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, handler)
+    with NamedPool {
   class NamedThreadFactory extends ThreadFactory {
     private[this] val group: ThreadGroup = Option(getSecurityManager).map(_.getThreadGroup).getOrElse(currentThread.getThreadGroup)
     private[this] val threadNumber = new AtomicInteger(1)
@@ -68,15 +67,13 @@ class ThreadPoolExecutor(val name: String,
     }
   }
 
-  start(this)
   setThreadFactory(new NamedThreadFactory)
 
-  def id = name + "(" + uid(this) + ")"
   def currentState = cs(this)
 
   override def beforeExecute(thread: Thread, task: Runnable) { super.beforeExecute(thread, task); startTask(this, thread, task) }
-  override def afterExecute(task: Runnable, ex: Throwable) { endTask(this, task); super.afterExecute(task, ex) }
-  override def terminated() { end(this); super.terminated }
+  override def afterExecute(task: Runnable, ex: Throwable) { endTask(this, currentThread, task); super.afterExecute(task, ex) }
+  override def terminated { tryEnd }
 }
 
 object ComplexThreadPoolExecutor {

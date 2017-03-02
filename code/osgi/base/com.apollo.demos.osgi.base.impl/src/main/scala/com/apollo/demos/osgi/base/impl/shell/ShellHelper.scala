@@ -2,16 +2,23 @@ package com.apollo.demos.osgi.base.impl.shell
 
 import java.util.concurrent.TimeUnit.SECONDS
 
+import com.apollo.demos.osgi.base.impl.thread.ForkJoinPool
 import com.apollo.demos.osgi.base.impl.thread.ThreadPoolExecutor
 
 object ShellHelper {
   final val Scope_Thread = "apollo.base.thread"
 
-  val ColumnHeader_PoolParameter = List(("ID", 7), ("Core Pool Size", 3), ("Maximum Pool Size", 3), ("Keep Alive Time (Sec)", 4))
+  val ColumnHeader_Parameter_ThreadPool = List(("ID", 7), ("Core Pool Size", 3), ("Maximum Pool Size", 3), ("Keep Alive Time (Sec)", 4))
   def parameter(pool: ThreadPoolExecutor) = List(pool.id, pool.getCorePoolSize, pool.getMaximumPoolSize, pool.getKeepAliveTime(SECONDS))
 
-  val ColumnHeader_PoolState = List(("ID", 7), ("State", 3), ("Pool Size", 2), ("Active Threads", 3), ("Queued Tasks", 3), ("Completed Tasks", 3), ("Task Count", 2), ("Largest Pool Size", 3))
+  val ColumnHeader_Parameter_ForkJoinPool = List(("ID", 7), ("Parallelism", 3), ("Is Async Mode", 3))
+  def parameter(pool: ForkJoinPool) = List(pool.id, pool.getParallelism, pool.getAsyncMode)
+
+  val ColumnHeader_State_ThreadPool = List(("ID", 7), ("State", 3), ("Pool Size", 2), ("Active Threads", 3), ("Queued Tasks", 3), ("Completed Tasks", 3), ("Task Count", 2), ("Largest Pool Size", 3))
   def state(pool: ThreadPoolExecutor) = { val cs = pool.currentState; List(pool.id, cs._1, cs._2, cs._3, cs._4, cs._5, (cs._3 + cs._4 + cs._5), pool.getLargestPoolSize) }
+
+  val ColumnHeader_State_ForkJoinPool = List(("ID", 7), ("State", 3), ("Pool Size", 2), ("Active", 2), ("Running", 2), ("Steal Count", 3), ("Queued Tasks", 3), ("Queued Submissions", 4))
+  def state(pool: ForkJoinPool) = { val cs = pool.currentState; List(pool.id, cs._1, cs._3, cs._4, cs._5, cs._6, cs._7, cs._8) }
 
   private val TabSpace = 7
 

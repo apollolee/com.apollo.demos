@@ -3,28 +3,38 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
   <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
     <command>
-      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolList" />
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.PoolList" />
+      <optional-completers>
+        <entry key="-t" value-ref="poolTypeCompleter"/>
+      </optional-completers>
     </command>
 
     <command>
-      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPools" />
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.Pools" />
+      <optional-completers>
+        <entry key="-t" value-ref="poolTypeCompleter"/>
+      </optional-completers>
     </command>
 
     <command>
-      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolTrace" />
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.PoolTrace" />
       <completers>
-        <ref component-id="threadPoolIdCompleter" />
+        <ref component-id="poolIdCompleter" />
       </completers>
+      <optional-completers>
+        <entry key="-t" value-ref="poolTypeCompleter"/>
+      </optional-completers>
     </command>
 
     <command>
-      <action class="com.apollo.demos.osgi.base.impl.shell.command.ThreadPoolLogTrace" />
+      <action class="com.apollo.demos.osgi.base.impl.shell.command.PoolLogTrace" />
       <completers>
         <ref component-id="onOrOffCompleter" />
       </completers>
     </command>
   </command-bundle>
 
-  <bean id="threadPoolIdCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.ThreadPoolId" />
   <bean id="onOrOffCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.OnOrOff" />
+  <bean id="poolTypeCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.PoolType" />
+  <bean id="poolIdCompleter" class="com.apollo.demos.osgi.base.impl.shell.completer.PoolId" />
 </blueprint>

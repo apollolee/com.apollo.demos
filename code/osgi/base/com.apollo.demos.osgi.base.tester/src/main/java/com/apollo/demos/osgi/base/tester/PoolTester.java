@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.Future;
+import java.util.concurrent.RecursiveTask;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -26,14 +29,58 @@ import org.slf4j.LoggerFactory;
 import com.apollo.demos.osgi.base.api.IExecutors;
 
 @Component
-public class ThreadPoolTester {
+public class PoolTester {
 
-    private static final Logger s_logger = LoggerFactory.getLogger(ThreadPoolTester.class);
+    class Calculator extends RecursiveTask<Integer> {
+
+        private static final long serialVersionUID = 1L;
+
+        private static final int THRESHOLD = 2;
+
+        private final int m_start, m_end, m_taskSleep, m_taskMinSleep;
+
+        public Calculator(int start, int end, int taskSleep, int taskMinSleep) {
+            m_start = start;
+            m_end = end;
+            m_taskSleep = taskSleep;
+            m_taskMinSleep = taskMinSleep;
+        }
+
+        @Override
+        protected Integer compute() {
+            sleepRandom(m_taskSleep, m_taskMinSleep);
+            int sum = 0;
+            if ((m_end - m_start) < THRESHOLD) {
+                for (int i = m_start; i <= m_end; i++) {
+                    sum += i;
+                }
+
+            } else {
+                int middle = (m_start + m_end) / 2;
+                ForkJoinTask<Integer> left = m_executors.named(m_start + "+" + middle, new Calculator(m_start,
+                                                                                                      middle,
+                                                                                                      m_taskSleep,
+                                                                                                      m_taskMinSleep));
+                ForkJoinTask<Integer> right = m_executors.named((middle + 1) + "+" + m_end, new Calculator(middle + 1,
+                                                                                                           m_end,
+                                                                                                           m_taskSleep,
+                                                                                                           m_taskMinSleep));
+                left.fork();
+                right.fork();
+
+                sum = left.join() + right.join();
+            }
+            return sum;
+        }
+
+    }
+
+    private static final Logger s_logger = LoggerFactory.getLogger(PoolTester.class);
 
     @Reference
     private IExecutors m_executors;
 
-    public ThreadPoolTester() {
+    public PoolTester() {
         s_logger.info("New.");
     }
 
@@ -50,8 +97,15 @@ public class ThreadPoolTester {
         testFixedPool("FixedPool-Slow", 20, 5, 1000, 10000, 3000, 200, 100, true);
         testFixedPool("FixedPool-Fast", 20, 5, 1000, 5000, 1000, 100, 20, true);
 
+        testForkJoinPool("ForkJoinPool-Slow", 10, 5, 20, 500, 100, 2000, 200);
+        testForkJoinPool("ForkJoinPool-Fast", 10, 5, 5, 500, 100, 1000, 100);
+
+        testForkJoinPool_NoForkJoin("ForkJoinPool-NoForkJoin-Slow", 20, 5, 1000, 10000, 3000, 200, 100, true);
+        testForkJoinPool_NoForkJoin("ForkJoinPool-NoForkJoin-Fast", 20, 5, 1000, 5000, 1000, 100, 20, true);
+
         testDefaultPool("DefaultPool-NoTaskName", 10, 2, 500, 5000, 1000, 100, 20, false);
         testFixedPool("FixedPool-NoTaskName", 5, 2, 500, 5000, 1000, 100, 20, false);
+        testForkJoinPool_NoForkJoin("ForkJoinPool-NoForkJoin-NoTaskName", 5, 2, 500, 5000, 1000, 100, 20, false);
     }
 
     @Deactivate
@@ -102,6 +156,51 @@ public class ThreadPoolTester {
                        boolean hasTaskName) {
         testPool(name,
                  i -> m_executors.newFixedThreadPool(name + "-" + i, count),
+                 poolNum,
+                 taskNum,
+                 taskSleep,
+                 taskMinSleep,
+                 submitSleep,
+                 submitMinSleep,
+                 hasTaskName);
+    }
+
+    void testForkJoinPool(String name, int count, int poolNum, int submissionNum, int taskSleep, int taskMinSleep, int end, int endMin) {
+        for (int i = 0; i < poolNum; i++) {
+            String poolName = name + "-" + i;
+            ForkJoinPool pool = m_executors.newForkJoinPool(poolName, count);
+            m_executors.submit("Mock-Tasks-" + poolName, () -> {
+                List<Integer> ends = new ArrayList<>();
+                List<ForkJoinTask<Integer>> tasks = new ArrayList<>();
+                for (int j = 0; j < submissionNum; j++) {
+                    ends.add(random(end) + endMin);
+                    tasks.add(m_executors.named("Submission-" + j, new Calculator(1, ends.get(j), taskSleep, taskMinSleep)));
+                }
+                tasks.forEach(pool::submit);
+                for (int j = 0, size = ends.size(); j < size; j++) {
+                    try {
+                        s_logger.debug(poolName + "-Submission-" + j + ": 1 ~ " + ends.get(j) + " = " + tasks.get(j).get());
+
+                    } catch (Throwable ex) {
+                        s_logger.error(poolName + "-Submission-" + j + " get is failed.", ex);
+                    }
+                }
+                pool.shutdown();
+            });
+        }
+    }
+
+    void testForkJoinPool_NoForkJoin(String name,
+                                     int count,
+                                     int poolNum,
+                                     int taskNum,
+                                     int taskSleep,
+                                     int taskMinSleep,
+                                     int submitSleep,
+                                     int submitMinSleep,
+                                     boolean hasTaskName) {
+        testPool(name,
+                 i -> m_executors.newForkJoinPool(name + "-" + i, count),
                  poolNum,
                  taskNum,
                  taskSleep,

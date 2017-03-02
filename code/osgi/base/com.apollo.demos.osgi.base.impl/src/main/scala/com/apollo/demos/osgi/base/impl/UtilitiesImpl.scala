@@ -2,6 +2,7 @@ package com.apollo.demos.osgi.base.impl
 
 import java.lang.Integer.toHexString
 import java.lang.System.identityHashCode
+import java.util.concurrent.ForkJoinPool
 import java.util.concurrent.ThreadPoolExecutor
 
 import org.apache.felix.scr.annotations.Activate
@@ -30,12 +31,20 @@ class UtilitiesImpl extends UtilitiesApi {
 
   def startThread(name: String, task: => Unit) = new Thread(new Runnable() { def run() { task } }, name).start
 
-  def currentState(pool: ThreadPoolExecutor): (String, Int, Int, Int, Long) = currentState(pool.toString)
-  private[impl] def currentState(stateInfo: String): (String, Int, Int, Int, Long) = {
+  def currentState(pool: ThreadPoolExecutor) = {
+    val stateInfo = pool.toString
     val extractor = """.*\[(.*),.*= (\d*),.*= (\d*),.*= (\d*),.*= (\d*)\]""".r
     val extractor(state, poolSize, activeThreads, queuedTasks, completedTasks) = stateInfo
     import UtilitiesApi.{ stringToInt, stringToLong }
     (state, poolSize, activeThreads, queuedTasks, completedTasks)
+  }
+
+  def currentState(pool: ForkJoinPool) = {
+    val stateInfo = pool.toString
+    val extractor = """.*\[(.*),.*= (\d*),.*= (\d*),.*= (\d*),.*= (\d*),.*= (\d*),.*= (\d*),.*= (\d*)\]""".r
+    val extractor(state, parallelism, size, active, running, steals, tasks, submissions) = stateInfo
+    import UtilitiesApi.{ stringToInt, stringToLong }
+    (state, parallelism, size, active, running, steals, tasks, submissions)
   }
 
   @Activate def activate() { logger.debug("Activate.") }
