@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import com.apollo.demos.osgi.base.api.IUtilities
 
 object Utilities {
+  implicit def anyToString(any: Any) = any.toString
   implicit def stringToInt(intString: String) = Integer.parseInt(intString)
   implicit def stringToLong(longString: String) = java.lang.Long.parseLong(longString)
 }

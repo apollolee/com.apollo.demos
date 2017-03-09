@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory.getLogger
 
 import com.apollo.demos.osgi.base.api.ILogHelper
 import com.apollo.demos.osgi.base.api.scala.{ LogHelper => LogHelperApi }
+import com.apollo.demos.osgi.base.api.scala.Utilities.anyToString
 
 @Component(immediate = true)
 @Service
@@ -33,8 +34,8 @@ class LogHelperImpl extends LogHelperApi {
     val format = arguments.map(a => "[{}]").mkString
     def convert = {
       val args = arguments.map(_.asInstanceOf[Object]).toArray
-      def data(i: Int, dataType: (String, String)) = {
-        val data = Data(logger, dataType._1, args(i).toString)
+      def data(i: Int, dataType: (String, String))(implicit toString: Object => String) = {
+        val data = Data(logger, dataType._1, toString(args(i)))
         args(i) = dataType._2 + "->" + data.uuid
         Some(data)
       }
