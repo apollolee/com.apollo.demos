@@ -3,6 +3,9 @@
  */
 package com.apollo.demos.osgi.base.api;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public interface IUtilities {
 
     String id(Object obj);
@@ -12,5 +15,15 @@ public interface IUtilities {
     String className(Object object);
 
     String stack(Thread thread);
+
+    default String stack(Throwable throwable) {
+        try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw)) {
+            throwable.printStackTrace(pw);
+            return sw.toString();
+
+        } catch (Throwable ex) {
+            throw new RuntimeException("Get stack is failed.", ex);
+        }
+    }
 
 }
