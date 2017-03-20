@@ -29,6 +29,8 @@ class UtilitiesImpl extends UtilitiesApi {
 
   def stack(thread: Thread) = thread.getStackTrace.mkString("Thread.Stack\n  at ", "\n  at ", "\n")
 
+  def percent(numerator: Long, denominator: Long) = if (denominator == 0) "--" else (numerator * 100 / denominator) + "%"
+
   def startThread(name: String, task: => Unit) = new Thread(new Runnable() { def run() { task } }, name).start
 
   def currentState(pool: ThreadPoolExecutor) = {

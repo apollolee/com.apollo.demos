@@ -26,4 +26,6 @@ public interface IUtilities {
         }
     }
 
+    String percent(long numerator, long denominator);
+
 }
