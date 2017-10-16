@@ -38,7 +38,7 @@ public class JUnitTheoriesDemo {
     public static int[] s_positiveInteger = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     @DataPoints
-    public static int s_zero = 0;
+    public static int[] s_zero = new int[] { 0 };
 
     @DataPoints
     public static int[] s_negtiveInteger = new int[] { -1, -2, -3, -4, -5, -6, -7, -8, -9 };
@@ -52,9 +52,9 @@ public class JUnitTheoriesDemo {
 
     @Theory
     public void test2(int a, int b, int c) {
-        //System.out.println("Begin test2: a = " + a + " , b = " + b);
+        //System.out.println("Begin test2: a = " + a + " , b = " + b + " , c = " + c);
         assertTrue((a + b) + c == a + (b + c));//加法结合律
-        //System.out.println("  End test2: a = " + a + " , b = " + b);
+        //System.out.println("  End test2: a = " + a + " , b = " + b + " , c = " + c);
     }
 
     @Theory
@@ -88,6 +88,15 @@ public class JUnitTheoriesDemo {
         assertTrue(a + b > b);
 
         //System.out.println("  End test6: a = " + a + " , b = " + b);
+    }
+
+    @Theory
+    public void test7(int a) {
+        //System.out.println("Begin test7: a = " + a);
+
+        assertTrue(a == -(-a)); //负负得正
+
+        //System.out.println("  End test7: a = " + a);
     }
 
 }
