@@ -23,6 +23,6 @@
     <module>../com.apollo.demos.osgi.app.adapter.ptn.api</module>
     <!--module>../com.apollo.demos.osgi.app.adapter.ptn.impl</module--><!-- 依赖编译的maven插件，无法整体编译，需要单独编译 -->
     <module>../com.apollo.demos.osgi.app.adapter.sender</module>
-    <module>../com.apollo.demos.osgi.app.adapter.feature</module>
+    <!--module>../com.apollo.demos.osgi.app.adapter.feature</module--><!-- 依赖上面的ptn.impl，无法整体编译，需要单独编译 -->
   </modules>
 </project>
