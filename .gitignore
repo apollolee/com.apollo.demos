@@ -1,0 +1,7 @@
+.gitignore
+output/
+target/
+.project
+.classpath
+.settings
+.idea
