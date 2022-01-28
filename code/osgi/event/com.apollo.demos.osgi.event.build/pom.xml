@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.event</groupId>
   <artifactId>build</artifactId>
-  <version>${version}</version>
   <packaging>pom</packaging>
 
   <name>com.apollo.demos.osgi.event.build</name>

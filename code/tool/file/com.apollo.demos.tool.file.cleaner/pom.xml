@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.tool.file</groupId>
   <artifactId>cleaner</artifactId>
-  <version>${version}</version>
 
   <name>com.apollo.demos.tool.file.cleaner</name>
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/tool/file/com.apollo.demos.tool.file.cleaner</url>

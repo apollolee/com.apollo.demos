@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.app.message</groupId>
   <artifactId>apollo-demos-app-message</artifactId>
-  <version>${version}</version>
   <packaging>feature</packaging>
 
   <name>com.apollo.demos.osgi.app.message.feature</name>

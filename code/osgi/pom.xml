@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom</groupId>
+    <artifactId>build</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.osgi</groupId>
+  <artifactId>build</artifactId>
+  <packaging>pom</packaging>
+
+  <name>com.apollo.demos.osgi.build</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi</url>
+
+  <modules>
+    <module>base/com.apollo.demos.osgi.base.build</module>
+    <module>blueprint/com.apollo.demos.osgi.blueprint.build</module>
+    <module>fragment/com.apollo.demos.osgi.fragment.build</module>
+    <module>event/com.apollo.demos.osgi.event.build</module>
+    <module>service/com.apollo.demos.osgi.service.build</module>
+    <module>helloworld/com.apollo.demos.osgi.helloworld.build</module>
+    <module>scr/com.apollo.demos.osgi.scr.build</module>
+    <module>karaf</module>
+    <module>app</module>
+  </modules>
+</project>

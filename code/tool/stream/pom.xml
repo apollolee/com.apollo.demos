@@ -9,18 +9,14 @@
     <version>1.0.0</version>
   </parent>
 
-  <groupId>com.apollo.demos.osgi.base</groupId>
+  <groupId>com.apollo.demos.tool.stream</groupId>
   <artifactId>build</artifactId>
   <packaging>pom</packaging>
 
-  <name>com.apollo.demos.osgi.base.build</name>
-  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/osgi/base/com.apollo.demos.osgi.base.build</url>
+  <name>com.apollo.demos.tool.stream.build</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/tool/stream</url>
 
   <modules>
-    <module>../com.apollo.demos.osgi.base.api</module>
-    <module>../com.apollo.demos.osgi.base.api.scala</module>
-    <module>../com.apollo.demos.osgi.base.impl</module>
-    <module>../com.apollo.demos.osgi.base.tester</module>
-    <module>../com.apollo.demos.osgi.base.feature</module>
+    <module>com.apollo.demos.tool.stream.parser</module>
   </modules>
 </project>

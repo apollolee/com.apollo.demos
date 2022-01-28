@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.blueprint</groupId>
   <artifactId>provider1</artifactId>
-  <version>${version}</version>
   <packaging>bundle</packaging>
 
   <name>com.apollo.demos.osgi.blueprint.provider1</name>

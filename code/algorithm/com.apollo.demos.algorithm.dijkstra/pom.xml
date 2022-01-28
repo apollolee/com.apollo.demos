@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.algorithm</groupId>
   <artifactId>dijkstra</artifactId>
-  <version>${version}</version>
 
   <name>com.apollo.demos.algorithm.dijkstra</name>
   <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/algorithm/com.apollo.demos.algorithm.dijkstra</url>

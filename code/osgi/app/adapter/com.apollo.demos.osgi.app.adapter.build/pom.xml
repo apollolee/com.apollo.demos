@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.app.adapter</groupId>
   <artifactId>build</artifactId>
-  <version>${version}</version>
   <packaging>pom</packaging>
 
   <name>com.apollo.demos.osgi.app.adapter.build</name>
@@ -22,7 +21,7 @@
     <module>../com.apollo.demos.osgi.app.adapter.plugin</module>
     <module>../com.apollo.demos.osgi.app.adapter.core</module>
     <module>../com.apollo.demos.osgi.app.adapter.ptn.api</module>
-    <module>../com.apollo.demos.osgi.app.adapter.ptn.impl</module>
+    <!--module>../com.apollo.demos.osgi.app.adapter.ptn.impl</module--><!-- 依赖编译的maven插件，无法整体编译，需要单独编译 -->
     <module>../com.apollo.demos.osgi.app.adapter.sender</module>
     <module>../com.apollo.demos.osgi.app.adapter.feature</module>
   </modules>

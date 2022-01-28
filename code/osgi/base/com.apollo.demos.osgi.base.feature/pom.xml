@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.base</groupId>
   <artifactId>apollo-demos-base</artifactId>
-  <version>${version}</version>
   <packaging>feature</packaging>
 
   <name>com.apollo.demos.osgi.base.feature</name>

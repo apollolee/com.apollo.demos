@@ -11,7 +11,6 @@
 
   <groupId>com.apollo.demos.osgi.app.adapter</groupId>
   <artifactId>apollo-demos-app-adapter</artifactId>
-  <version>${version}</version>
   <packaging>feature</packaging>
 
   <name>com.apollo.demos.osgi.app.adapter.feature</name>
