@@ -27,5 +27,6 @@
     <module>com.apollo.demos.base.scala</module>
 
     <module>javaagent</module>
+    <module>jsr269</module>
   </modules>
 </project>
