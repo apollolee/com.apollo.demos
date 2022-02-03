@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.apollo.base.pom</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>com.apollo.demos.javaagent</groupId>
+  <artifactId>agentmain.test</artifactId>
+
+  <name>com.apollo.demos.javaagent.agentmain.test</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/javaagent/agentmain/com.apollo.demos.javaagent.agentmain.test</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sun</groupId>
+      <artifactId>tools</artifactId>
+      <version>1.8.0</version>
+      <scope>system</scope>
+      <!--systemPath>${JAVA_HOME}/lib/tools.jar</systemPath-->
+      <systemPath>D:/apollo/work/development/java/jdk/jdk-8/lib/tools.jar</systemPath>
+    </dependency>
+  </dependencies>
+</project>

@@ -9,19 +9,15 @@
     <version>1.0.0</version>
   </parent>
 
-  <groupId>com.apollo.demos</groupId>
+  <groupId>com.apollo.demos.javaagent.premain</groupId>
   <artifactId>build</artifactId>
   <packaging>pom</packaging>
 
-  <name>com.apollo.demos.build</name>
-  <url>https://github.com/apollolee/com.apollo.demos/tree/master/build</url>
+  <name>com.apollo.demos.javaagent.premain.build</name>
+  <url>https://github.com/apollolee/com.apollo.demos/tree/master/code/javaagent/premain</url>
 
   <modules>
-    <module>../code/base</module>
-    <module>../code/javaagent</module>
-    <module>../code/maven</module>
-    <module>../code/osgi</module>
-    <module>../code/algorithm</module>
-    <module>../code/tool</module>
+    <module>com.apollo.demos.javaagent.premain</module>
+    <module>com.apollo.demos.javaagent.premain.test</module>
   </modules>
 </project>
