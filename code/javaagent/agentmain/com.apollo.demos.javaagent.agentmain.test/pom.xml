@@ -22,6 +22,7 @@
       <version>1.8.0</version>
       <scope>system</scope>
       <!--systemPath>${JAVA_HOME}/lib/tools.jar</systemPath-->
+      <!--systemPath>${java.home}/../lib/tools.jar</systemPath-->
       <systemPath>D:/apollo/work/development/java/jdk/jdk-8/lib/tools.jar</systemPath>
     </dependency>
   </dependencies>
