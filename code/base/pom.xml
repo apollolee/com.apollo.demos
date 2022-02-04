@@ -28,5 +28,6 @@
 
     <module>javaagent</module>
     <module>jsr269</module>
+    <module>fsm</module>
   </modules>
 </project>
