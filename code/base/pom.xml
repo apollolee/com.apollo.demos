@@ -22,6 +22,7 @@
     <module>com.apollo.demos.base.annotation</module>
     <module>com.apollo.demos.base.serialization</module>
     <module>com.apollo.demos.base.test</module>
+    <module>com.apollo.demos.base.bytecode</module>
     <module>com.apollo.demos.base.javassist</module>
     <module>com.apollo.demos.base.pcap4j</module>
     <module>com.apollo.demos.base.scala</module>
