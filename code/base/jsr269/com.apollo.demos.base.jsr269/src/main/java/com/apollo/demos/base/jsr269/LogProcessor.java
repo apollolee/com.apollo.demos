@@ -4,6 +4,7 @@
 package com.apollo.demos.base.jsr269;
 
 import static com.sun.tools.javac.tree.TreeMaker.instance;
+import static com.sun.tools.javac.util.List.nil;
 import static com.sun.tools.javac.util.List.of;
 import static javax.lang.model.SourceVersion.RELEASE_8;
 import static javax.tools.Diagnostic.Kind.MANDATORY_WARNING;
@@ -20,11 +21,9 @@ import javax.lang.model.element.TypeElement;
 
 import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
-import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCMethodDecl;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.Context;
-import com.sun.tools.javac.util.List;
 
 @SupportedSourceVersion(RELEASE_8)
 @SupportedAnnotationTypes("com.apollo.demos.base.jsr269.Log")
@@ -58,10 +57,9 @@ public class LogProcessor extends AbstractProcessor {
             JCMethodDecl tree = (JCMethodDecl) jes.getTree(element);
             tm.pos = tree.pos;
             tree.body = tm.Block(0,
-                                 of(tm.Exec(tm.Apply(List.<JCExpression> nil(),
-                                                     tm.Select(tm.Select(tm.Ident(jes.getName("System")), jes.getName("out")), jes.getName("println")),
-                                                     List.<JCExpression> of(tm.Literal("jsr269.log.[" + annotation.level().toString() + "][" + element.getSimpleName() + "]")))),
-                                    tree.body));
+                                 of(tm.Exec(tm.Apply(nil(),
+                                                     tm.Select(tm.Ident(jes.getTypeElement("com.apollo.demos.base.jsr269.LogHelper")), jes.getName("log")),
+                                                     of(tm.Lambda(tree.getParameters(), tree.body), tm.Literal(annotation.level().toString()))))));
         }
 
         return true;
