@@ -19,5 +19,6 @@
   <modules>
     <module>com.apollo.demos.base.jsr269</module>
     <!--module>com.apollo.demos.base.jsr269.test</module-->
+    <module>com.apollo.demos.base.jsr269.demo</module>
   </modules>
 </project>
