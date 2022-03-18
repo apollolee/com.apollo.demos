@@ -58,7 +58,7 @@ public class LogProcessor extends AbstractProcessor {
             tm.pos = tree.pos;
             tree.body = tm.Block(0,
                                  of(tm.Exec(tm.Apply(nil(),
-                                                     tm.Select(tm.Ident(jes.getTypeElement("com.apollo.demos.base.jsr269.LogHelper")), jes.getName("log")),
+                                                     tm.Select(tm.QualIdent(jes.getTypeElement("com.apollo.demos.base.jsr269.LogHelper")), jes.getName("log")),
                                                      of(tm.Lambda(tree.getParameters(), tree.body), tm.Literal(annotation.level().toString()))))));
         }
 
