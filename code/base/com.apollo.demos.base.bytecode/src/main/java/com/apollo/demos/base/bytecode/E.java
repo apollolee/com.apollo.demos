@@ -6,6 +6,10 @@ package com.apollo.demos.base.bytecode;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//方法throws后面的声明的异常并不在descriptor中，而是在专门的Exceptions中记录。
+//覆写需要检查方法descriptor是否完全一致，这也解释了覆写方法时，不需要和父类中声明要抛出的异常完全保持一致（子类只能缩小异常范围，不能扩大，目前不清楚是语言层面限制，还是虚拟机层面的限制）。
+//异常列表中，也包含非检查异常。
+
 public interface E {
 
     void testEx(int a) throws IOException, SQLException, NullPointerException;

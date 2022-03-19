@@ -6,6 +6,9 @@ package com.apollo.demos.base.bytecode;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//相对复杂的继承，字节码描述也是比较简洁的。
+//虚函数是在运行时确定调用关系的，@Override是SOURCE级别的，不会带到字节码，在字节码层面上没有专门的信息用于标识虚函数。
+
 public class F extends B implements D, E {
 
     public F() {

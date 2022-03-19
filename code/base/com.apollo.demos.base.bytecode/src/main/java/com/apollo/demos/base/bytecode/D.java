@@ -3,6 +3,10 @@
  */
 package com.apollo.demos.base.bytecode;
 
+//interface和class在字节码结构上差别几乎没有，interface在flags中有一个ACC_INTERFACE。
+//可以看到interface也有缺省的super_class，和class一样，都是Object。
+//接口的default方法并没有特别的字节码支持。
+
 public interface D {
 
     int m_a = 1;

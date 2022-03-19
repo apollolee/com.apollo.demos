@@ -3,6 +3,9 @@
  */
 package com.apollo.demos.base.bytecode;
 
+//看看一个简单类的字节码长什么样子。
+//常量池变长了，常量池索引大小是有限制的，2个字节，最大65535，每个方法或字段都会形成n个常量池项，常量池的大小直接限制了一个class的规模，这意味着一个类或者接口不要写得太大。
+
 public class B {
 
     public static void main(String[] args) {

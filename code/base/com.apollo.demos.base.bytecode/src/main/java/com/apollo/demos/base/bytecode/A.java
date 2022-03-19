@@ -3,8 +3,13 @@
  */
 package com.apollo.demos.base.bytecode;
 
-public class A {
+//什么都没有，看看javac编译出来的字节码是不是空的。
+//一些隐藏的Java语言特效决定了，空的接口比空的类在字节码上要简洁一些，主要是少了自动生成的缺省构造方法。
 
+public class A {
+}
+
+interface IA {
 }
 
 /*-------- javap -v A --------
@@ -45,5 +50,24 @@ public com.apollo.demos.base.bytecode.A();
     LocalVariableTable:
       Start  Length  Slot  Name   Signature
           0       5     0  this   Lcom/apollo/demos/base/bytecode/A;
+}
+*/
+
+/*-------- javap -v IA --------
+interface com.apollo.demos.base.bytecode.IA
+minor version: 0
+major version: 52
+flags: (0x0600) ACC_INTERFACE, ACC_ABSTRACT
+this_class: #1                          // com/apollo/demos/base/bytecode/IA
+super_class: #3                         // java/lang/Object
+interfaces: 0, fields: 0, methods: 0, attributes: 1
+Constant pool:
+#1 = Class              #2              // com/apollo/demos/base/bytecode/IA
+#2 = Utf8               com/apollo/demos/base/bytecode/IA
+#3 = Class              #4              // java/lang/Object
+#4 = Utf8               java/lang/Object
+#5 = Utf8               SourceFile
+#6 = Utf8               A.java
+{
 }
 */
