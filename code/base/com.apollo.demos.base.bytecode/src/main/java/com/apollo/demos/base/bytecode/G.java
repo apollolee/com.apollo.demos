@@ -6,6 +6,12 @@ package com.apollo.demos.base.bytecode;
 @SuppressWarnings("unused")
 public class G {
 
+    //LocalVariableTable：局部变量表，栈帧中的内存消耗之一。Code第一句中有locals=n，其中n表示本方法局部变量占用的槽位数。
+    //Start：局部变量使用从哪个指令开始。
+    //Length：局部变量使用到哪个指令结束，一般是到最后一条指令。
+    //Slot：局部变量从第几个槽位开始，注意：不是一个变量一个槽位。
+    //所有非静态方法的第一个局部变量都是this，而静态方法则没有这个消耗，所以静态方法的栈帧消耗要低一些（节省一个槽位），如无必要，尽量使用静态方法。
+
     public void a(int p1, int p2) {
         int temp = p1 + p2;
     }
@@ -18,6 +24,8 @@ public class G {
         if (true) {
             String b = "b"; //复用上面a的Slot，这样可以减少每个栈帧中的局部变量表的大小，节省实际内存开销。这就是局部变量作用域控制的越小越好的原因。
         }
+        //这里没有this消耗，但locals=1，表示还是有一个槽位消耗，但局部变量表是空的，这是因为方法域内的局部作用域内会临时占用槽位，且多个局部作用域能够共享，但这些局部变量都不记录到局部变量表。
+        //从栈帧消耗上看，合理的控制局部变量的作用域能够更精细化的控制栈内存消耗。
     }
 
     public void c() {
