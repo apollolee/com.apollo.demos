@@ -7,10 +7,11 @@ package com.apollo.demos.base.bytecode;
 //加final时字段有ConstantValue属性指向常量池，不加final实际上是一个语法糖，赋值指令移到缺省构造方法中了。
 //常量池索引并不是依次递增的，long和double会占用2个索引位置。
 //Utf8虽然是个很长的字符串，但只占一个索引位置。
+//private字段，无论是静态还是非静态的，在字段表中都没有记录，但在常量池中还是有的。
 
+@SuppressWarnings("unused")
 public final class C {
 
-    @SuppressWarnings("unused")
     private byte m_a;
 
     protected short m_b;
@@ -21,15 +22,15 @@ public final class C {
 
     final float m_e = 0.8f;
 
-    static double m_f = 88.88;
+    static double s_f = 88.88;
 
     volatile boolean m_g;
 
-    static final char m_h = 'h';
+    public static final char s_h = 'h';
 
-    public static final String m_i = "test";
+    protected static final String s_i = "test";
 
-    public static volatile String m_j;
+    private static volatile String s_j;
 
 }
 
@@ -58,24 +59,24 @@ Constant pool:
   #14 = Utf8               F
   #15 = Utf8               ConstantValue
   #16 = Float              0.8f
-  #17 = Utf8               m_f
+  #17 = Utf8               s_f
   #18 = Utf8               D
   #19 = Utf8               m_g
   #20 = Utf8               Z
-  #21 = Utf8               m_h
+  #21 = Utf8               s_h
   #22 = Utf8               C
   #23 = Integer            104
-  #24 = Utf8               m_i
+  #24 = Utf8               s_i
   #25 = Utf8               Ljava/lang/String;
   #26 = String             #27            // test
   #27 = Utf8               test
-  #28 = Utf8               m_j
+  #28 = Utf8               s_j
   #29 = Utf8               <clinit>
   #30 = Utf8               ()V
   #31 = Utf8               Code
   #32 = Double             88.88d
-  #34 = Fieldref           #1.#35         // com/apollo/demos/base/bytecode/C.m_f:D
-  #35 = NameAndType        #17:#18        // m_f:D
+  #34 = Fieldref           #1.#35         // com/apollo/demos/base/bytecode/C.s_f:D
+  #35 = NameAndType        #17:#18        // s_f:D
   #36 = Utf8               LineNumberTable
   #37 = Utf8               LocalVariableTable
   #38 = Utf8               <init>
@@ -108,7 +109,7 @@ Constant pool:
     flags: (0x0010) ACC_FINAL
     ConstantValue: float 0.8f
 
-  static double m_f;
+  static double s_f;
     descriptor: D
     flags: (0x0008) ACC_STATIC
 
@@ -116,19 +117,15 @@ Constant pool:
     descriptor: Z
     flags: (0x0040) ACC_VOLATILE
 
-  static final char m_h;
+  public static final char s_h;
     descriptor: C
-    flags: (0x0018) ACC_STATIC, ACC_FINAL
+    flags: (0x0019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL
     ConstantValue: int 104
 
-  public static final java.lang.String m_i;
+  protected static final java.lang.String s_i;
     descriptor: Ljava/lang/String;
-    flags: (0x0019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    flags: (0x001c) ACC_PROTECTED, ACC_STATIC, ACC_FINAL
     ConstantValue: String test
-
-  public static volatile java.lang.String m_j;
-    descriptor: Ljava/lang/String;
-    flags: (0x0049) ACC_PUBLIC, ACC_STATIC, ACC_VOLATILE
 
   static {};
     descriptor: ()V
@@ -136,11 +133,11 @@ Constant pool:
     Code:
       stack=2, locals=0, args_size=0
          0: ldc2_w        #32                 // double 88.88d
-         3: putstatic     #34                 // Field m_f:D
+         3: putstatic     #34                 // Field s_f:D
          6: return
       LineNumberTable:
-        line 21: 0
-        line 29: 6
+        line 24: 0
+        line 32: 6
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
 
@@ -159,10 +156,10 @@ Constant pool:
         14: putfield      #45                 // Field m_e:F
         17: return
       LineNumberTable:
-        line 8: 0
-        line 17: 4
-        line 19: 11
-        line 8: 17
+        line 12: 0
+        line 20: 4
+        line 22: 11
+        line 12: 17
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0      18     0  this   Lcom/apollo/demos/base/bytecode/C;
