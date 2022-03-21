@@ -3,16 +3,55 @@
  */
 package com.apollo.demos.base.bytecode;
 
+//控制转移指令。
+//条件跳转指令都是如果xxx，就跳转到xxx，这个逻辑和语言正好是相反的。
+//条件跳转指令中的条件，都是判断int类型。
+//和0对比很特殊，有独立的指令，0不需要压栈，其余的数都用另外一条通用指令。所以p > 0的效率要高于p > 1
+//long，float，double类型比较时，会先使用比较指令，然后用比较结果跟0进行对比来完成控制转移。所以int类型效率要高于其他类型。
+//比较指令有5个，如下：
+//lcmp 比较long类型值，比较规则：a=b为0，a>b为1，a<b为-1，下同。
+//fcmpl 比较float类型值（当遇到NaN时，返回-1）。
+//fcmpg 比较float类型值（当遇到NaN时，返回1）。
+//dcmpl 比较double类型值（当遇到NaN时，返回-1）。
+//dcmpg 比较double类型值（当遇到NaN时，返回1）。
+//float和double为什么有2个版本，而long只有一个？因为float和double都是有编码格式的，不像long那样任何二进制值都有效，所以这两个浮点类型存在NaN:not a number，既无效值。
+//byte，short，char本身就是int，指令和int完全一样。
+//boolean，对象类型只支持相等和不等的判断。
+//三目运算符没有特殊指令，应该算得上最早出现的语法糖之一。
+//所有跳转类指令占3字节，这是由于跳转的行索引占了2字节，注意：这并不意味着一个方法最大指令行索引是65535。
+//goto_w支持无条件跳转到指定的宽索引，但有条件指令都没有宽索引版本，想想也知道如何实现宽索引有条件跳转，效率肯定是低的，所以一个方法别写太长是最好的。
+
+/*
+ * 关于StackMapTable。
+ * 在Java 6版本之后JVM引入了栈图(Stack Map Table)概念。为了提高验证过程的效率，在字节码规范中添加了Stack Map Table属性，以下简称栈图，其方法的code属性中存储
+ * 了局部变量和操作数的类型验证以及字节码的偏移量。也就是一个method需要且仅对应一个Stack Map Table。在Java 7版本之后把栈图作为字节码文件中的强制部分。本来程序员是不需要
+ * 关心JVM 中的JIT编译器的细节，也不用知道编译原理或者数据流、控制流的细节。但栈图强制了，如果要生成bytecode，必须准确知道每个字节码指令对应的局部变量和操作数栈的类型。这是因
+ * 为Java7在编译的时期做了一些验证期间要做的事情，那就是类型检查，也就是栈图包含的内容。
+ * 
+ * 想想都比较抓狂，但是JVM 做的这一点点性能优化对整体性能提升也没起到什么卵用。Java的验证在类加载的时候只会运行一次，而占据了大部分时间的操作是IO的消耗，而不是验证过程。即使现在
+ * 有了栈图，验证过程依然会执行，栈图的存在只是节省了一部分的验证时间。并且JVM的设计者还必须兼容没有栈图的验证的实现，因为Java7以前版本是没有强制栈图这个概念的，然而Java8 依然
+ * 延续了栈图的字节码结构。
+ * 
+ * StackMapTable主要用来验证跳转前后locals、stack中的类型和大小一致。StackMapTable有多个StackMapFrame组成，第一个StackMapFrame也就是init_frame不
+ * 在StackMapTable中，后一个frame需要依赖前一个frame来得到完整的信息。一个frame中包含的信息有locals、stack、offset等，具体的数据结构可以参考规范jvms-4。有几
+ * 种frame我们会经常碰到，same_frame、same_frame_extended 、append_frame,例如append_frame就是和前面一个frame相比，这个frame增加了局部变量，这也是
+ * 前面说的后一个frame要依靠前一个frame来获取完整信息。
+ * 
+ * 一般编译器碰到一个跳转指令（ifxx/goto等）就会生成一个frame来描述跳转处的locals情况好到了链接时校验方法字节码的时候会把方法的所有指令都线性扫一遍，碰到store类指
+ * 令（istroe、fstore等）就会把在init_frame.locals中保存一个type，碰到跳转指令就会把init_frame和StackMapTable中对应offset的frame对比看看
+ * locals stack 类型 大小是否一致来判断跳转前后局部变量是否发生变化。
+ */
+
 public interface L {
 
     static int a(int p) {
         int a = 0;
 
-        if (p == 0) {
+        if (p == 0) { //3: ifne          8 解释：弹出栈顶数据，并判断，不为0则跳转到序号为8的指令。
             a = 1;
         }
 
-        if (p != 0) {
+        if (p != 0) { //9: ifeq          14 解释：弹出栈顶数据，并判断，为0则跳转到序号为14的指令。
             a = 1;
         }
 
@@ -42,11 +81,11 @@ public interface L {
     static int b(int p) {
         int a = 0;
 
-        if (p == 1) {
+        if (p == 1) { //4: if_icmpne     9 解释：弹出栈顶两个数据，并判断，不为0则跳转到序号为9的指令。
             a = 1;
         }
 
-        if (p != 1) {
+        if (p != 1) { //11: if_icmpeq     16 解释：弹出栈顶两个数据，并判断，为0则跳转到序号为16的指令。
             a = 1;
         }
 
@@ -79,6 +118,8 @@ public interface L {
         if (p == 1) {
             a = 1;
         }
+        //4: lcmp             解释：弹出栈顶两数据进行比较，a=b为0，a>b为1，a<b为-1，对比结果为int类型，把对比结果压栈。
+        //5: ifne          10 解释：弹出栈顶数据，并判断，不为0则跳转到序号为10的指令。
 
         if (p != 1) {
             a = 1;
@@ -178,7 +219,7 @@ public interface L {
     static int c(boolean p) {
         int a = 0;
 
-        if (p == true) {
+        if (p == true) { //和下面if (p)的写法生成的字节码一模一样。
             a = 1;
         }
 
@@ -219,6 +260,19 @@ public interface L {
         return a;
     }
 
+    static int e(int p1, int p2) {
+        return p1 > p2 ? p1 : p2;
+    }
+
+    static int f(int p1, int p2) {
+        if (p1 > p2) {
+            return p1;
+
+        } else {
+            return p2;
+        }
+    }
+
 }
 
 //-------- javap -v L --------
@@ -228,7 +282,7 @@ public interface L {
 //flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
 //this_class: #1                          // com/apollo/demos/base/bytecode/L
 //super_class: #3                         // java/lang/Object
-//interfaces: 0, fields: 0, methods: 7, attributes: 1
+//interfaces: 0, fields: 0, methods: 9, attributes: 1
 //Constant pool:
 // #1 = Class              #2             // com/apollo/demos/base/bytecode/L
 // #2 = Utf8               com/apollo/demos/base/bytecode/L
@@ -257,8 +311,11 @@ public interface L {
 //#25 = Utf8               p1
 //#26 = Utf8               Ljava/lang/String;
 //#27 = Utf8               p2
-//#28 = Utf8               SourceFile
-//#29 = Utf8               L.java
+//#28 = Utf8               e
+//#29 = Utf8               (II)I
+//#30 = Utf8               f
+//#31 = Utf8               SourceFile
+//#32 = Utf8               L.java
 //{
 //public static int a(int);
 //  descriptor: (I)I
@@ -752,4 +809,50 @@ public interface L {
 //      frame_type = 6 /* same */
 //      frame_type = 5 /* same */
 //      frame_type = 5 /* same */
+//
+//public static int e(int, int);
+//  descriptor: (II)I
+//  flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+//  Code:
+//    stack=2, locals=2, args_size=2
+//       0: iload_0
+//       1: iload_1
+//       2: if_icmple     9
+//       5: iload_0
+//       6: goto          10
+//       9: iload_1
+//      10: ireturn
+//    LineNumberTable:
+//      line 223: 0
+//    LocalVariableTable:
+//      Start  Length  Slot  Name   Signature
+//          0      11     0    p1   I
+//          0      11     1    p2   I
+//    StackMapTable: number_of_entries = 2
+//      frame_type = 9 /* same */
+//      frame_type = 64 /* same_locals_1_stack_item */
+//        stack = [ int ]
+//
+//public static int f(int, int);
+//  descriptor: (II)I
+//  flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+//  Code:
+//    stack=2, locals=2, args_size=2
+//       0: iload_0
+//       1: iload_1
+//       2: if_icmple     7
+//       5: iload_0
+//       6: ireturn
+//       7: iload_1
+//       8: ireturn
+//    LineNumberTable:
+//      line 227: 0
+//      line 228: 5
+//      line 231: 7
+//    LocalVariableTable:
+//      Start  Length  Slot  Name   Signature
+//          0       9     0    p1   I
+//          0       9     1    p2   I
+//    StackMapTable: number_of_entries = 1
+//      frame_type = 7 /* same */
 //}
