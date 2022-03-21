@@ -6,15 +6,15 @@ package com.apollo.demos.base.bytecode;
 //控制转移指令。
 //条件跳转指令都是如果xxx，就跳转到xxx，这个逻辑和语言正好是相反的。
 //条件跳转指令中的条件，都是判断int类型。
-//和0对比很特殊，有独立的指令，0不需要压栈，其余的数都用另外一条通用指令。所以p > 0的效率要高于p > 1
-//long，float，double类型比较时，会先使用比较指令，然后用比较结果跟0进行对比来完成控制转移。所以int类型效率要高于其他类型。
+//和0对比很特殊，有独立的指令，0不需要压栈，其余的数都用另外一条通用指令，所以p>0的效率要高于p>1。
+//long，float，double类型比较时，会先使用比较指令，然后用比较结果跟0进行对比来完成控制转移，所以int类型效率要高于其他类型。
 //比较指令有5个，如下：
 //lcmp 比较long类型值，比较规则：a=b为0，a>b为1，a<b为-1，下同。
 //fcmpl 比较float类型值（当遇到NaN时，返回-1）。
 //fcmpg 比较float类型值（当遇到NaN时，返回1）。
 //dcmpl 比较double类型值（当遇到NaN时，返回-1）。
 //dcmpg 比较double类型值（当遇到NaN时，返回1）。
-//float和double为什么有2个版本，而long只有一个？因为float和double都是有编码格式的，不像long那样任何二进制值都有效，所以这两个浮点类型存在NaN:not a number，既无效值。
+//float和double为什么有2个版本，而long只有一个？因为float和double都是有编码格式的，不像long那样任何二进制值都有效，所以这两个浮点类型存在NaN：Not a Number，既无效值。
 //byte，short，char本身就是int，指令和int完全一样。
 //boolean，对象类型只支持相等和不等的判断。
 //三目运算符没有特殊指令，应该算得上最早出现的语法糖之一。
@@ -40,6 +40,8 @@ package com.apollo.demos.base.bytecode;
  * 一般编译器碰到一个跳转指令（ifxx/goto等）就会生成一个frame来描述跳转处的locals情况好到了链接时校验方法字节码的时候会把方法的所有指令都线性扫一遍，碰到store类指
  * 令（istroe、fstore等）就会把在init_frame.locals中保存一个type，碰到跳转指令就会把init_frame和StackMapTable中对应offset的frame对比看看
  * locals stack 类型 大小是否一致来判断跳转前后局部变量是否发生变化。
+ * 
+ * 最后吐个槽，javap输出的StackMapTable中使用了/*（这个输出应该不是用于注释，而是专门表示跳转前后frame的对比类型），这导致导致我无法用/*进行javap信息注释，只能改为//进行注释。
  */
 
 public interface L {
@@ -71,10 +73,6 @@ public interface L {
             a = 1;
         }
 
-        if (p >= 0) {
-            a = 1;
-        }
-
         return a;
     }
 
@@ -98,10 +96,6 @@ public interface L {
         }
 
         if (p > 1) {
-            a = 1;
-        }
-
-        if (p >= 1) {
             a = 1;
         }
 
@@ -141,10 +135,6 @@ public interface L {
             a = 1;
         }
 
-        if (p >= 1) {
-            a = 1;
-        }
-
         return a;
     }
 
@@ -175,10 +165,6 @@ public interface L {
             a = 1;
         }
 
-        if (p >= 1) {
-            a = 1;
-        }
-
         return a;
     }
 
@@ -202,10 +188,6 @@ public interface L {
         }
 
         if (p > 1) {
-            a = 1;
-        }
-
-        if (p >= 1) {
             a = 1;
         }
 
@@ -348,38 +330,31 @@ public interface L {
 //      33: iflt          38
 //      36: iconst_1
 //      37: istore_1
-//      38: iload_0
-//      39: iflt          44
-//      42: iconst_1
-//      43: istore_1
-//      44: iload_1
-//      45: ireturn
+//      38: iload_1
+//      39: ireturn
 //    LineNumberTable:
-//      line 9: 0
-//      line 11: 2
-//      line 12: 6
-//      line 15: 8
-//      line 16: 12
-//      line 19: 14
-//      line 20: 18
-//      line 23: 20
-//      line 24: 24
-//      line 27: 26
-//      line 28: 30
-//      line 31: 32
-//      line 32: 36
-//      line 35: 38
-//      line 36: 42
-//      line 39: 44
+//      line 48: 0
+//      line 50: 2
+//      line 51: 6
+//      line 54: 8
+//      line 55: 12
+//      line 58: 14
+//      line 59: 18
+//      line 62: 20
+//      line 63: 24
+//      line 66: 26
+//      line 67: 30
+//      line 70: 32
+//      line 71: 36
+//      line 74: 38
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
-//          0      46     0     p   I
-//          2      44     1     a   I
-//    StackMapTable: number_of_entries = 7
+//          0      40     0     p   I
+//          2      38     1     a   I
+//    StackMapTable: number_of_entries = 6
 //      frame_type = 252 /* append */
 //        offset_delta = 8
 //        locals = [ int ]
-//      frame_type = 5 /* same */
 //      frame_type = 5 /* same */
 //      frame_type = 5 /* same */
 //      frame_type = 5 /* same */
@@ -423,39 +398,31 @@ public interface L {
 //      39: if_icmplt     44
 //      42: iconst_1
 //      43: istore_1
-//      44: iload_0
-//      45: iconst_1
-//      46: if_icmplt     51
-//      49: iconst_1
-//      50: istore_1
-//      51: iload_1
-//      52: ireturn
+//      44: iload_1
+//      45: ireturn
 //    LineNumberTable:
-//      line 43: 0
-//      line 45: 2
-//      line 46: 7
-//      line 49: 9
-//      line 50: 14
-//      line 53: 16
-//      line 54: 21
-//      line 57: 23
-//      line 58: 28
-//      line 61: 30
-//      line 62: 35
-//      line 65: 37
-//      line 66: 42
-//      line 69: 44
-//      line 70: 49
-//      line 73: 51
+//      line 78: 0
+//      line 80: 2
+//      line 81: 7
+//      line 84: 9
+//      line 85: 14
+//      line 88: 16
+//      line 89: 21
+//      line 92: 23
+//      line 93: 28
+//      line 96: 30
+//      line 97: 35
+//      line 100: 37
+//      line 101: 42
+//      line 104: 44
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
-//          0      53     0     p   I
-//          2      51     1     a   I
-//    StackMapTable: number_of_entries = 7
+//          0      46     0     p   I
+//          2      44     1     a   I
+//    StackMapTable: number_of_entries = 6
 //      frame_type = 252 /* append */
 //        offset_delta = 9
 //        locals = [ int ]
-//      frame_type = 6 /* same */
 //      frame_type = 6 /* same */
 //      frame_type = 6 /* same */
 //      frame_type = 6 /* same */
@@ -505,40 +472,31 @@ public interface L {
 //      45: iflt          50
 //      48: iconst_1
 //      49: istore_2
-//      50: lload_0
-//      51: lconst_1
-//      52: lcmp
-//      53: iflt          58
-//      56: iconst_1
-//      57: istore_2
-//      58: iload_2
-//      59: ireturn
+//      50: iload_2
+//      51: ireturn
 //    LineNumberTable:
-//      line 77: 0
-//      line 79: 2
-//      line 80: 8
-//      line 83: 10
-//      line 84: 16
-//      line 87: 18
-//      line 88: 24
-//      line 91: 26
-//      line 92: 32
-//      line 95: 34
-//      line 96: 40
-//      line 99: 42
-//      line 100: 48
-//      line 103: 50
-//      line 104: 56
-//      line 107: 58
+//      line 108: 0
+//      line 110: 2
+//      line 111: 8
+//      line 116: 10
+//      line 117: 16
+//      line 120: 18
+//      line 121: 24
+//      line 124: 26
+//      line 125: 32
+//      line 128: 34
+//      line 129: 40
+//      line 132: 42
+//      line 133: 48
+//      line 136: 50
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
-//          0      60     0     p   J
-//          2      58     2     a   I
-//    StackMapTable: number_of_entries = 7
+//          0      52     0     p   J
+//          2      50     2     a   I
+//    StackMapTable: number_of_entries = 6
 //      frame_type = 252 /* append */
 //        offset_delta = 10
 //        locals = [ int ]
-//      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
@@ -588,40 +546,31 @@ public interface L {
 //      45: iflt          50
 //      48: iconst_1
 //      49: istore_1
-//      50: fload_0
-//      51: fconst_1
-//      52: fcmpl
-//      53: iflt          58
-//      56: iconst_1
-//      57: istore_1
-//      58: iload_1
-//      59: ireturn
+//      50: iload_1
+//      51: ireturn
 //    LineNumberTable:
-//      line 111: 0
-//      line 113: 2
-//      line 114: 8
-//      line 117: 10
-//      line 118: 16
-//      line 121: 18
-//      line 122: 24
-//      line 125: 26
-//      line 126: 32
-//      line 129: 34
-//      line 130: 40
-//      line 133: 42
-//      line 134: 48
-//      line 137: 50
-//      line 138: 56
-//      line 141: 58
+//      line 140: 0
+//      line 142: 2
+//      line 143: 8
+//      line 146: 10
+//      line 147: 16
+//      line 150: 18
+//      line 151: 24
+//      line 154: 26
+//      line 155: 32
+//      line 158: 34
+//      line 159: 40
+//      line 162: 42
+//      line 163: 48
+//      line 166: 50
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
-//          0      60     0     p   F
-//          2      58     1     a   I
-//    StackMapTable: number_of_entries = 7
+//          0      52     0     p   F
+//          2      50     1     a   I
+//    StackMapTable: number_of_entries = 6
 //      frame_type = 252 /* append */
 //        offset_delta = 10
 //        locals = [ int ]
-//      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
@@ -671,40 +620,31 @@ public interface L {
 //      45: iflt          50
 //      48: iconst_1
 //      49: istore_2
-//      50: dload_0
-//      51: dconst_1
-//      52: dcmpl
-//      53: iflt          58
-//      56: iconst_1
-//      57: istore_2
-//      58: iload_2
-//      59: ireturn
+//      50: iload_2
+//      51: ireturn
 //    LineNumberTable:
-//      line 145: 0
-//      line 147: 2
-//      line 148: 8
-//      line 151: 10
-//      line 152: 16
-//      line 155: 18
-//      line 156: 24
-//      line 159: 26
-//      line 160: 32
-//      line 163: 34
-//      line 164: 40
-//      line 167: 42
-//      line 168: 48
-//      line 171: 50
-//      line 172: 56
-//      line 175: 58
+//      line 170: 0
+//      line 172: 2
+//      line 173: 8
+//      line 176: 10
+//      line 177: 16
+//      line 180: 18
+//      line 181: 24
+//      line 184: 26
+//      line 185: 32
+//      line 188: 34
+//      line 189: 40
+//      line 192: 42
+//      line 193: 48
+//      line 196: 50
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
-//          0      60     0     p   D
-//          2      58     2     a   I
-//    StackMapTable: number_of_entries = 7
+//          0      52     0     p   D
+//          2      50     2     a   I
+//    StackMapTable: number_of_entries = 6
 //      frame_type = 252 /* append */
 //        offset_delta = 10
 //        locals = [ int ]
-//      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
 //      frame_type = 7 /* same */
@@ -737,16 +677,16 @@ public interface L {
 //      26: iload_1
 //      27: ireturn
 //    LineNumberTable:
-//      line 179: 0
-//      line 181: 2
-//      line 182: 6
-//      line 185: 8
-//      line 186: 12
-//      line 189: 14
-//      line 190: 18
-//      line 193: 20
-//      line 194: 24
-//      line 197: 26
+//      line 200: 0
+//      line 202: 2
+//      line 203: 6
+//      line 206: 8
+//      line 207: 12
+//      line 210: 14
+//      line 211: 18
+//      line 214: 20
+//      line 215: 24
+//      line 218: 26
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      28     0     p   Z
@@ -787,16 +727,16 @@ public interface L {
 //      28: iload_2
 //      29: ireturn
 //    LineNumberTable:
-//      line 201: 0
-//      line 203: 2
-//      line 204: 7
-//      line 207: 9
-//      line 208: 14
-//      line 211: 16
-//      line 212: 20
-//      line 215: 22
-//      line 216: 26
-//      line 219: 28
+//      line 222: 0
+//      line 224: 2
+//      line 225: 7
+//      line 228: 9
+//      line 229: 14
+//      line 232: 16
+//      line 233: 20
+//      line 236: 22
+//      line 237: 26
+//      line 240: 28
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      30     0    p1   Ljava/lang/String;
@@ -823,7 +763,7 @@ public interface L {
 //       9: iload_1
 //      10: ireturn
 //    LineNumberTable:
-//      line 223: 0
+//      line 244: 0
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      11     0    p1   I
@@ -846,9 +786,9 @@ public interface L {
 //       7: iload_1
 //       8: ireturn
 //    LineNumberTable:
-//      line 227: 0
-//      line 228: 5
-//      line 231: 7
+//      line 248: 0
+//      line 249: 5
+//      line 252: 7
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0       9     0    p1   I
