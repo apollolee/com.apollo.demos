@@ -6,7 +6,16 @@ package com.apollo.demos.base.bytecode;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-@SuppressWarnings("unused")
+//异常处理也属于分支控制的一种。
+//只有要异常处理的方法都有ExceptionTable。
+//ExceptionTable的from，to，target代表指令索引，type代表异常类型，表示[from,to)中的指令如果出现type异常，则跳转到target指令执行。
+//如果发生异常，跳转到target前，会把异常对象入栈顶，所以catch的第一个指定总是把栈顶异常存入局部变量中。如果发生异常的finally第一句也是，因为需要执行finally语句后重新抛出。
+//finally比较特别，处理方式是指令拷贝，字节码代价还是相当大的，建议finally内不要写太长的代码。
+//finally的type都是any，可能不只一个。
+//finally中直接返回值或者改变返回值，都是些较为奇怪的行为，最终字节码可以解释一切。
+//try-with-resources是个超级语法糖，当resource非常多得时候，它生成的字节码会多到无法想象，当JaCoCo检查到xx of xx branches missed的时候，请不要感到诧异.
+
+@SuppressWarnings({ "unused", "finally" })
 public interface O {
 
     static void a() {
@@ -51,7 +60,6 @@ public interface O {
         }
     }
 
-    @SuppressWarnings("finally")
     static int e() {
         try {
             int a = 1;
@@ -93,7 +101,6 @@ public interface O {
         }
     }
 
-    @SuppressWarnings("finally")
     static void i() {
         try {
             throw new RuntimeException("in try");

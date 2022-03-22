@@ -6,6 +6,9 @@ package com.apollo.demos.base.bytecode;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+//无聊静态还是非静态，在字段定义时直接赋值只是语法糖，最终都是在初始化方法中执行对应的赋值指令。
+//一个对象的创建至少需要new，dup，调用<init>三个指令，dup的存在是因为调用<init>需要一个对象，但<init>又不带返回值，调用完后不能再次压栈，如果不在之前dup，new出来的对象就丢失了，无法再赋值到其它地方了。
+
 @SuppressWarnings("unused")
 public class P {
 

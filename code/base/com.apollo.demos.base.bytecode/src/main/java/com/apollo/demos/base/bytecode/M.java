@@ -5,6 +5,13 @@ package com.apollo.demos.base.bytecode;
 
 import java.lang.annotation.RetentionPolicy;
 
+//switch可能是占用字节最长的指令。
+//switch指令只能接受int类型的case。
+//编译器会根据case的稀疏程度选择具体指令，tableswitch效率高，但需要补充断层case以实现O(1)时间复杂度的查找，lookupswitch则使用二分查找，时间复杂度为O(log n)。
+//switch字符串时会先把String转为hashCode，再把hashCode作为case，最后在case中还要调用String.equals做最终判断，这是因为hashCode并不唯一。
+//如果case多个字符串的hashCode相同，还会在case中加入类似elseif的分支进一步处理。所以总体来说，switch字符串的效率要远低于int，甚至还不如直接使用ifelse做分支控制。
+//switch枚举需要生成静态方法辅助实现，也有一定开销，但由于Enum.ordinal的存在，一个潜在的好处是switch枚举能固定使用效率较高的tableswitch，而且还不用补充断层。
+
 public interface M {
 
     static int a(int p) {
@@ -132,7 +139,26 @@ public interface M {
         return a;
     }
 
-    static int f(RetentionPolicy p) {
+    static int f(String p) {
+        int a = 0;
+
+        switch (p) {
+        case "Aa":
+            a = 1;
+            break;
+        case "BB":
+            a = 1;
+            break;
+
+        default:
+            a = 1;
+            break;
+        }
+
+        return a;
+    }
+
+    static int g(RetentionPolicy p) {
         int a = 0;
 
         switch (p) {
@@ -163,7 +189,7 @@ public interface M {
 //flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
 //this_class: #1                          // com/apollo/demos/base/bytecode/M
 //super_class: #3                         // java/lang/Object
-//interfaces: 0, fields: 1, methods: 7, attributes: 1
+//interfaces: 0, fields: 1, methods: 8, attributes: 1
 //Constant pool:
 // #1 = Class              #2             // com/apollo/demos/base/bytecode/M
 // #2 = Utf8               com/apollo/demos/base/bytecode/M
@@ -206,36 +232,41 @@ public interface M {
 //#39 = Utf8               5
 //#40 = Utf8               Ljava/lang/String;
 //#41 = Utf8               f
-//#42 = Utf8               (Ljava/lang/annotation/RetentionPolicy;)I
-//#43 = InterfaceMethodref #1.#44         // com/apollo/demos/base/bytecode/M.$SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
-//#44 = NameAndType        #5:#45         // $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
-//#45 = Utf8               ()[I
-//#46 = Methodref          #47.#49        // java/lang/annotation/RetentionPolicy.ordinal:()I
-//#47 = Class              #48            // java/lang/annotation/RetentionPolicy
-//#48 = Utf8               java/lang/annotation/RetentionPolicy
-//#49 = NameAndType        #50:#25        // ordinal:()I
-//#50 = Utf8               ordinal
-//#51 = Utf8               Ljava/lang/annotation/RetentionPolicy;
-//#52 = Fieldref           #1.#53         // com/apollo/demos/base/bytecode/M.$SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
-//#53 = NameAndType        #5:#6          // $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
-//#54 = Methodref          #47.#55        // java/lang/annotation/RetentionPolicy.values:()[Ljava/lang/annotation/RetentionPolicy;
-//#55 = NameAndType        #56:#57        // values:()[Ljava/lang/annotation/RetentionPolicy;
-//#56 = Utf8               values
-//#57 = Utf8               ()[Ljava/lang/annotation/RetentionPolicy;
-//#58 = Fieldref           #47.#59        // java/lang/annotation/RetentionPolicy.CLASS:Ljava/lang/annotation/RetentionPolicy;
-//#59 = NameAndType        #60:#51        // CLASS:Ljava/lang/annotation/RetentionPolicy;
-//#60 = Utf8               CLASS
-//#61 = Fieldref           #47.#62        // java/lang/annotation/RetentionPolicy.RUNTIME:Ljava/lang/annotation/RetentionPolicy;
-//#62 = NameAndType        #63:#51        // RUNTIME:Ljava/lang/annotation/RetentionPolicy;
-//#63 = Utf8               RUNTIME
-//#64 = Fieldref           #47.#65        // java/lang/annotation/RetentionPolicy.SOURCE:Ljava/lang/annotation/RetentionPolicy;
-//#65 = NameAndType        #66:#51        // SOURCE:Ljava/lang/annotation/RetentionPolicy;
-//#66 = Utf8               SOURCE
-//#67 = Class              #68            // java/lang/NoSuchFieldError
-//#68 = Utf8               java/lang/NoSuchFieldError
-//#69 = Class              #6             // "[I"
-//#70 = Utf8               SourceFile
-//#71 = Utf8               M.java
+//#42 = String             #43            // Aa
+//#43 = Utf8               Aa
+//#44 = String             #45            // BB
+//#45 = Utf8               BB
+//#46 = Utf8               g
+//#47 = Utf8               (Ljava/lang/annotation/RetentionPolicy;)I
+//#48 = InterfaceMethodref #1.#49         // com/apollo/demos/base/bytecode/M.$SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
+//#49 = NameAndType        #5:#50         // $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
+//#50 = Utf8               ()[I
+//#51 = Methodref          #52.#54        // java/lang/annotation/RetentionPolicy.ordinal:()I
+//#52 = Class              #53            // java/lang/annotation/RetentionPolicy
+//#53 = Utf8               java/lang/annotation/RetentionPolicy
+//#54 = NameAndType        #55:#25        // ordinal:()I
+//#55 = Utf8               ordinal
+//#56 = Utf8               Ljava/lang/annotation/RetentionPolicy;
+//#57 = Fieldref           #1.#58         // com/apollo/demos/base/bytecode/M.$SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
+//#58 = NameAndType        #5:#6          // $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
+//#59 = Methodref          #52.#60        // java/lang/annotation/RetentionPolicy.values:()[Ljava/lang/annotation/RetentionPolicy;
+//#60 = NameAndType        #61:#62        // values:()[Ljava/lang/annotation/RetentionPolicy;
+//#61 = Utf8               values
+//#62 = Utf8               ()[Ljava/lang/annotation/RetentionPolicy;
+//#63 = Fieldref           #52.#64        // java/lang/annotation/RetentionPolicy.CLASS:Ljava/lang/annotation/RetentionPolicy;
+//#64 = NameAndType        #65:#56        // CLASS:Ljava/lang/annotation/RetentionPolicy;
+//#65 = Utf8               CLASS
+//#66 = Fieldref           #52.#67        // java/lang/annotation/RetentionPolicy.RUNTIME:Ljava/lang/annotation/RetentionPolicy;
+//#67 = NameAndType        #68:#56        // RUNTIME:Ljava/lang/annotation/RetentionPolicy;
+//#68 = Utf8               RUNTIME
+//#69 = Fieldref           #52.#70        // java/lang/annotation/RetentionPolicy.SOURCE:Ljava/lang/annotation/RetentionPolicy;
+//#70 = NameAndType        #71:#56        // SOURCE:Ljava/lang/annotation/RetentionPolicy;
+//#71 = Utf8               SOURCE
+//#72 = Class              #73            // java/lang/NoSuchFieldError
+//#73 = Utf8               java/lang/NoSuchFieldError
+//#74 = Class              #6             // "[I"
+//#75 = Utf8               SourceFile
+//#76 = Utf8               M.java
 //{
 //public static final int[] $SWITCH_TABLE$java$lang$annotation$RetentionPolicy;
 //  descriptor: [I
@@ -277,20 +308,20 @@ public interface M {
 //      63: iload_1
 //      64: ireturn
 //    LineNumberTable:
-//      line 11: 0
-//      line 13: 2
-//      line 15: 36
-//      line 16: 38
-//      line 18: 41
-//      line 19: 43
-//      line 21: 46
-//      line 22: 48
-//      line 24: 51
-//      line 25: 53
-//      line 27: 56
-//      line 28: 58
-//      line 31: 61
-//      line 35: 63
+//      line 18: 0
+//      line 20: 2
+//      line 22: 36
+//      line 23: 38
+//      line 25: 41
+//      line 26: 43
+//      line 28: 46
+//      line 29: 48
+//      line 31: 51
+//      line 32: 53
+//      line 34: 56
+//      line 35: 58
+//      line 38: 61
+//      line 42: 63
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      65     0     p   I
@@ -333,14 +364,14 @@ public interface M {
 //      48: iload_1
 //      49: ireturn
 //    LineNumberTable:
-//      line 39: 0
-//      line 41: 2
-//      line 43: 36
-//      line 44: 38
-//      line 46: 41
-//      line 47: 43
-//      line 50: 46
-//      line 54: 48
+//      line 46: 0
+//      line 48: 2
+//      line 50: 36
+//      line 51: 38
+//      line 53: 41
+//      line 54: 43
+//      line 57: 46
+//      line 61: 48
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      50     0     p   I
@@ -380,14 +411,14 @@ public interface M {
 //      48: iload_1
 //      49: ireturn
 //    LineNumberTable:
-//      line 58: 0
-//      line 60: 2
-//      line 62: 36
-//      line 63: 38
-//      line 68: 41
-//      line 69: 43
-//      line 72: 46
-//      line 76: 48
+//      line 65: 0
+//      line 67: 2
+//      line 69: 36
+//      line 70: 38
+//      line 75: 41
+//      line 76: 43
+//      line 79: 46
+//      line 83: 48
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      50     0     p   I
@@ -436,20 +467,20 @@ public interface M {
 //      79: iload_1
 //      80: ireturn
 //    LineNumberTable:
-//      line 80: 0
-//      line 82: 2
-//      line 84: 52
-//      line 85: 54
-//      line 87: 57
-//      line 88: 59
-//      line 90: 62
-//      line 91: 64
-//      line 93: 67
-//      line 94: 69
-//      line 96: 72
-//      line 97: 74
-//      line 100: 77
-//      line 104: 79
+//      line 87: 0
+//      line 89: 2
+//      line 91: 52
+//      line 92: 54
+//      line 94: 57
+//      line 95: 59
+//      line 97: 62
+//      line 98: 64
+//      line 100: 67
+//      line 101: 69
+//      line 103: 72
+//      line 104: 74
+//      line 107: 77
+//      line 111: 79
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      81     0     p   I
@@ -529,20 +560,20 @@ public interface M {
 //     147: iload_1
 //     148: ireturn
 //    LineNumberTable:
-//      line 108: 0
-//      line 110: 2
-//      line 112: 120
-//      line 113: 122
-//      line 115: 125
-//      line 116: 127
-//      line 118: 130
-//      line 119: 132
-//      line 121: 135
-//      line 122: 137
-//      line 124: 140
-//      line 125: 142
-//      line 128: 145
-//      line 132: 147
+//      line 115: 0
+//      line 117: 2
+//      line 119: 120
+//      line 120: 122
+//      line 122: 125
+//      line 123: 127
+//      line 125: 130
+//      line 126: 132
+//      line 128: 135
+//      line 129: 137
+//      line 131: 140
+//      line 132: 142
+//      line 135: 145
+//      line 139: 147
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0     149     0     p   Ljava/lang/String;
@@ -564,16 +595,73 @@ public interface M {
 //      frame_type = 250 /* chop */
 //        offset_delta = 1
 //
-//public static int f(java.lang.annotation.RetentionPolicy);
+//public static int f(java.lang.String);
+//  descriptor: (Ljava/lang/String;)I
+//  flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+//  Code:
+//    stack=2, locals=3, args_size=1
+//       0: iconst_0
+//       1: istore_1
+//       2: aload_0
+//       3: dup
+//       4: astore_2
+//       5: invokevirtual #20                 // Method java/lang/String.hashCode:()I
+//       8: lookupswitch  { // 1
+//                  2112: 28
+//               default: 59
+//          }
+//      28: aload_2
+//      29: ldc           #42                 // String Aa
+//      31: invokevirtual #28                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+//      34: ifne          49
+//      37: aload_2
+//      38: ldc           #44                 // String BB
+//      40: invokevirtual #28                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+//      43: ifne          54
+//      46: goto          59
+//      49: iconst_1
+//      50: istore_1
+//      51: goto          61
+//      54: iconst_1
+//      55: istore_1
+//      56: goto          61
+//      59: iconst_1
+//      60: istore_1
+//      61: iload_1
+//      62: ireturn
+//    LineNumberTable:
+//      line 143: 0
+//      line 145: 2
+//      line 147: 49
+//      line 148: 51
+//      line 150: 54
+//      line 151: 56
+//      line 154: 59
+//      line 158: 61
+//    LocalVariableTable:
+//      Start  Length  Slot  Name   Signature
+//          0      63     0     p   Ljava/lang/String;
+//          2      61     1     a   I
+//    StackMapTable: number_of_entries = 5
+//      frame_type = 253 /* append */
+//        offset_delta = 28
+//        locals = [ int, class java/lang/String ]
+//      frame_type = 20 /* same */
+//      frame_type = 4 /* same */
+//      frame_type = 4 /* same */
+//      frame_type = 250 /* chop */
+//        offset_delta = 1
+//
+//public static int g(java.lang.annotation.RetentionPolicy);
 //  descriptor: (Ljava/lang/annotation/RetentionPolicy;)I
 //  flags: (0x0009) ACC_PUBLIC, ACC_STATIC
 //  Code:
 //    stack=2, locals=2, args_size=1
 //       0: iconst_0
 //       1: istore_1
-//       2: invokestatic  #43                 // InterfaceMethod $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
+//       2: invokestatic  #48                 // InterfaceMethod $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:()[I
 //       5: aload_0
-//       6: invokevirtual #46                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
+//       6: invokevirtual #51                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
 //       9: iaload
 //      10: tableswitch   { // 1 to 3
 //                     1: 36
@@ -595,16 +683,16 @@ public interface M {
 //      53: iload_1
 //      54: ireturn
 //    LineNumberTable:
-//      line 136: 0
-//      line 138: 2
-//      line 140: 36
-//      line 141: 38
-//      line 143: 41
-//      line 144: 43
-//      line 146: 46
-//      line 147: 48
-//      line 150: 51
-//      line 154: 53
+//      line 162: 0
+//      line 164: 2
+//      line 166: 36
+//      line 167: 38
+//      line 169: 41
+//      line 170: 43
+//      line 172: 46
+//      line 173: 48
+//      line 176: 51
+//      line 180: 53
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //          0      55     0     p   Ljava/lang/annotation/RetentionPolicy;
@@ -623,39 +711,39 @@ public interface M {
 //  flags: (0x1009) ACC_PUBLIC, ACC_STATIC, ACC_SYNTHETIC
 //  Code:
 //    stack=3, locals=1, args_size=0
-//       0: getstatic     #52                 // Field $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
+//       0: getstatic     #57                 // Field $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
 //       3: dup
 //       4: ifnull        8
 //       7: areturn
 //       8: pop
-//       9: invokestatic  #54                 // Method java/lang/annotation/RetentionPolicy.values:()[Ljava/lang/annotation/RetentionPolicy;
+//       9: invokestatic  #59                 // Method java/lang/annotation/RetentionPolicy.values:()[Ljava/lang/annotation/RetentionPolicy;
 //      12: arraylength
 //      13: newarray       int
 //      15: astore_0
 //      16: aload_0
-//      17: getstatic     #58                 // Field java/lang/annotation/RetentionPolicy.CLASS:Ljava/lang/annotation/RetentionPolicy;
-//      20: invokevirtual #46                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
+//      17: getstatic     #63                 // Field java/lang/annotation/RetentionPolicy.CLASS:Ljava/lang/annotation/RetentionPolicy;
+//      20: invokevirtual #51                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
 //      23: iconst_2
 //      24: iastore
 //      25: goto          29
 //      28: pop
 //      29: aload_0
-//      30: getstatic     #61                 // Field java/lang/annotation/RetentionPolicy.RUNTIME:Ljava/lang/annotation/RetentionPolicy;
-//      33: invokevirtual #46                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
+//      30: getstatic     #66                 // Field java/lang/annotation/RetentionPolicy.RUNTIME:Ljava/lang/annotation/RetentionPolicy;
+//      33: invokevirtual #51                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
 //      36: iconst_3
 //      37: iastore
 //      38: goto          42
 //      41: pop
 //      42: aload_0
-//      43: getstatic     #64                 // Field java/lang/annotation/RetentionPolicy.SOURCE:Ljava/lang/annotation/RetentionPolicy;
-//      46: invokevirtual #46                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
+//      43: getstatic     #69                 // Field java/lang/annotation/RetentionPolicy.SOURCE:Ljava/lang/annotation/RetentionPolicy;
+//      46: invokevirtual #51                 // Method java/lang/annotation/RetentionPolicy.ordinal:()I
 //      49: iconst_1
 //      50: iastore
 //      51: goto          55
 //      54: pop
 //      55: aload_0
 //      56: dup
-//      57: putstatic     #52                 // Field $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
+//      57: putstatic     #57                 // Field $SWITCH_TABLE$java$lang$annotation$RetentionPolicy:[I
 //      60: areturn
 //    Exception table:
 //       from    to  target type
@@ -663,7 +751,7 @@ public interface M {
 //          29    38    41   Class java/lang/NoSuchFieldError
 //          42    51    54   Class java/lang/NoSuchFieldError
 //    LineNumberTable:
-//      line 8: 0
+//      line 15: 0
 //    LocalVariableTable:
 //      Start  Length  Slot  Name   Signature
 //    StackMapTable: number_of_entries = 7
