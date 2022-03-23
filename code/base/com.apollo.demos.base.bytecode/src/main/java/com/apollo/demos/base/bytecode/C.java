@@ -136,8 +136,8 @@ Constant pool:
          3: putstatic     #34                 // Field s_f:D
          6: return
       LineNumberTable:
-        line 24: 0
-        line 32: 6
+        line 25: 0
+        line 33: 6
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
 
@@ -156,10 +156,10 @@ Constant pool:
         14: putfield      #45                 // Field m_e:F
         17: return
       LineNumberTable:
-        line 12: 0
-        line 20: 4
-        line 22: 11
-        line 12: 17
+        line 13: 0
+        line 21: 4
+        line 23: 11
+        line 13: 17
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0      18     0  this   Lcom/apollo/demos/base/bytecode/C;

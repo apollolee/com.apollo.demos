@@ -96,8 +96,8 @@ Constant pool:
          5: invokevirtual #18                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
          8: return
       LineNumberTable:
-        line 9: 0
-        line 10: 8
+        line 12: 0
+        line 13: 8
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0       9     0  args   [Ljava/lang/String;
@@ -112,8 +112,8 @@ Constant pool:
          2: invokespecial #30                 // Method "<init>":(I)V
          5: return
       LineNumberTable:
-        line 15: 0
-        line 16: 5
+        line 18: 0
+        line 19: 5
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0       6     0  this   Lcom/apollo/demos/base/bytecode/B;
@@ -130,9 +130,9 @@ Constant pool:
          6: putfield      #37                 // Field m_a:I
          9: return
       LineNumberTable:
-        line 18: 0
-        line 19: 4
-        line 20: 9
+        line 21: 0
+        line 22: 4
+        line 23: 9
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0      10     0  this   Lcom/apollo/demos/base/bytecode/B;
@@ -147,7 +147,7 @@ Constant pool:
          1: getfield      #37                 // Field m_a:I
          4: ireturn
       LineNumberTable:
-        line 23: 0
+        line 26: 0
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0       5     0  this   Lcom/apollo/demos/base/bytecode/B;
@@ -162,8 +162,8 @@ Constant pool:
          2: putfield      #37                 // Field m_a:I
          5: return
       LineNumberTable:
-        line 27: 0
-        line 28: 5
+        line 30: 0
+        line 31: 5
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
             0       6     0  this   Lcom/apollo/demos/base/bytecode/B;

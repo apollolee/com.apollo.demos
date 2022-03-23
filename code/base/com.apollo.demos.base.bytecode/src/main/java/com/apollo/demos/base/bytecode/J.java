@@ -37,125 +37,125 @@ public class J {
 
 /*-------- javap -v J --------
 public class com.apollo.demos.base.bytecode.J
-minor version: 0
-major version: 52
-flags: (0x0021) ACC_PUBLIC, ACC_SUPER
-this_class: #1                          // com/apollo/demos/base/bytecode/J
-super_class: #3                         // java/lang/Object
-interfaces: 0, fields: 1, methods: 5, attributes: 1
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #1                          // com/apollo/demos/base/bytecode/J
+  super_class: #3                         // java/lang/Object
+  interfaces: 0, fields: 1, methods: 5, attributes: 1
 Constant pool:
- #1 = Class              #2             // com/apollo/demos/base/bytecode/J
- #2 = Utf8               com/apollo/demos/base/bytecode/J
- #3 = Class              #4             // java/lang/Object
- #4 = Utf8               java/lang/Object
- #5 = Utf8               m_i
- #6 = Utf8               I
- #7 = Utf8               <init>
- #8 = Utf8               ()V
- #9 = Utf8               Code
-#10 = Methodref          #3.#11         // java/lang/Object."<init>":()V
-#11 = NameAndType        #7:#8          // "<init>":()V
-#12 = Fieldref           #1.#13         // com/apollo/demos/base/bytecode/J.m_i:I
-#13 = NameAndType        #5:#6          // m_i:I
-#14 = Utf8               LineNumberTable
-#15 = Utf8               LocalVariableTable
-#16 = Utf8               this
-#17 = Utf8               Lcom/apollo/demos/base/bytecode/J;
-#18 = Utf8               a
-#19 = Utf8               ()I
-#20 = Utf8               b
-#21 = Methodref          #1.#22         // com/apollo/demos/base/bytecode/J.a:()I
-#22 = NameAndType        #18:#19        // a:()I
-#23 = Utf8               c
-#24 = Utf8               ()J
-#25 = Utf8               d
-#26 = Methodref          #1.#27         // com/apollo/demos/base/bytecode/J.c:()J
-#27 = NameAndType        #23:#24        // c:()J
-#28 = Utf8               SourceFile
-#29 = Utf8               J.java
+   #1 = Class              #2             // com/apollo/demos/base/bytecode/J
+   #2 = Utf8               com/apollo/demos/base/bytecode/J
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               m_i
+   #6 = Utf8               I
+   #7 = Utf8               <init>
+   #8 = Utf8               ()V
+   #9 = Utf8               Code
+  #10 = Methodref          #3.#11         // java/lang/Object."<init>":()V
+  #11 = NameAndType        #7:#8          // "<init>":()V
+  #12 = Fieldref           #1.#13         // com/apollo/demos/base/bytecode/J.m_i:I
+  #13 = NameAndType        #5:#6          // m_i:I
+  #14 = Utf8               LineNumberTable
+  #15 = Utf8               LocalVariableTable
+  #16 = Utf8               this
+  #17 = Utf8               Lcom/apollo/demos/base/bytecode/J;
+  #18 = Utf8               a
+  #19 = Utf8               ()I
+  #20 = Utf8               b
+  #21 = Methodref          #1.#22         // com/apollo/demos/base/bytecode/J.a:()I
+  #22 = NameAndType        #18:#19        // a:()I
+  #23 = Utf8               c
+  #24 = Utf8               ()J
+  #25 = Utf8               d
+  #26 = Methodref          #1.#27         // com/apollo/demos/base/bytecode/J.c:()J
+  #27 = NameAndType        #23:#24        // c:()J
+  #28 = Utf8               SourceFile
+  #29 = Utf8               J.java
 {
-int m_i;
-  descriptor: I
-  flags: (0x0000)
+  int m_i;
+    descriptor: I
+    flags: (0x0000)
 
-public com.apollo.demos.base.bytecode.J();
-  descriptor: ()V
-  flags: (0x0001) ACC_PUBLIC
-  Code:
-    stack=2, locals=1, args_size=1
-       0: aload_0
-       1: invokespecial #10                 // Method java/lang/Object."<init>":()V
-       4: aload_0
-       5: iconst_0
-       6: putfield      #12                 // Field m_i:I
-       9: return
-    LineNumberTable:
-      line 6: 0
-      line 10: 4
-      line 6: 9
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
-          0      10     0  this   Lcom/apollo/demos/base/bytecode/J;
+  public com.apollo.demos.base.bytecode.J();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #10                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_0
+         6: putfield      #12                 // Field m_i:I
+         9: return
+      LineNumberTable:
+        line 6: 0
+        line 10: 4
+        line 6: 9
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lcom/apollo/demos/base/bytecode/J;
 
-int a();
-  descriptor: ()I
-  flags: (0x0000)
-  Code:
-    stack=3, locals=1, args_size=1
-       0: aload_0
-       1: dup
-       2: getfield      #12                 // Field m_i:I
-       5: iconst_1
-       6: iadd
-       7: dup_x1
-       8: putfield      #12                 // Field m_i:I
-      11: ireturn
-    LineNumberTable:
-      line 13: 0
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
-          0      12     0  this   Lcom/apollo/demos/base/bytecode/J;
+  int a();
+    descriptor: ()I
+    flags: (0x0000)
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: dup
+         2: getfield      #12                 // Field m_i:I
+         5: iconst_1
+         6: iadd
+         7: dup_x1
+         8: putfield      #12                 // Field m_i:I
+        11: ireturn
+      LineNumberTable:
+        line 13: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  this   Lcom/apollo/demos/base/bytecode/J;
 
-void b();
-  descriptor: ()V
-  flags: (0x0000)
-  Code:
-    stack=1, locals=1, args_size=1
-       0: aload_0
-       1: invokevirtual #21                 // Method a:()I
-       4: pop
-       5: return
-    LineNumberTable:
-      line 25: 0
-      line 26: 5
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
-          0       6     0  this   Lcom/apollo/demos/base/bytecode/J;
+  void b();
+    descriptor: ()V
+    flags: (0x0000)
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokevirtual #21                 // Method a:()I
+         4: pop
+         5: return
+      LineNumberTable:
+        line 25: 0
+        line 26: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lcom/apollo/demos/base/bytecode/J;
 
-static long c();
-  descriptor: ()J
-  flags: (0x0008) ACC_STATIC
-  Code:
-    stack=2, locals=0, args_size=0
-       0: lconst_1
-       1: lreturn
-    LineNumberTable:
-      line 29: 0
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
+  static long c();
+    descriptor: ()J
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: lconst_1
+         1: lreturn
+      LineNumberTable:
+        line 29: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
 
-static void d();
-  descriptor: ()V
-  flags: (0x0008) ACC_STATIC
-  Code:
-    stack=2, locals=0, args_size=0
-       0: invokestatic  #26                 // Method c:()J
-       3: pop2
-       4: return
-    LineNumberTable:
-      line 33: 0
-      line 34: 4
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
+  static void d();
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: invokestatic  #26                 // Method c:()J
+         3: pop2
+         4: return
+      LineNumberTable:
+        line 33: 0
+        line 34: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
 }
 */
