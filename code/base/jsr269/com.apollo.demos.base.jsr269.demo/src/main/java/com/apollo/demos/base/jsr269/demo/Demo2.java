@@ -6,12 +6,14 @@ package com.apollo.demos.base.jsr269.demo;
 import static com.apollo.base.annotation.Log.Level.Debug;
 import static com.apollo.base.annotation.Log.Level.Warn;
 import static com.apollo.base.annotation.Log.Location.EdgeOut;
+import static java.util.Arrays.asList;
+import static java.util.Arrays.setAll;
 
 import java.util.List;
 
 import com.apollo.base.annotation.Log;
 
-@Log
+@Log(mapper = "com.apollo.demos.base.jsr269.demo.Demo1.Mapper")
 public class Demo2 {
 
     public static void main(String[] args) {
@@ -24,6 +26,9 @@ public class Demo2 {
         demo1.getX();
 
         demo1.size(null);
+
+        list(50);
+        listX(50);
     }
 
     public static void hello(String name) {
@@ -72,4 +77,16 @@ public class Demo2 {
         System.out.println(text.size());
     }
 
+    @Log
+    static List<Integer> list(int size) {
+        Integer[] data = new Integer[size];
+        setAll(data, i -> i);
+        return asList(data);
+    }
+
+    static List<Integer> listX(int size) {
+        Integer[] data = new Integer[size];
+        setAll(data, i -> i);
+        return asList(data);
+    }
 }

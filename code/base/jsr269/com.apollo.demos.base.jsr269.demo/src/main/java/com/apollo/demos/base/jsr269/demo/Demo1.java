@@ -11,8 +11,11 @@ import static com.apollo.base.annotation.Log.Level.Warn;
 import static com.apollo.base.annotation.Log.Location.Core;
 import static com.apollo.base.annotation.Log.Location.EdgeIn;
 import static com.apollo.base.annotation.Log.Location.EdgeOut;
+import static java.util.Arrays.asList;
+import static java.util.Arrays.setAll;
 
 import java.util.List;
+import java.util.function.Function;
 
 import com.apollo.base.annotation.Log;
 
@@ -28,6 +31,9 @@ public class Demo1 {
         demo1.getX();
 
         demo1.size(null);
+
+        list(50);
+        listX(50);
     }
 
     @Log
@@ -79,5 +85,21 @@ public class Demo1 {
     private void sizeX(List<String> text) {
         System.out.println(text.size());
     }
+
+    @Log
+    static List<Integer> list(int size) {
+        Integer[] data = new Integer[size];
+        setAll(data, i -> i);
+        return asList(data);
+    }
+
+    @Log(mapper = "com.apollo.demos.base.jsr269.demo.Demo1.Mapper")
+    static List<Integer> listX(int size) {
+        Integer[] data = new Integer[size];
+        setAll(data, i -> i);
+        return asList(data);
+    }
+
+    static Function<Object, Object> Mapper = o -> o instanceof List ? "The list is too long. Its size is " + ((List<?>) o).size() : o;
 
 }
